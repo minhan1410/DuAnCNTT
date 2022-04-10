@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Login page - Thang Long University</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="shortcut icon" href="http://cdn.onlinewebfonts.com/svg/download_153418.png" type="image/x-icon"/>
+    <link href="https://fonts.googleapis.com/css2?family=Cabin&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="shortcut icon"
+          href="https://th.bing.com/th/id/OIP.7ygufrwv0ZC8FpCGIlV5RAHaHa?pid=ImgDet&w=221&h=221&c=7&dpr=1.25"
+          type="image/x-icon"/>
+
+</head>
+
+<body>
+<div class="main">
+    <div class="wrap">
+        <form class="form" th:action="@{/login}" method="post">
+            <img src="https://login.thanglong.edu.vn/images/logotlu.jpg" id="anh1" alt="logo"/>
+            <p id="title">Đăng Nhập â</p>
+
+            <div th:if="${param.error}" class="alert alert-error">
+                Username hoặc password không hợp lệ
+            </div>
+
+            <div th:if="${param.logout}" class="alert alert-success">
+                Đăng xuất
+            </div>
+
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username"/>
+
+            <label for="password"/>password</label>
+            <input type="password" id="password" name="password"/>
+
+            <div class="from-action">
+                <button type="submit" class="btn">Login</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+
+</html>

@@ -5,11 +5,20 @@
     <title>Title</title>
 </head>
 <body>
-  <h1>User:</h1>
-  <div th:object="${user}">
-    <h2 th:text = "*{username}"></h2>
-    <h2 th:text = "*{password}"></h2>
-    <h2 th:text = "*{permissions}"></h2>
-  </div>
+<h1>User:</h1>
+<div th:object="${user}">
+    <h2 th:text="*{username}"> username </h2>
+    <h2 th:text="*{password}"> password </h2>
+    <h2 th:text="*{permissions}"> permissions </h2>
+    <h2 th:text="*{name}"> name </h2>
+    <h2 th:text="*{address}"> address </h2>
+    <h2 th:text="*{email}"> email </h2>
+    <h2 th:text="*{phoneNumber}"> phoneNumber </h2>
+    <h2 th:text="*{peopleID}"> peopleID </h2>
+    <h2 th:text="*{birthday}"> birthday </h2>
+    <h2 th:text="*{avatar}"> avatar </h2>
+    <img th:src="*{avatar}"/>
+    <h2 th:text="*{sex}"> sex </h2>
+</div>
 </body>
 </html>

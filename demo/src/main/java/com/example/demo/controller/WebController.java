@@ -37,19 +37,24 @@ public class WebController {
         return "hello";
     }
 
-    @GetMapping("/registration")
-    public String Registration(Model model) {
-        model.addAttribute("user", new User());
-        return "registration";
+    @GetMapping("/dangkihoc")
+    public String dangkihoc() {
+        return "dangkihoc";
     }
 
-    @PostMapping("/registration")
-    public String Registration(@ModelAttribute User newUser) {
+    @GetMapping("/registrationUser")
+    public String registrationUser(Model model) {
+        model.addAttribute("user", new User());
+        return "registrationUser";
+    }
+
+    @PostMapping("/registrationUser")
+    public String registrationUser(@ModelAttribute User newUser) {
         newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
         System.out.printf("\n\n%s\n\n", newUser);
 
         if (userRepository.findByUsername(newUser.getUsername()) != null) {
-            return "registration";
+            return "registrationUser";
         }
         userRepository.save(newUser);
         return "home";

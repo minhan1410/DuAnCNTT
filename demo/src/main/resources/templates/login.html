@@ -181,6 +181,7 @@
             background-size: cover;
             position: relative;
             z-index: 1;
+            background-image: url(https://login.thanglong.edu.vn/images/bg-01.jpg);
         }
         .main::before {
             content: "";
@@ -192,22 +193,22 @@
             top: 0;
             left: 0;
             background-color: rgba(255,255,255,0.75);
-            background-image: url(../img/bg-01.jpg);
+
         }
 
         .wrap{
             background-color: #9152f8;
             width: 500px;
-            height: 800px;
+            height: 525px;
             border-radius: 10px;
             overflow: hidden;
             padding: 55px 55px 37px 55px;
 
         }
         .form{
-            height: 710px;
+            height: 510px;
             width: 390px;
-            /* background-color: #666666; */
+        / background-color: #666666; /
 
         }
         #anh1 {
@@ -311,6 +312,7 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
+            background-color: #fff;
         }
         .login-form{
             font-size: 16px;
@@ -377,15 +379,36 @@
                 Username hoặc password không hợp lệ
             </div>
 
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username"/>
-
-            <label for="password"/>password</label>
-            <input type="password" id="password" name="password"/>
-
-            <div class="from-action">
-                <button type="submit" class="btn">Login</button>
+            <!-- <label for="username">Username</label> -->
+            <div class="input" data-validate="Điền tên đăng nhập">
+                <input type="text" minlength="3" name="username" id="username" placeholder="Tên đăng nhập" class="input100">
             </div>
+
+
+            <!-- <label for="password"/>password</label> -->
+            <div class="password" data-validate="Điền tên mật khẩu">
+                <input type="password" minlength="3" name="password" id="password" placeholder="Mật khẩu" class="input100">
+            </div>
+            <!-- <input type="password" id="password" name="password"/> -->
+            <!-- <div class="form-checkbox">
+                <input type="checkbox" name="ckb1" id="ckb1" checked="checked">
+                <label for="ckb1" class="label-checkbox">
+                    Remenber me
+                </label>
+            </div> -->
+
+            <div class="from-action login">
+                <button type="submit" class="btn login-form " value="Đăng Nhập">Login</button>
+            </div>
+            <!-- <div class="login">
+                <input type="submit" name="btloggin" value="Đăng Nhập" id="btnLogin" class="login-form">
+            </div> -->
+            <!-- <div class="text">
+                <a href="" class="text-white">Quên mật khẩu ấn vào dòng này</a>
+            </div>
+            <div class="last">
+                <a href=""><img src="https://login.thanglong.edu.vn/images/gglg.png" alt="" id="anh"></a>
+            </div> -->
         </form>
     </div>
 </div>

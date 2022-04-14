@@ -1,0 +1,316 @@
+body {
+    margin: 0;
+    padding: 0;
+    font: 12px/1.8 tahoma, sans-serif;
+    color: #333;
+    background: #FFF;
+}
+
+h3 {
+    color: Red;
+    padding-top: 0;
+    font-size: 12px;
+}
+
+a {
+    text-decoration: none;
+    color: #003745;
+}
+
+ul {
+    margin: 0 0 0 20px;
+    padding: 0;
+}
+
+#head {
+    height: 145px;
+    background: url("../../templates/images/topbg.jpg") repeat-x top;
+    margin: auto;
+}
+
+    #head .center {
+        width: 1000px;
+        height: 145px;
+        margin: 0 auto;
+        background: url("../../templates/images/headbg.png") no-repeat center top;
+    }
+
+        #head .center .logo {
+            float: left;
+            height: 102px;
+            width: 100px;
+            background: url("../../templates/images/logo.png") no-repeat center;
+        }
+
+        #head .center .right {
+            float: right;
+            padding-top: 5px;
+            color: #003745;
+            text-align: right;
+            line-height: 1.8;
+            font-family: Verdana, sans-serif;
+        }
+
+            #head .center .right label {
+                color: #C00;
+                font-weight: bold;
+            }
+
+            #head .center .right a:hover {
+                text-decoration: underline;
+            }
+
+        #head .center #menu {
+            clear: both;
+            width: 1000px;
+            height: 40px;
+            border-top: solid 1px #bbc5c7;
+            border-bottom: solid 2px #003644;
+            background: #d8e0e1 url("../../templates/images/menubg.jpg") repeat-x top;
+        }
+
+#menu ul {
+    margin: 0;
+    padding: 0;
+}
+
+    #menu ul li {
+        list-style: none;
+        float: left;
+    }
+
+        #menu ul li:hover {
+            background: url("images/menuhover.jpg") repeat-x top;
+        }
+
+        #menu ul li a {
+            color: #003745;
+            display: block;
+            line-height: 40px;
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+            padding: 0 20px;
+            font-size: 14px;
+            background: url("../../templates/images/menuleftbg.jpg") no-repeat right top;
+        }
+
+            #menu ul li a.msg {
+                color: red;
+            }
+
+            #menu ul li a.active {
+                color: #FFF;
+                background: #003745;
+                margin-top: -1px;
+                line-height: 42px;
+            }
+
+
+#page {
+    width: 1000px;
+    position: relative;
+    float: left;
+    left: 50%;
+    margin-left: -500px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    clear: both;
+}
+
+    #page .title {
+        margin: 0 -1px;
+        font-family: Verdana, sans-serif;
+        line-height: 35px;
+        background: #e4e8e9 url("../../templates/images/titlebg.jpg") repeat-x bottom;
+        text-indent: 10px;
+        color: #175765;
+        font-weight: bold;
+        border-top: solid 1px #DDD;
+        border-bottom: solid 1px #DDD;
+    }
+
+#left {
+    width: 198px;
+    float: left;
+    border-style: solid;
+    border-color: #e4e9eb;
+    border-width: 0 1px 1px 1px;
+    background: #e8edef;
+    padding-bottom: 20px;
+}
+
+    #left ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+        #left ul li {
+            background: url("../../templates/images/leftmenubg.jpg") no-repeat center bottom;
+        }
+
+        #left ul a:hover {
+            background: #eef0f0 url("../../templates/images/leftmenubg.jpg") no-repeat center bottom;
+        }
+
+        #left ul li a {
+            font-family: Verdana, sans-serif;
+            display: block;
+            padding: 10px 0 10px 10px;
+        }
+
+#right {
+    float: right;
+    width: 770px;
+    background: #f3f6f7;
+    border-style: solid;
+    border-width: 0 1px 1px 1px;
+    border-color: #f3f6f7;
+    padding: 0 10px 10px 10px;
+}
+
+    #right .title {
+        margin: 0 -10px 15px -10px;
+    }
+
+#footer {
+    margin-top: 15px;
+    border-top: solid 1px #cfd7d9;
+    height: 80px;
+    font-family: Verdana, sans-serif;
+    padding-top: 10px;
+    text-align: center;
+    clear: both;
+    background: url("../../templates/images/footerbg.jpg") repeat-x top;
+    color: #003745;
+    line-height: 1.5;
+    font-size: 11px;
+}
+
+    #footer a {
+    }
+
+        #footer a:hover {
+            text-decoration: none;
+        }
+
+.hocky {
+    float: left;
+    width: 350px;
+    text-align: center;
+    font-size: 12px;
+    padding: 10px 0;
+    line-height: 1.2;
+    font-weight: bold;
+    color: #06f;
+}
+
+    .hocky span {
+        color: Red;
+        font-size: 11px;
+    }
+
+    .hocky:hover {
+        color: #06f;
+        text-decoration: underline;
+    }
+
+#gioithieu {
+    height: 150px;
+    margin: auto;
+    text-align: center;
+}
+
+    #gioithieu img {
+        height: 140px;
+        margin-left: 5px;
+    }
+
+.imgs {
+    position: absolute;
+    opacity: 0.6;
+    filter: alpha(opacity=60);
+    top: 130px;
+    left: 205px;
+    height: 60px;
+    width: 800px;
+    background: #fff;
+    text-align: center;
+}
+
+    .imgs img {
+        height: 60px;
+    }
+
+#error {
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+    #error a {
+        text-decoration: none;
+        color: #06f;
+    }
+
+        #error a:hover {
+            color: orange;
+        }
+
+.thongbao {
+}
+
+    .thongbao h3 {
+        color: Red;
+        text-align: left;
+        font-size: 16px;
+        padding: 5px;
+    }
+
+    .thongbao h2 {
+        color: Red;
+        text-align: left;
+        font-size: 30px;
+        padding: 5px;
+    }
+
+    .thongbao ul {
+        padding-left: 20px;
+        color: #06f;
+    }
+
+.info, .success, .warning, .error, .validation {
+    border: 1px solid;
+    margin: 10px 0px;
+    padding: 15px 10px 15px 50px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+}
+
+.info {
+    color: #00529B;
+    background-color: #BDE5F8;
+}
+
+.success {
+    color: #4F8A10;
+    background-color: #DFF2BF;
+}
+
+.warning {
+    color: #9F6000;
+    background-color: #FEEFB3;
+}
+
+.error {
+    color: #D8000C;
+    background-color: #FFBABA;
+}
+.maquee
+{    
+    width: 450px;
+    right: 10px;
+    top: 80px;
+    float: right;
+    position: fixed;
+}

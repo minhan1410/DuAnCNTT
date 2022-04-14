@@ -42,8 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin() // Cho phép người dùng xác thực bằng form login
                 .loginPage("/login").permitAll()
-                .defaultSuccessUrl("/hello")
-                .permitAll() // Tất cả đều được truy cập vào địa chỉ này
+                .defaultSuccessUrl("/dangkihoc").permitAll() // Tất cả đều được truy cập vào địa chỉ này
                 .and()
                 .logout() // Cho phép logout
                 .permitAll();

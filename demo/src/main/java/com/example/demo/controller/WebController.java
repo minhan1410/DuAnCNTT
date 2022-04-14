@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.Specialized;
 import com.example.demo.model.User;
+import com.example.demo.repository.SpecializedRepository;
 import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -20,6 +22,8 @@ public class WebController {
     @Autowired
     private UserRepository userRepository;
     @Autowired
+    private SpecializedRepository specializedRepository;
+    @Autowired
     PasswordEncoder passwordEncoder;
 
     @GetMapping(value = {"/"})
@@ -35,6 +39,22 @@ public class WebController {
     @GetMapping("/hello")
     public String hello() {
         return "hello";
+    }
+
+    @GetMapping("/newSpecialized")
+    public String newSpecialized(Model model) {
+        model.addAttribute("specialized", new Specialized());
+        return "newSpecialized";
+    }
+
+    @PostMapping("/newSpecialized")
+    public String newSpecialized(@ModelAttribute Specialized specialized, Model model) {
+        if (specializedRepository.findByName(specialized.getName()) != null) {
+            model.addAttribute("mess", "specialized name unique");
+            return "newSpecialized";
+        }
+        specializedRepository.save(specialized);
+        return "home";
     }
 
     @GetMapping("/dangkihoc")
@@ -58,6 +78,12 @@ public class WebController {
         }
         userRepository.save(newUser);
         return "home";
+    }
+
+    @GetMapping("/registrationTeacher")
+    public String registrationTeacher(Model model) {
+        model.addAttribute("listSpecialized", specializedRepository.findAll());
+        return "registrationTeacher";
     }
 
     @GetMapping("/user")

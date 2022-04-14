@@ -35,7 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                còn những gì cấm hoặc yêu cầu xác thực sẽ dùng .authenticated()
         http
                 .authorizeRequests()
-                .antMatchers("/", "/home", "/registration").permitAll() // Cho phép tất cả mọi người truy cập vào 2 địa chỉ này
+                .antMatchers("/", "/home", "/registrationUser","/newSpecialized","/registrationTeacher").permitAll() // Cho phép tất cả mọi người truy cập vào 2 địa chỉ này
                 .antMatchers("/user").access("hasRole('ROLE_Student')")
                 .antMatchers("/admin").access("hasRole('ROLE_Teacher')")
                 .anyRequest().authenticated() // Tất cả các request khác đều cần phải xác thực mới được truy cập

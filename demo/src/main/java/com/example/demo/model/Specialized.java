@@ -15,6 +15,6 @@ public class Specialized {
     @Column(name = "MaCN", nullable = false, length = 6)
     private String id;
 
-    @Column(name = "TenCN")
+    @Column(name = "TenCN", unique = true)
     private String name;
 }

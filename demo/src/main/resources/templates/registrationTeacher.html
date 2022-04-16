@@ -32,21 +32,13 @@
                                     registration Teacher
                                 </p>
 
-                                <div>
-                                    <ul>
-                                        <th:block th:each="specialized : ${listSpecialized}">
-                                            <li th:utext="${specialized}">..</li>
-                                        </th:block>
-                                    </ul>
-                                </div>
-
                                 <div class="d-flex flex-row align-items-center mb-4">
                                     <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                                     <div class="form-outline flex-fill mb-0">
                                         <label class="form-label" for="form3Example3c">Your chuyen nganh:
                                         </label>
-                                        <select class="select" th:each="specializeds : ${listSpecialized}">
-                                            <option th:value="${#ids}" th:text="${specializeds.name}"></option>
+                                        <select class="select">
+                                            <option th:each="specializeds : ${listSpecialized}" th:value="${specializeds.id}" th:text="${specializeds.name}"></option>
                                         </select>
                                     </div>
                                 </div>

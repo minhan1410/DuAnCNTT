@@ -20,9 +20,9 @@
     <div id="head">
         <div class="center">
             <div class="logo"></div>
-            <div class="right">
+            <div class="right" th:object="${user}">
                 <b>Chào
-                    <span style="color:red">Nguyễn Việt Anh(35066)</span>
+                    <span style="color:red" th:text="*{username}"></span>
                 </b>
                  |  
                 <a href="#">Đổi mật khẩu</a>

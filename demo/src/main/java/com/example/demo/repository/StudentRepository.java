@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface StudentRepository extends JpaRepository<Student,String> {
     @Query(value = "select max(id) from Student ")
     String maxStudentId();
+
+    Student findByUserId(Long userId);
 }

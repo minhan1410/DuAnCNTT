@@ -12,7 +12,6 @@ import java.util.Date;
 @Entity
 @Table(name = "sinhvien")
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Student {
@@ -27,6 +26,6 @@ public class Student {
     private String giaoVienId;
 
     @Column(name = "user_id")
-    private String userId;
+    private Long userId;
 
 }

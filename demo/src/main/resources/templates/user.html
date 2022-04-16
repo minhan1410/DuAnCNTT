@@ -7,18 +7,25 @@
 <body>
 <h1>User:</h1>
 <div th:object="${user}">
-    <h2 th:text="*{username}"> username </h2>
-    <h2 th:text="*{password}"> password </h2>
-    <h2 th:text="*{permissions}"> permissions </h2>
-    <h2 th:text="*{name}"> name </h2>
-    <h2 th:text="*{address}"> address </h2>
-    <h2 th:text="*{email}"> email </h2>
-    <h2 th:text="*{phoneNumber}"> phoneNumber </h2>
-    <h2 th:text="*{peopleID}"> peopleID </h2>
-    <h2 th:text="*{birthday}"> birthday </h2>
-    <h2 th:text="*{avatar}"> avatar </h2>
-    <img th:src="*{avatar}"/>
-    <h2 th:text="*{sex}"> sex </h2>
+    <p th:text="|username: *{username}|"></p>
+    <p th:text="|password: *{password}|"></p>
+    <p th:text="|permissions: *{permissions}|"></p>
+    <p th:text="|name: *{name}|"></p>
+    <p th:text="|address: *{address}|"> address </p>
+    <p th:text="|email: *{email}|"></p>
+    <p th:text="|phoneNumber *{phoneNumber}|"></p>
+    <p th:text="|peopleID *{peopleID}|"> </p>
+    <p th:text="|birthday *{birthday}|"> </p>
+    <img th:src="|*{avatar}|"/>
+    <p th:text="|sex *{sex}|"> </p>
+</div>
+
+<div th:object="${student}">
+    <p th:text="| id *{id}|"></p>
+    <p th:text="|ChuyenNganhId *{ChuyenNganhId}|"> </p>
+    <p th:text="|giaoVienId *{giaoVienId}|"> </p>
+    <p th:text="|userId *{userId}|"> </p>
+
 </div>
 </body>
 </html>

@@ -17,5 +17,5 @@ public class Teacher {
     private String ChuyenNganhId;
 
     @Column(name = "user_id")   
-    private String userId;
+    private Long userId;
 }

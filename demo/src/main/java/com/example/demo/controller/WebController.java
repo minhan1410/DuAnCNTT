@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.model.Specialized;
 import com.example.demo.model.User;
 import com.example.demo.repository.SpecializedRepository;
+import com.example.demo.repository.StudentRepository;
 import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -24,6 +25,8 @@ public class WebController {
     @Autowired
     private SpecializedRepository specializedRepository;
     @Autowired
+    private StudentRepository studentRepository;
+    @Autowired
     PasswordEncoder passwordEncoder;
 
     @GetMapping(value = {"/"})
@@ -41,25 +44,33 @@ public class WebController {
         return "hello";
     }
 
-    @GetMapping("/newSpecialized")
-    public String newSpecialized(Model model) {
-        model.addAttribute("specialized", new Specialized());
-        return "newSpecialized";
+    @GetMapping("/dangkihoc")
+    public String dangkihoc(Model model, Principal principal) {
+        User customUser = (User) ((Authentication) principal).getPrincipal();
+        model.addAttribute("user", customUser);
+        model.addAttribute("student", studentRepository.findByUserId(customUser.getId()));
+        return "dangkihoc";
     }
 
-    @PostMapping("/newSpecialized")
-    public String newSpecialized(@ModelAttribute Specialized specialized, Model model) {
+    @GetMapping("/registrationSpecialized")
+    public String registrationSpecialized(Model model) {
+        model.addAttribute("specialized", new Specialized());
+        return "registrationSpecialized";
+    }
+
+    @PostMapping("/registrationSpecialized")
+    public String registrationSpecialized(@ModelAttribute Specialized specialized, Model model) {
         if (specializedRepository.findByName(specialized.getName()) != null) {
             model.addAttribute("mess", "specialized name unique");
-            return "newSpecialized";
+            return "registrationSpecialized";
+        }
+
+        if (!specializedRepository.findById(specialized.getId()).isEmpty()) {
+            model.addAttribute("mess", "specialized id unique");
+            return "registrationSpecialized";
         }
         specializedRepository.save(specialized);
         return "home";
-    }
-
-    @GetMapping("/dangkihoc")
-    public String dangkihoc() {
-        return "dangkihoc";
     }
 
     @GetMapping("/registrationUser")
@@ -88,22 +99,16 @@ public class WebController {
 
     @GetMapping("/user")
     public String user(Model model, Principal principal) {
-//        CustomUserDetails customUser = (CustomUserDetails) ((Authentication) principal).getPrincipal();
-//        System.out.printf("\n\n%s\n\n", customUser.getUser());
-//        model.addAttribute("user", customUser.getUser());
-//        return "user";
         User customUser = (User) ((Authentication) principal).getPrincipal();
         System.out.printf("\n\n%s\n\n", customUser);
+        System.out.printf("\n\n%s\n\n", studentRepository.findByUserId(customUser.getId()));
         model.addAttribute("user", customUser);
+        model.addAttribute("student", studentRepository.findByUserId(customUser.getId()));
         return "user";
     }
 
     @GetMapping("/admin")
     public String admin(Model model, Principal principal) {
-//        CustomUserDetails customUser = (CustomUserDetails) ((Authentication) principal).getPrincipal();
-//        System.out.printf("\n\n%s\n\n", customUser.getUser());
-//        model.addAttribute("user", customUser.getUser());
-//        return "admin";
         User customUser = (User) ((Authentication) principal).getPrincipal();
         System.out.printf("\n\n%s\n\n", customUser);
         model.addAttribute("user", customUser);

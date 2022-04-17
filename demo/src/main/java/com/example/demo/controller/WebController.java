@@ -46,28 +46,30 @@ public class WebController {
 
     @GetMapping("/dangkihoc")
     public String dangkihoc(Model model, Principal principal) {
-        User customUser = (User) ((Authentication) principal).getPrincipal();
-        model.addAttribute("user", customUser);
-        model.addAttribute("student", studentRepository.findByUserId(customUser.getId()));
+        User user = (User) ((Authentication) principal).getPrincipal();
+        System.out.printf("\n\n%s\n\n", studentRepository.findByUserId(user.getId()));
+
+        model.addAttribute("user", user);
+        model.addAttribute("student", studentRepository.findByUserId(user.getId()));
         return "dangkihoc";
     }
 
     @GetMapping("/registrationSpecialized")
     public String registrationSpecialized(Model model) {
         model.addAttribute("specialized", new Specialized());
-        return "registrationSpecialized";
+        return "registration/registrationSpecialized";
     }
 
     @PostMapping("/registrationSpecialized")
     public String registrationSpecialized(@ModelAttribute Specialized specialized, Model model) {
         if (specializedRepository.findByName(specialized.getName()) != null) {
             model.addAttribute("mess", "specialized name unique");
-            return "registrationSpecialized";
+            return "registration/registrationSpecialized";
         }
 
         if (!specializedRepository.findById(specialized.getId()).isEmpty()) {
             model.addAttribute("mess", "specialized id unique");
-            return "registrationSpecialized";
+            return "registration/registrationSpecialized";
         }
         specializedRepository.save(specialized);
         return "home";
@@ -76,7 +78,7 @@ public class WebController {
     @GetMapping("/registrationUser")
     public String registrationUser(Model model) {
         model.addAttribute("user", new User());
-        return "registrationUser";
+        return "registration/registrationUser";
     }
 
     @PostMapping("/registrationUser")
@@ -85,7 +87,7 @@ public class WebController {
         System.out.printf("\n\n%s\n\n", newUser);
 
         if (userRepository.findByUsername(newUser.getUsername()) != null) {
-            return "registrationUser";
+            return "registration/registrationUser";
         }
         userRepository.save(newUser);
         return "home";
@@ -94,7 +96,7 @@ public class WebController {
     @GetMapping("/registrationTeacher")
     public String registrationTeacher(Model model) {
         model.addAttribute("listSpecialized", specializedRepository.findAll());
-        return "registrationTeacher";
+        return "registration/registrationTeacher";
     }
 
     @GetMapping("/user")

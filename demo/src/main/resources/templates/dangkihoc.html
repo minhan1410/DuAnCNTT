@@ -20,9 +20,9 @@
     <div id="head">
         <div class="center">
             <div class="logo"></div>
-            <div class="right" th:object="${user}">
+            <div class="right">
                 <b>Chào
-                    <span style="color:red" th:text="*{username}"></span>
+                    <span style="color:red" th:text="${user.username}"></span>
                 </b>
                  |  
                 <a href="#">Đổi mật khẩu</a>
@@ -31,7 +31,7 @@
                 <br>
                 Tình Trạng : 
                 <strong>
-                    <span style="color:brown">Bình thường</span>
+                    <span style="color:brown" th:text="${student.trangThai}"></span>
                 </strong>
                 
 

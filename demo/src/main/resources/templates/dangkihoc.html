@@ -1,132 +1,53 @@
 <!DOCTYPE html>
-<html lang="vi" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <title>TRƯỜNG ĐẠI HỌC THĂNG LONG</title>
-    <link rel="shortcut icon" href="http://cdn.onlinewebfonts.com/svg/download_153418.png" type="image/x-icon"/>
-    <link href="https://fonts.googleapis.com/css2?family=Cabin&display=swap" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
-    <link rel="shortcut icon"
-          href="https://th.bing.com/th/id/OIP.7ygufrwv0ZC8FpCGIlV5RAHaHa?pid=ImgDet&w=221&h=221&c=7&dpr=1.25"
-          type="image/x-icon"/>
-    <link rel="stylesheet" th:href="@{/style/dangkihoc.css}">
-</head>
-<body>
-    <div id="head">
-        <div class="center">
-            <div class="logo"></div>
-            <div class="right">
-                <b>Chào
-                    <span style="color:red" th:text="${user.username}"></span>
-                </b>
-                 |  
-                <a href="#">Đổi mật khẩu</a>
-                 | 
-<!--                <a href="#">Đăng xuất</a>-->
-                <form th:action="@{/logout}" method="post">
-                    <input type="submit" value="Đăng xuất"/>
-                </form>
-                <br>
-                Tình Trạng : 
-                <strong>
-                    <span style="color:brown" th:text="${student.trangThai}"></span>
-                </strong>
-                
+<html
+    lang="vi"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+    <head
+        th:replace="template/head.html :: head('TRƯỜNG ĐẠI HỌC THĂNG LONG')"
+    ></head>
 
-            </div>
-            <div class="maquee">
-                <a href="#" style="color:red">Để nhận hỗ trợ từ hệ thống, đăng kí địa chỉ email, số điện thoại!</a>
-            </div>
-            <div id="menu">
-                <ul>
-                    <li>
-                        <a href="#" class="avtice">Trang chủ đăng kí học</a>
-                    </li>
-                    <li>
-                        <a href="#">Trang chủ nhà trường</a>
-                    </li>
-                    <li>
-                        <a href="#">Trang chủ đào tạo</a>
-                    </li>
-                    <li>
-                        <a href="#" class="msg">Có 0 tin báo mới</a>
-                    </li>
-                </ul>
+    <head>
+        <link rel="stylesheet" th:href="@{/style/dangkihoc.css}" />
+    </head>
 
-            </div>
+    <body>
+        <div id="head">
+            <div th:replace="template/header.html :: header"></div>
 
-        </div>
-        <div id="page">
-            <div id="left">
-                <ul>
-                    <li>
-                        <h3 class="title">Toàn trường</h3>
-                        <ul>
-                            <li>
-                                <a href="#">Thời khóa biểu toàn trường</a>
-                            </li>
-                            <li>
-                                <a href="#">Lịch thi lại toàn trường</a>
-                            </li>
-                            <li>
-                                <a href="#">Chương trình đào tạo</a>
-                            </li>
-                        </ul>
+            <div id="page">
+                <div th:replace="template/sidebar.html :: sidebar"></div>
 
-                    </li>
-                    <li>
-                        <h3 class="title">Góc sinh viên</h3>
-                        <ul class="sub-menu" style="display:block">
-                            <li><a href="#">Thông tin cá nhân</a></li>
-                            <li><a href="#">Đăng kí học </a></li>
-                            <li><a href="#">Đăng kí thi lại</a></li>
-                            <li><a href="#">Thời khóa biểu</a></li>
-                            <li><a href="#">Phiếu báo thu tiền</a></li>
-                            <li><a href="#">Bảng điểm</a></li>
-                            <li><a href="#">Lịch thi chính thức</a></li>
-                            <li><a href="#">Lịch thi dự kiến</a></li>
-                            <li><a href="#">Phiếu bảo điểm</a></li>
-                            <li><a href="#">Lịch kí sổ gốc</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div id="right">
-                <div class="title">
-                    <a href="#">Nhấn vào dòng này để cập nhật địa chỉ email, số điện thoại cá nhân của mình ( khi quên mật khẩu, có thể sử dụng email này để lấy lại mật khẩu). </a>
-                </div>
-                <div class="entry">
-                    <div class="imgs"></div>
-                    <div class="thongbao">
-                        <h3>Thông báo thời gian đăng kí học : </h3>
-                        <ul>
-                            <li>
-                                Học kì III nhóm 2 : 
-                                <span>Từ 09/04/2022 1:00:00 CH đến 11/04/2022 9:00:00 SA</span>
-                            </li>
-                        </ul>
+                <div id="right">
+                    <div class="title">
+                        <a href="#"
+                            >Nhấn vào dòng này để cập nhật địa chỉ email, số
+                            điện thoại cá nhân của mình ( khi quên mật khẩu, có
+                            thể sử dụng email này để lấy lại mật khẩu).
+                        </a>
                     </div>
-
+                    <div class="entry">
+                        <div class="imgs"></div>
+                        <div class="thongbao">
+                            <h3>Thông báo thời gian đăng kí học :</h3>
+                            <ul>
+                                <li>
+                                    Học kì III nhóm 2 :
+                                    <span
+                                        >Từ 09/04/2022 1:00:00 CH đến 11/04/2022
+                                        9:00:00 SA</span
+                                    >
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-
             </div>
 
+            <div th:replace="template/footer.html :: footer"></div>
         </div>
-        <div id="footer">
-            <p>Địa chỉ: Đường Nghiêm Xuân Yêm - Đại Kim - Hoàng Mai - Hà Nội</p>
-            Điện thoại hỗ trợ kỹ thuật:(04) 355 92 678 website 
-            <a href="http://www.thanglong.edu.vn">http://www.thanglong.edu.vn</a>
-            mail:
-            <a href="">p.cntt@thanglong.edu.vn.</a>
-        </div>
-
-    </div>
-
-    
-</body>
+    </body>
 </html>

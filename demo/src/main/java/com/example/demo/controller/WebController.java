@@ -44,16 +44,6 @@ public class WebController {
         return "hello";
     }
 
-    @GetMapping("/dangkihoc")
-    public String dangkihoc(Model model, Principal principal) {
-        User user = (User) ((Authentication) principal).getPrincipal();
-        System.out.printf("\n\n%s\n\n", studentRepository.findByUserId(user.getId()));
-
-        model.addAttribute("user", user);
-        model.addAttribute("student", studentRepository.findByUserId(user.getId()));
-        return "dangkihoc";
-    }
-
     @GetMapping("/registrationSpecialized")
     public String registrationSpecialized(Model model) {
         model.addAttribute("specialized", new Specialized());

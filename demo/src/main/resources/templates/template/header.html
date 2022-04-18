@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Title</title>
+    </head>
+    <body>
+        <div class="center" th:fragment="header">
+            <div class="logo"></div>
+            <div class="right">
+                <b
+                    >Chào
+                    <span style="color: red" th:text="${user.username}"></span>
+                </b>
+                |
+                <a href="#">Đổi mật khẩu</a>
+                |
+                <a href="">Đăng xuất</a>
+                <br />
+                Tình Trạng :
+                <strong>
+                    <span
+                        style="color: brown"
+                        th:text="${student.trangThai}"
+                    ></span>
+                </strong>
+            </div>
+            <div class="maquee">
+                <a href="#" style="color: red"
+                    >Để nhận hỗ trợ từ hệ thống, đăng kí địa chỉ email, số điện
+                    thoại!</a
+                >
+            </div>
+            <div id="menu">
+                <ul>
+                    <li>
+                        <a href="#" class="avtice">Trang chủ đăng kí học</a>
+                    </li>
+                    <li>
+                        <a href="#">Trang chủ nhà trường</a>
+                    </li>
+                    <li>
+                        <a href="#">Trang chủ đào tạo</a>
+                    </li>
+                    <li>
+                        <a href="#" class="msg">Có 0 tin báo mới</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>

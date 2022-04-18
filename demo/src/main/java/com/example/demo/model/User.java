@@ -33,13 +33,13 @@ public class User implements UserDetails {
     @Column(name = "Email")
     private String email;
 
-    @Column(name = "DienThoai", length = 10)
+    @Column(name = "dien_thoai", length = 10)
     private String phoneNumber;
 
     @Column(name = "CMND")
     private String peopleID;
 
-    @Column(name = "NgaySinh")
+    @Column(name = "ngay_sinh")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
@@ -47,7 +47,7 @@ public class User implements UserDetails {
     @Column(name = "avatar")
     private String avatar;
 
-    @Column(name = "GioiTinh",length = 4)
+    @Column(name = "gioi_tinh",length = 4)
     private String sex;
 
     @Override

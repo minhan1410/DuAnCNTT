@@ -3,10 +3,11 @@
     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
-<head th:replace="template/head.html :: head('Thông tin sinh viên')"></head>
+<head th:replace="template/template.html :: head('Thông tin sinh viên')"></head>
 
 <head>
     <link rel="stylesheet" th:href="@{/style/dangkihoc.css}" />
+    
     <style>
         .entry {
             display: flex;
@@ -68,7 +69,7 @@
 
         }
 
-        input[type=submit] {
+        #submit {
             width: 100%;
             background-color: #4CAF50;
             color: white;
@@ -79,7 +80,7 @@
             cursor: pointer;
         }
 
-        input[type=submit]:hover {
+        #submit:hover {
             background-color: #45a049;
         }
 
@@ -105,11 +106,11 @@
 <body>
     <div id="head">
 
-        <div th:replace="template/header.html :: header"></div>
+        <div th:replace="template/template.html :: header"></div>
 
         <div id="page">
 
-            <div th:replace="template/sidebar.html :: sidebar"></div>
+            <div th:replace="template/template.html :: sidebar"></div>
 
             <div id="right">
                 <div class="title">
@@ -172,7 +173,7 @@
 
     </div>
 
-    <div th:replace="template/footer.html :: footer"></div>
+    <div th:replace="template/template.html :: footer"></div>
 
     </div>
 
@@ -208,13 +209,13 @@
                         </option>
                     </select>
 
-                    <input type="submit" value="Update">
+                    <input type="submit" value="Update" id = "submit">
 
 
                 </form>
             </div>
         </div>
-
+    </div>
 
 </body>
 <script>

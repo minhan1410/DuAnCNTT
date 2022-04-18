@@ -1,53 +1,46 @@
 <!DOCTYPE html>
-<html
-    lang="vi"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:th="http://www.thymeleaf.org"
+<html lang="vi" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
->
-    <head
-        th:replace="template/head.html :: head('TRƯỜNG ĐẠI HỌC THĂNG LONG')"
-    ></head>
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
-    <head>
-        <link rel="stylesheet" th:href="@{/style/dangkihoc.css}" />
-    </head>
+<head th:replace="template/template.html :: head('TRƯỜNG ĐẠI HỌC THĂNG LONG')"></head>
 
-    <body>
-        <div id="head">
-            <div th:replace="template/header.html :: header"></div>
+<head>
+    <link rel="stylesheet" th:href="@{/style/dangkihoc.css}" />
+</head>
 
-            <div id="page">
-                <div th:replace="template/sidebar.html :: sidebar"></div>
+<body>
+    <div id="head">
+        <div th:replace="template/template.html :: header"></div>
 
-                <div id="right">
-                    <div class="title">
-                        <a href="#"
-                            >Nhấn vào dòng này để cập nhật địa chỉ email, số
-                            điện thoại cá nhân của mình ( khi quên mật khẩu, có
-                            thể sử dụng email này để lấy lại mật khẩu).
-                        </a>
-                    </div>
-                    <div class="entry">
-                        <div class="imgs"></div>
-                        <div class="thongbao">
-                            <h3>Thông báo thời gian đăng kí học :</h3>
-                            <ul>
-                                <li>
-                                    Học kì III nhóm 2 :
-                                    <span
-                                        >Từ 09/04/2022 1:00:00 CH đến 11/04/2022
-                                        9:00:00 SA</span
-                                    >
-                                </li>
-                            </ul>
-                        </div>
+        <div id="page">
+            <div th:replace="template/template.html :: sidebar"></div>
+
+            <div id="right">
+                <div class="title">
+                    <a href="#">Nhấn vào dòng này để cập nhật địa chỉ email, số
+                        điện thoại cá nhân của mình ( khi quên mật khẩu, có
+                        thể sử dụng email này để lấy lại mật khẩu).
+                    </a>
+                </div>
+                <div class="entry">
+                    <div class="imgs"></div>
+                    <div class="thongbao">
+                        <h3>Thông báo thời gian đăng kí học :</h3>
+                        <ul>
+                            <li>
+                                Học kì III nhóm 2 :
+                                <span>Từ 09/04/2022 1:00:00 CH đến 11/04/2022
+                                    9:00:00 SA</span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
-
-            <div th:replace="template/footer.html :: footer"></div>
         </div>
-    </body>
+
+        <div th:replace="template/template.html :: footer"></div>
+    </div>
+</body>
+
 </html>

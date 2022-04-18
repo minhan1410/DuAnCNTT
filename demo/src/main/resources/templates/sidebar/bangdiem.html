@@ -1,34 +1,31 @@
 <!DOCTYPE html>
-<html
-        lang="vi"
-        xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
->
-<head
-        th:replace="template/head.html :: head('TRƯỜNG ĐẠI HỌC THĂNG LONG')"
-></head>
+<html lang="vi" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head th:replace="template/template.html :: head('TRƯỜNG ĐẠI HỌC THĂNG LONG')"></head>
 
 <head>
     <link rel="stylesheet" th:href="@{/style/dangkihoc.css}" />
 </head>
 
 <body>
-<div id="head">
-    <div th:replace="template/header.html :: header"></div>
+    <div id="head">
+        <div th:replace="template/template.html :: header"></div>
 
-    <div id="page">
-        <div th:replace="template/sidebar.html :: sidebar"></div>
+        <div id="page">
+            <div th:replace="template/template.html :: sidebar"></div>
 
-        <div id="right">
+            <div id="right">
+                
 
 
-
+                
+            </div>
         </div>
-    </div>
 
-    <div th:replace="template/footer.html :: footer"></div>
-</div>
+        <div th:replace="template/template.html :: footer"></div>
+    </div>
 </body>
+
 </html>

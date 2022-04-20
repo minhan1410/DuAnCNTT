@@ -2,26 +2,28 @@ package com.example.demo.model;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-// không biết bỏ được cột id
-//@Entity
+@Entity
 @Table(name = "sinhvien_diem")
 @Data
 public class StudentPoint {
+    @Id
+    @Column(name = "id", nullable = false)
+    private Long id;
+
     @Column(name = "MaSV")
     private String studentId;
 
-    @Column(name = "MaMon")
+    @Column(name = "ma_mon")
     private String subjectId;
 
-    @Column(name = "DiemQuaTrinh")
-    private String diemQuaTrinh;
+    @Column(name = "diem_qua_trinh")
+    private Integer diemQuaTrinh;
 
-    @Column(name = "DiemCuoiKy")
-    private String diemCuoiKy;
+    @Column(name = "diem_cuoi_ky")
+    private Integer diemCuoiKy;
 
-    @Column(name = "DiemTongke")
-    private String diemTongket;
+    @Column(name = "diem_tong_ket")
+    private Integer diemTongket;
 }

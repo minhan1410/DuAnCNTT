@@ -6,36 +6,40 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Date;
 
 @Entity
 @Table(name = "monhoc")
 @Data
 public class Subject {
     @Id
-    @Column(name = "MaMon", nullable = false, length = 6)
+    @Column(name = "ma_mon", nullable = false, length = 6)
     private String id;
 
-    @Column(name = "TenMon")
+    @Column(name = "MaGV", nullable = false, length = 6)
+    private String teacherId;
+
+    @Column(name = "ten_mon")
     private String name;
 
-    @Column(name = "SoTC")
-    private String soTinChi;
+    @Column(name = "sotc")
+    private Integer soTinChi;
 
-    @Column(name = "MaCN")
+    @Column(name = "macn")
     private String maChuyenNganh;
 
-    @Column(name = "Ca")
+    @Column(name = "ca")
     private String ca;
 
-    @Column(name = "Thu")
+    @Column(name = "thu")
     private String thu;
 
-    @Column(name = "NgayThi")
-    private String ngayThi;
+    @Column(name = "ngay_thi")
+    private Date ngayThi;
 
-    @Column(name = "CaThi")
+    @Column(name = "ca_thi")
     private String caThi;
 
-    @Column(name = "GiaTien")
-    private String giaTien;
+    @Column(name = "gia_tien")
+    private Integer giaTien;
 }

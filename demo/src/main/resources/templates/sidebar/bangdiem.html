@@ -1,31 +1,101 @@
 <!DOCTYPE html>
-<html lang="vi" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html
+  lang="vi"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+  <head
+    th:replace="template/template.html :: head('TRƯỜNG ĐẠI HỌC THĂNG LONG')"
+  ></head>
 
-<head th:replace="template/template.html :: head('TRƯỜNG ĐẠI HỌC THĂNG LONG')"></head>
-
-<head>
+  <head>
     <link rel="stylesheet" th:href="@{/style/dangkihoc.css}" />
-</head>
+    <style>
+      .grid {
+        text-align: left;
+        border-color: #f3f3f3;
+        border-width: 1px;
+        border-style: hidden;
+        background: #fff;
+      }
 
-<body>
+      .grid th {
+        margin-top: 0px;
+        border: 0;
+        font-family: Tahoma, "Times New Roman", Times, serif;
+        font-weight: bold;
+        color: White;
+        background: #6296c5;
+        padding: 2px;
+      }
+
+      .grid tr td {
+        font-size: 85%;
+        border-bottom: 1px dotted #ccc;
+        padding: 3px 4px;
+      }
+    </style>
+  </head>
+
+  <body>
     <div id="head">
-        <div th:replace="template/template.html :: header"></div>
+      <div th:replace="template/template.html :: header"></div>
 
-        <div id="page">
-            <div th:replace="template/template.html :: sidebar"></div>
+      <div id="page">
+        <div th:replace="template/template.html :: sidebar"></div>
 
-            <div id="right">
-                
-
-
-                
-            </div>
+        <div id="right">
+          <div class="title">
+            Bảng điểm sinh viên
+            <b th:text="${user.name}" style="text-transform: uppercase"></b> -
+            <b th:text="${student.id}" style="text-transform: uppercase"></b> -
+            <b th:text="${user.birthday}" style="text-transform: uppercase"></b>
+          </div>
+          <div class="entry">
+            <form action=""></form>
+            Chọn chương trình học:
+            <select name="" id="">
+              <option value="TTCN" selected="selected">
+                Công Nghệ Thông Tin
+              </option>
+            </select>
+            <input type="submit" value="Hiển thị" />
+            <table cellspacing="3" cellpadding="" border="0" width="100%">
+              <tbody>
+                <tr valign="top">
+                  <td style="width: 50%">
+                    <div>
+                      <table
+                        class="grid"
+                        cellspacing="0"
+                        border="0"
+                        style="
+                          width: 100%;
+                          border-style: none;
+                          border-collapse: collapse;
+                        "
+                      >
+                        <tr>
+                          <th scope="col">STT</th>
+                          <th scope="col">Mã HP</th>
+                          <th scope="col">Tên HP</th>
+                          <th scope="col">Số TC</th>
+                          <th scope="col">Điểm</th>
+                        </tr>
+                      </table>
+                    </div>
+                  </td>
+                  
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
+      </div>
 
-        <div th:replace="template/template.html :: footer"></div>
+      <div th:replace="template/template.html :: footer"></div>
     </div>
-</body>
-
+  </body>
 </html>

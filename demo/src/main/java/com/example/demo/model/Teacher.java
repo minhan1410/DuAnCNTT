@@ -16,6 +16,9 @@ public class Teacher {
     @Column(name = "MaCN")
     private String ChuyenNganhId;
 
+    @Column(name = "GVCN")
+    private Boolean gvChuNhiem;
+
     @Column(name = "user_id")   
     private Long userId;
 }

@@ -1,31 +1,121 @@
 <!DOCTYPE html>
-<html lang="vi" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html
+  lang="vi"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+  <head
+    th:replace="template/template.html :: head('TRƯỜNG ĐẠI HỌC THĂNG LONG')"
+  ></head>
 
-<head th:replace="template/template.html :: head('TRƯỜNG ĐẠI HỌC THĂNG LONG')"></head>
-
-<head>
+  <head>
     <link rel="stylesheet" th:href="@{/style/dangkihoc.css}" />
-</head>
+    <style>
+      .fr {
+        background: url(images/menu2.png) white;
+        color: #333;
+        border: 1px solid #ccc;
+        padding: 1px 10px;
+        margin: 0;
+      }
+      .tablesv {
+        width: 760px;
+        margin: auto;
+      }
 
-<body>
+      .tablesv a {
+        color: #06f;
+      }
+
+      .tablesv a:hover {
+        text-decoration: underline;
+      }
+
+      .tablesv th {
+        background: #6595c2;
+        color: #fff;
+        padding: 2px;
+      }
+
+      .tablesv td {
+        border-bottom: 1px dotted #ccc;
+        background: #fff;
+      }
+    </style>
+  </head>
+
+  <body>
     <div id="head">
-        <div th:replace="template/template.html :: header"></div>
+      <div th:replace="template/template.html :: header"></div>
 
-        <div id="page">
-            <div th:replace="template/template.html :: sidebar"></div>
+      <div id="page">
+        <div th:replace="template/template.html :: sidebar"></div>
 
-            <div id="right">
-                
-
-
-                
+        <div id="right">
+          <div class="title">Lịch thi sinh viên</div>
+          <div class="entry">
+            <br />
+            <form action="?" method="get">
+              <h2>
+                Phiếu báo dự thi kết thúc học kỳ (dữ liệu chỉ có trước mỗi kỳ
+                thi học kỳ).
+              </h2>
+              Chọn học kì :
+              <select name="id">
+                <option selected="selected" value="146">
+                  Học Kỳ III Nhóm 3 năm 2020-2021
+                </option>
+                <option value="145">Học Kỳ III Nhóm 2 năm 2020-2021</option>
+                <option value="144">Học Kỳ III Nhóm 1 năm 2020-2021</option>
+                <option value="143">Học Kỳ II Nhóm 3 năm 2020-2021</option>
+                <option value="142">Học Kỳ II Nhóm 2 năm 2020-2021</option>
+                <option value="141">Học Kỳ II Nhóm 1 năm 2020-2021</option>
+                <option value="140">Học Kỳ I Nhóm 3 năm 2020-2021</option>
+                <option value="139">Học Kỳ I Nhóm 2 năm 2020-2021</option>
+                <option value="138">Học Kỳ I Nhóm 1 năm 2020-2021</option>
+              </select>
+              <input type="submit" value="Gửi đi" class="fr" />
+            </form>
+            <br />
+            <div>
+              <table cellpadding="0" cellspacing="0" width="720px">
+                <tbody>
+                  <tr>
+                    <td colspan="3" align="center">
+                      <h3>PHIẾU DỰ THI</h3>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">
+                      Mã sinh viên <b th:text="${student.id}"></b>
+                    </td>
+                    <td align="left">
+                      Họ và tên : <b th:text="${user.name}"></b>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
+            <br />
+            <table class="tablesv" cellpadding="0" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>STT</th>
+                  <th>Mã học phần</th>
+                  <th>Tên học phần</th>
+                  <th>Ca thi/Mã phòng thi</th>
+                  <th>Ngày thi</th>
+                  <th>Tình trạng</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
         </div>
+      </div>
 
-        <div th:replace="template/template.html :: footer"></div>
+      <div th:replace="template/template.html :: footer"></div>
     </div>
-</body>
-
+  </body>
 </html>

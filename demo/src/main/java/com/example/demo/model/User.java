@@ -7,6 +7,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
@@ -49,6 +51,11 @@ public class User implements UserDetails {
 
     @Column(name = "gioi_tinh",length = 4)
     private String sex;
+
+    public String getBirthdayStr() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return dateFormat.format(birthday);
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

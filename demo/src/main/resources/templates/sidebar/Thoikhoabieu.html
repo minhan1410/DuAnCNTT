@@ -1,31 +1,182 @@
 <!DOCTYPE html>
-<html lang="vi" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html
+  lang="vi"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+  <head
+    th:replace="template/template.html :: head('TRƯỜNG ĐẠI HỌC THĂNG LONG')"
+  ></head>
 
-<head th:replace="template/template.html :: head('TRƯỜNG ĐẠI HỌC THĂNG LONG')"></head>
-
-<head>
+  <head>
     <link rel="stylesheet" th:href="@{/style/dangkihoc.css}" />
-</head>
+    <style>
+      .grid {
+        text-align: left;
+        border-color: #f3f3f3;
+        border-width: 1px;
+        border-style: hidden;
+        background: #fff;
+      }
 
-<body>
+      .grid th {
+        margin-top: 0px;
+        border: 0;
+        font-family: Tahoma, "Times New Roman", Times, serif;
+        font-weight: bold;
+        color: White;
+        background: #6296c5;
+        padding: 2px;
+      }
+
+      .grid tr td {
+        font-size: 85%;
+        border-bottom: 1px dotted #ccc;
+        padding: 3px 4px;
+      }
+    </style>
+  </head>
+
+  <body>
     <div id="head">
-        <div th:replace="template/template.html :: header"></div>
+      <div th:replace="template/template.html :: header"></div>
 
-        <div id="page">
-            <div th:replace="template/template.html :: sidebar"></div>
+      <div id="page">
+        <div th:replace="template/template.html :: sidebar"></div>
 
-            <div id="right">
-                
-
-
-                
-            </div>
+        <div id="right">
+          <div class="title">Thời khóa biểu toàn trường</div>
+          <div class="entry">
+            <form action="" method="post">
+              <table style="margin: auto">
+                <tbody>
+                  <tr>
+                    <td>Nhập mã môn, tên môn tìm kiếm:</td>
+                    <td>
+                      <input type="text" />
+                    </td>
+                    <td>
+                      <input type="submit" value="Tìm kiếm" class="fr" />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <br />
+              <table style="float: right">
+                <tbody>
+                  <tr>
+                    <td>Chọn năm học</td>
+                    <td>
+                      <select name="" id="" style="width: 180px">
+                        <option selected="selected" value="2021">
+                          Năm học 2021-2022
+                        </option>
+                        <option value="2020">Năm học 2020-2021</option>
+                        <option value="2019">Năm học 2019-2020</option>
+                        <option value="2018">Năm học 2018-2019</option>
+                        <option value="2017">Năm học 2017-2018</option>
+                        <option value="2016">Năm học 2016-2017</option>
+                        <option value="2015">Năm học 2015-2016</option>
+                      </select>
+                    </td>
+                    <td>Chọn học kì</td>
+                    <td>
+                      <select name="" id="" style="width: 150px">
+                        <option selected="selected" value="146">
+                          Học Kỳ III Nhóm 3
+                        </option>
+                        <option value="145">Học Kỳ III Nhóm 2</option>
+                        <option value="144">Học Kỳ III Nhóm 1</option>
+                        <option value="143">Học Kỳ II Nhóm 3</option>
+                        <option value="142">Học Kỳ II Nhóm 2</option>
+                        <option value="141">Học Kỳ II Nhóm 1</option>
+                        <option value="140">Học Kỳ I Nhóm 3</option>
+                        <option value="139">Học Kỳ I Nhóm 2</option>
+                        <option value="138">Học Kỳ I Nhóm 1</option>
+                      </select>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <br />
+              <div>
+                <table
+                  class="grid"
+                  border="0"
+                  cellspacing="0"
+                  style="
+                    border-style: none;
+                    width: 100%;
+                    border-collapse: collapse;
+                  "
+                >
+                  <tbody>
+                    <tr>
+                      <th scope="col">STT</th>
+                      <th scope="col">Mã Môn</th>
+                      <th scope="col">Tên Môn</th>
+                      <th scope="col">Tên Lớp</th>
+                      <th scope="col">Thứ</th>
+                      <th scope="col">Ca</th>
+                      <th scope="col">Phòng học</th>
+                      <th scope="col">TC</th>
+                      <th scope="col">Giáo Viên</th>
+                    </tr>
+                    <tr>
+                        <td> 1 </td>
+                        <td>FA131</td>
+                        <td>Bố cục màu</td>
+                        <td>BOCUCMAU.1</td>
+                        <td>1</td>
+                        <td>8-9</td>
+                        <td>BOMON</td>
+                        <td>2</td>
+                        <td>Nguyễn Việt Anh</td>
+                    </tr>
+                    <tr>
+                        <td> 2 </td>
+                        <td>CS131</td>
+                        <td>Cấu trúc dữ liệu</td>
+                        <td>CTDL.1</td>
+                        <td>3</td>
+                        <td>6-9</td>
+                        <td>BOMON</td>
+                        <td>3</td>
+                        <td>Nguyễn Minh An</td>
+                    </tr>
+                    <tr>
+                        <td> 3 </td>
+                        <td>MA131</td>
+                        <td>Đồ Họa</td>
+                        <td>DOHOA.3</td>
+                        <td>5</td>
+                        <td>1-5</td>
+                        <td>BOMON</td>
+                        <td>3</td>
+                        <td>Nguyễn Huy Hiệp</td>
+                    </tr>
+                    <tr>
+                        <td> 4 </td>
+                        <td>TA131</td>
+                        <td>Tiếng Anh Trung Cấp 2</td>
+                        <td>TA.3</td>
+                        <td>7</td>
+                        <td>3-5</td>
+                        <td>BOMON</td>
+                        <td>2</td>
+                        <td>Trần Duy Anh Tú</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </form>
+          </div>
         </div>
+      </div>
 
-        <div th:replace="template/template.html :: footer"></div>
+      <div th:replace="template/template.html :: footer"></div>
     </div>
-</body>
-
+  </body>
 </html>

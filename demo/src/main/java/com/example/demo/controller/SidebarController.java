@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.awt.*;
 import java.security.Principal;
 
 @Controller
@@ -55,5 +54,16 @@ public class SidebarController {
 
         userRepository.save(user);
         return thongtincanhan(model, principal);
+    }
+
+
+    @GetMapping("/bangdiem")
+    public String bangdiem(Model model, Principal principal) {
+        User user = (User) ((Authentication) principal).getPrincipal();
+        System.out.printf("\n\n%s\n\n", studentRepository.findByUserId(user.getId()));
+
+        model.addAttribute("user", user);
+        model.addAttribute("student", studentRepository.findByUserId(user.getId()));
+        return "sidebar/bangdiem";
     }
 }

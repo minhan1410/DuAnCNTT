@@ -12,9 +12,12 @@ import javax.persistence.Table;
 @Data
 public class Class {
     @Id
-    @Column(name = "MaLop", nullable = false, length = 6)
+    @Column(name = "ma_lop", nullable = false, length = 6)
     private String id;
 
-    @Column(name = "TenLop")
-    private String name;
+    @Column(name = "phong")
+    private String phongHoc;
+
+    @Column(name = "ma_mon", nullable = false, length = 6)
+    private String subjectId;
 }

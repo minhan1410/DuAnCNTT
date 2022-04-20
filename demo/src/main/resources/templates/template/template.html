@@ -26,10 +26,9 @@
             |
             <a href="#">Đổi mật khẩu</a>
             |
-            
-            <form th:action="@{/logout}" method="post">
-                <input type="submit" value="Đăng xuất" />
-            </form>
+
+            <form style="display: none" id="myform" th:action="@{/logout}" method="post"></form>
+            <a onclick="document.getElementById('myform').submit();">Đăng xuất</a></br>
 
             Tình Trạng :
             <strong>
@@ -84,7 +83,7 @@
                     <li><a href="#">Đăng kí thi lại</a></li>
                     <li><a href="#">Thời khóa biểu</a></li>
                     <li><a href="#">Phiếu báo thu tiền</a></li>
-                    <li><a href="#">Bảng điểm</a></li>
+                    <li><a th:href="@{/bangdiem}">Bảng điểm</a></li>
                     <li><a href="#">Lịch thi chính thức</a></li>
                     <li><a href="#">Lịch thi dự kiến</a></li>
                     <li><a href="#">Phiếu bảo điểm</a></li>

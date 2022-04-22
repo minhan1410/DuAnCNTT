@@ -1,11 +1,9 @@
 package com.example.demo.model;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -19,14 +17,20 @@ public class Subject {
     @Column(name = "MaGV", nullable = false, length = 6)
     private String teacherId;
 
+    @Column(name = "macn")
+    private String maChuyenNganh;
+
     @Column(name = "ten_mon")
     private String name;
 
+    @Column(name = "ten_lop")
+    private String tenLop;
+
+    @Column(name = "phong_hoc")
+    private String phongHoc;
+
     @Column(name = "sotc")
     private Integer soTinChi;
-
-    @Column(name = "macn")
-    private String maChuyenNganh;
 
     @Column(name = "ca")
     private String ca;
@@ -42,4 +46,10 @@ public class Subject {
 
     @Column(name = "gia_tien")
     private Integer giaTien;
+
+    @Column(name = "NgayBatDau")
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date ngayBatDau;
+
 }

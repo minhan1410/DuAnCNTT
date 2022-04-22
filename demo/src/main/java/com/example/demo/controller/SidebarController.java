@@ -1,9 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.User;
-import com.example.demo.repository.SpecializedRepository;
-import com.example.demo.repository.StudentRepository;
-import com.example.demo.repository.UserRepository;
+import com.example.demo.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -22,6 +20,10 @@ public class SidebarController {
     private SpecializedRepository specializedRepository;
     @Autowired
     private StudentRepository studentRepository;
+    @Autowired
+    private SubjectRepository subjectRepository;
+    @Autowired
+    private TeacherRepository teacherRepository;
 
     @GetMapping("/dangkihoc")
     public String dangkihoc(Model model, Principal principal) {
@@ -65,5 +67,21 @@ public class SidebarController {
         model.addAttribute("user", user);
         model.addAttribute("student", studentRepository.findByUserId(user.getId()));
         return "sidebar/bangdiem";
+    }
+
+    @GetMapping("/thoikhoabieutoantruong")
+    public String thoikhoabieutoantruong(Model model, Principal principal) {
+//        header
+        User user = (User) ((Authentication) principal).getPrincipal();
+
+        model.addAttribute("user", user);
+        model.addAttribute("student", studentRepository.findByUserId(user.getId()));
+
+//
+        model.addAttribute("listSubject",subjectRepository.findAll());
+        model.addAttribute("teacherRepository",teacherRepository);
+        model.addAttribute("userRepository",userRepository);
+
+        return "sidebar/thoikhoabieutoantruong";
     }
 }

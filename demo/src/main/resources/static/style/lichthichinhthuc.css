@@ -1,0 +1,30 @@
+.fr {
+    background: url(images/menu2.png) white;
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 1px 10px;
+    margin: 0;
+}
+.tablesv {
+    width: 760px;
+    margin: auto;
+}
+
+.tablesv a {
+    color: #06f;
+}
+
+.tablesv a:hover {
+    text-decoration: underline;
+}
+
+.tablesv th {
+    background: #6595c2;
+    color: #fff;
+    padding: 2px;
+}
+
+.tablesv td {
+    border-bottom: 1px dotted #ccc;
+    background: #fff;
+}

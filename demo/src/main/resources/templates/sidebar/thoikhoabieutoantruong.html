@@ -12,31 +12,7 @@
 
   <head>
     <link rel="stylesheet" th:href="@{/style/dangkihoc.css}" />
-    <style>
-      .grid {
-        text-align: left;
-        border-color: #f3f3f3;
-        border-width: 1px;
-        border-style: hidden;
-        background: #fff;
-      }
-
-      .grid th {
-        margin-top: 0px;
-        border: 0;
-        font-family: Tahoma, "Times New Roman", Times, serif;
-        font-weight: bold;
-        color: White;
-        background: #6296c5;
-        padding: 2px;
-      }
-
-      .grid tr td {
-        font-size: 85%;
-        border-bottom: 1px dotted #ccc;
-        padding: 3px 4px;
-      }
-    </style>
+    <link rel="stylesheet" th:href="@{/style/thoikhoabieutoantruong.css}" />
   </head>
 
   <body>
@@ -64,7 +40,7 @@
                 </tbody>
               </table>
               <br />
-              <table style="float: right">
+              <table  id="example" style="float: right">
                 <tbody>
                   <tr>
                     <td>Chọn năm học</td>
@@ -79,22 +55,6 @@
                         <option value="2017">Năm học 2017-2018</option>
                         <option value="2016">Năm học 2016-2017</option>
                         <option value="2015">Năm học 2015-2016</option>
-                      </select>
-                    </td>
-                    <td>Chọn học kì</td>
-                    <td>
-                      <select name="" id="" style="width: 150px">
-                        <option selected="selected" value="146">
-                          Học Kỳ III Nhóm 3
-                        </option>
-                        <option value="145">Học Kỳ III Nhóm 2</option>
-                        <option value="144">Học Kỳ III Nhóm 1</option>
-                        <option value="143">Học Kỳ II Nhóm 3</option>
-                        <option value="142">Học Kỳ II Nhóm 2</option>
-                        <option value="141">Học Kỳ II Nhóm 1</option>
-                        <option value="140">Học Kỳ I Nhóm 3</option>
-                        <option value="139">Học Kỳ I Nhóm 2</option>
-                        <option value="138">Học Kỳ I Nhóm 1</option>
                       </select>
                     </td>
                   </tr>
@@ -124,49 +84,17 @@
                       <th scope="col">TC</th>
                       <th scope="col">Giáo Viên</th>
                     </tr>
-                    <tr>
-                        <td> 1 </td>
-                        <td>FA131</td>
-                        <td>Bố cục màu</td>
-                        <td>BOCUCMAU.1</td>
-                        <td>1</td>
-                        <td>8-9</td>
-                        <td>BOMON</td>
-                        <td>2</td>
-                        <td>Nguyễn Việt Anh</td>
-                    </tr>
-                    <tr>
-                        <td> 2 </td>
-                        <td>CS131</td>
-                        <td>Cấu trúc dữ liệu</td>
-                        <td>CTDL.1</td>
-                        <td>3</td>
-                        <td>6-9</td>
-                        <td>BOMON</td>
-                        <td>3</td>
-                        <td>Nguyễn Minh An</td>
-                    </tr>
-                    <tr>
-                        <td> 3 </td>
-                        <td>MA131</td>
-                        <td>Đồ Họa</td>
-                        <td>DOHOA.3</td>
-                        <td>5</td>
-                        <td>1-5</td>
-                        <td>BOMON</td>
-                        <td>3</td>
-                        <td>Nguyễn Huy Hiệp</td>
-                    </tr>
-                    <tr>
-                        <td> 4 </td>
-                        <td>TA131</td>
-                        <td>Tiếng Anh Trung Cấp 2</td>
-                        <td>TA.3</td>
-                        <td>7</td>
-                        <td>3-5</td>
-                        <td>BOMON</td>
-                        <td>2</td>
-                        <td>Trần Duy Anh Tú</td>
+
+                    <tr th:each="subject, iStat : ${listSubject}" >
+                      <td th:text="${iStat.index}"></td>
+                      <td th:text="${subject.id}"></td>
+                        <td th:text="${subject.name}"></td>
+                        <td th:text="${subject.tenLop}"></td>
+                        <td th:text="${subject.thu}"></td>
+                        <td th:text="${subject.ca}"></td>
+                        <td th:text="${subject.phongHoc}"></td>
+                        <td th:text="${subject.soTinChi}"></td>
+                        <td th:text="${userRepository.findById(teacherRepository.findById(subject.getTeacherId()).get().getUserId()).get().getName()}"></td>
                     </tr>
                   </tbody>
                 </table>

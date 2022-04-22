@@ -1,0 +1,85 @@
+.grid {
+    text-align: left;
+    border-color: #f3f3f3;
+    border-width: 1px;
+    border-style: hidden;
+    background: #fff;
+}
+
+.grid th {
+    margin-top: 0px;
+    border: 0;
+    font-family: Tahoma, "Times New Roman", Times, serif;
+    font-weight: bold;
+    color: White;
+    background: #6296c5;
+    padding: 2px;
+}
+
+.grid tr td {
+    font-size: 85%;
+    border-bottom: 1px dotted #ccc;
+    padding: 3px 4px;
+}
+
+.entry {
+    display: flex;
+}
+
+.update {
+    display: none;
+}
+
+img {
+    height: 200px;
+    width: 200px;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    object-fit: cover;
+}
+
+.entry {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999999;
+    background-color: rgba(0, 0, 0, 0.75);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.table {
+    justify-content: center;
+    margin: 200px auto;
+    margin-top: 120px;
+    width: 30%;
+    height: 530px;
+    line-height: 1;
+
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 15px;
+    background-color: #f2f2f2;
+}
+
+
+
+
+h4 {
+    padding-left: 20px;
+    padding-top: 10px;
+}
+
+label {
+    font-size: 14px;
+}
+
+#div {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}

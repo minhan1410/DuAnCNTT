@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html
+        lang="vi"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head
+        th:replace="template/template.html :: head('TRƯỜNG ĐẠI HỌC THĂNG LONG')"
+></head>
+
+<head>
+  <link rel="stylesheet" th:href="@{/style/dangkihoc.css}" />
+  <link rel="stylesheet" th:href="@{/style/thoikhoabieutt.css}" />
+
+</head>
+
+<body>
+<div id="head">
+  <div th:replace="template/template.html :: header"></div>
+
+  <div id="page">
+    <div th:replace="template/template.html :: sidebar"></div>
+    <div id="right">
+      <div class="title">Danh sách các môn học được đăng kí</div>
+      <div class="entry">
+        <div>
+          <p style="text-align: center; font-weight: bold; font-size: 20px">
+            Danh sách các môn được đăng kí
+          </p>
+        </div>
+        <div>
+          <table
+                  class="grid"
+                  border="0"
+                  cellspacing="0"
+                  style="
+                  border-style: none;
+                  width: 100%;
+                  border-collapse: collapse;
+                "
+          >
+            <tbody>
+            <tr>
+              <th scope="col">STT</th>
+              <th scope="col"></th>
+              <th scope="col">Tên Môn</th>
+              <th scope="col">Thứ</th>
+              <th scope="col">Ca</th>
+              <th scope="col">TC</th>
+              <th scope="col">Giá tiền</th>
+              <th scope="col">Trạng thái</th>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td><input type="checkbox" name="check" /></td>
+              <td>Bố cục màu</td>
+              <td>2</td>
+              <td>8-10</td>
+              <td>3</td>
+              <td>1.200.000</td>
+              <td>Chưa đăng kí</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td><input type="checkbox" name="check" /></td>
+              <td>Cấu trúc dữ liệu</td>
+              <td>4</td>
+              <td>6-10</td>
+              <td>3</td>
+              <td>1.200.000</td>
+              <td>Chưa đăng kí</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td><input type="checkbox" name="check" /></td>
+              <td>Đồ Họa</td>
+              <td>2</td>
+              <td>1-5</td>
+              <td>3</td>
+              <td>1.200.000</td>
+              <td>Chưa đăng kí</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td><input type="checkbox" name="check" /></td>
+              <td>Tiếng Anh Trung Cấp 2</td>
+              <td>7</td>
+              <td>3-5</td>
+              <td>2</td>
+              <td>1.200.000</td>
+              <td>Chưa đăng kí</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <p style="text-align: center; font-weight: bold; font-size: 20px">
+            Danh sách các môn đã được đăng kí
+          </p>
+        </div>
+        <div>
+          <table
+                  class="grid"
+                  border="0"
+                  cellspacing="0"
+                  style="
+                    border-style: none;
+                    width: 100%;
+                    border-collapse: collapse;
+                  "
+          >
+            <tbody>
+            <tr>
+              <th scope="col">STT</th>
+              <th scope="col">Tên Môn</th>
+              <th scope="col">Thứ</th>
+              <th scope="col">Ca</th>
+              <th scope="col">TC</th>
+              <th scope="col">Giá tiền</th>
+              <th scope="col">Trạng thái</th>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>Bố cục màu</td>
+              <td>2</td>
+              <td>8-10</td>
+              <td>3</td>
+              <td>1.200.000</td>
+              <td>đã đăng kí</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Cấu trúc dữ liệu</td>
+              <td>4</td>
+              <td>6-10</td>
+              <td>3</td>
+              <td>1.200.000</td>
+              <td>đã đăng kí</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Đồ Họa</td>
+              <td>2</td>
+              <td>1-5</td>
+              <td>3</td>
+              <td>1.200.000</td>
+              <td>đã đăng kí</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Tiếng Anh Trung Cấp 2</td>
+              <td>7</td>
+              <td>3-5</td>
+              <td>2</td>
+              <td>1.200.000</td>
+              <td>đã đăng kí</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div th:replace="template/template.html :: footer"></div>
+</div>
+</body>
+</html>

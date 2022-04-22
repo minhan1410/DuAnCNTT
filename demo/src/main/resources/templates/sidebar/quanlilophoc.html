@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html
+        lang="vi"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head
+        th:replace="template/template.html :: head('TRƯỜNG ĐẠI HỌC THĂNG LONG')"
+></head>
+
+<head>
+  <link rel="stylesheet" th:href="@{/style/dangkihoc.css}" />
+  <link rel="stylesheet" th:href="@{/style/quanlilophoc.css}" />
+</head>
+
+<body>
+<div id="head">
+  <div th:replace="template/template.html :: header"></div>
+
+  <div id="page">
+    <div th:replace="template/template.html :: sidebar"></div>
+    <div id="right">
+      <div class="title">Quản lí lớp học</div>
+      <div>
+        Chọn môn học :
+        <select name="id">
+          <option selected="selected" value="146">Tất cả</option>
+          <option value="145">Học Kỳ III Nhóm 2</option>
+          <option value="144">Học Kỳ III Nhóm 1</option>
+          <option value="143">Học Kỳ II Nhóm 3</option>
+          <option value="142">Học Kỳ II Nhóm 2</option>
+        </select>
+      </div>
+      <br />
+      <div>
+        Chọn tình trạng :
+        <select name="id">
+          <option selected="selected" value="146">Tất cả</option>
+          <option value="145">Bình thường</option>
+          <option value="144">Đã tốt nghiệp</option>
+          <option value="143">Bảo lưu</option>
+          <option value="142">Thôi học</option>
+        </select>
+      </div>
+      <br />
+      <div>
+        <table
+                class="grid"
+                border="0"
+                cellspacing="0"
+                style="border-style: none; width: 100%; border-collapse: collapse"
+        >
+          <tbody>
+          <tr>
+            <th scope="col">STT</th>
+            <th scope="col">Mã sinh viên</th>
+            <th scope="col">Họ tên</th>
+            <th scope="col">Tình trạng</th>
+            <th scope="col">Thêm</th>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>A35066</td>
+            <td>Nguyễn Việt Anh</td>
+            <td>
+              <select name="id">
+                <option selected="selected" value="146">Chọn</option>
+                <option value="145">Bình thường</option>
+                <option value="144">Tốt nghiệp</option>
+                <option value="143">Bảo lưu</option>
+                <option value="142">Thôi học</option>
+              </select>
+            </td>
+            <td>
+              <button >Đánh giá</button>
+              <button class="btn">Chi tiết</button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div th:replace="template/template.html :: footer"></div>
+</div>
+<div class="entry">
+
+  <table width="100%" class="table">
+    <tr>
+      <td width="30%">Mã sinh viên :</td>
+      <td th:text="${student.id}"> </td>
+      <td><a href=""
+             style="color:red ; margin-left:140px;font-size:25px">x</a></td>
+    </tr>
+    <tr>
+      <td width>Họ tên :</td>
+      <td th:text="${user.name}"></td>
+    </tr>
+    <tr>
+      <td width>Giới tính :</td>
+      <td th:text="${user.sex}"></td>
+    </tr>
+    <tr>
+      <td width>Ngày sinh :</td>
+      <td th:text="${user.birthdayStr}"></td>
+    </tr>
+    <tr>
+      <td width>Giáo viên chủ nghiệm :</td>
+      <td>Đậu Hải Phong</td>
+    </tr>
+    <tr>
+      <td width>Điện thoại :</td>
+      <td th:text="${user.phoneNumber}"></td>
+    </tr>
+    <tr>
+      <td width>Email :</td>
+      <td th:text="${user.email}"></td>
+    </tr>
+    <tr>
+      <td width>Chỗ ở :</td>
+      <td th:text="${user.address}"></td>
+    </tr>
+  </table>
+  <div class="avatar">
+    <tr>
+      <td><img th:src="${user.avatar}" /></td>
+    </tr>
+  </div>
+</div>
+</body>
+<script>
+  const buttonUpdate = document.querySelector(".btn");
+  const entry = document.querySelector(".entry");
+  const Table = document.querySelector(".table");
+
+  if (buttonUpdate) {
+    buttonUpdate.addEventListener("click", function (e) {
+      entry.style.display = "block";
+      console.log("haha");
+    });
+  }
+</script>
+</html>

@@ -12,7 +12,7 @@
 
 <head>
   <link rel="stylesheet" th:href="@{/style/dangkihoc.css}" />
-  <link rel="stylesheet" th:href="@{/style/thoikhoabieutt.css}" />
+  <link rel="stylesheet" th:href="@{/style/thoikhoabieutoantruong.css}" />
 
 </head>
 
@@ -46,51 +46,26 @@
               <th scope="col">STT</th>
               <th scope="col"></th>
               <th scope="col">Tên Môn</th>
+              <th scope="col">Tên Lớp</th>
               <th scope="col">Thứ</th>
               <th scope="col">Ca</th>
-              <th scope="col">TC</th>
+              <th scope="col">Phòng học</th>
+              <th scope="col">Tín chỉ</th>
               <th scope="col">Giá tiền</th>
               <th scope="col">Trạng thái</th>
             </tr>
-            <tr>
-              <td>1</td>
-              <td><input type="checkbox" name="check" /></td>
-              <td>Bố cục màu</td>
-              <td>2</td>
-              <td>8-10</td>
-              <td>3</td>
-              <td>1.200.000</td>
-              <td>Chưa đăng kí</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td><input type="checkbox" name="check" /></td>
-              <td>Cấu trúc dữ liệu</td>
-              <td>4</td>
-              <td>6-10</td>
-              <td>3</td>
-              <td>1.200.000</td>
-              <td>Chưa đăng kí</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td><input type="checkbox" name="check" /></td>
-              <td>Đồ Họa</td>
-              <td>2</td>
-              <td>1-5</td>
-              <td>3</td>
-              <td>1.200.000</td>
-              <td>Chưa đăng kí</td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td><input type="checkbox" name="check" /></td>
-              <td>Tiếng Anh Trung Cấp 2</td>
-              <td>7</td>
-              <td>3-5</td>
-              <td>2</td>
-              <td>1.200.000</td>
-              <td>Chưa đăng kí</td>
+
+            <tr th:each="subject, iStat : ${listSubject}">
+              <td th:text="${iStat.index+1}"></td>
+              <td><input type="checkbox" name="check" class="accept" th:attr="data-subject = ${subject.id}" /></td>
+              <td th:text="${subject.name}"></td>
+              <td th:text="${subject.tenLop}"></td>
+              <td th:text="${subject.thu}"></td>
+              <td th:text="${subject.ca}"></td>
+              <td th:text="${subject.phongHoc}"></td>
+              <td th:text="${subject.soTinChi}"></td>
+              <td th:text="${subject.giaTien}"></td>
+              <td th:text="|[${subject.soLuongSvDaDk} / ${subject.soLuongSv}]|"></td>
             </tr>
             </tbody>
           </table>
@@ -167,4 +142,18 @@
   <div th:replace="template/template.html :: footer"></div>
 </div>
 </body>
+
+<script>
+  const cb = document.querySelectorAll('.accept');
+
+  cb.forEach((item) => {
+    item.addEventListener('click', e => {
+      if(item.checked){
+        console.log(item.dataset.subject)
+        item.load("/checkdkh/" + item.dataset.subject)
+      }
+    })
+  })
+
+</script>
 </html>

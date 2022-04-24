@@ -45,11 +45,16 @@ public class Subject {
     private String caThi;
 
     @Column(name = "gia_tien")
-    private Integer giaTien;
+    private Long giaTien;
 
     @Column(name = "NgayBatDau")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date ngayBatDau;
 
+    @Column(name = "so_luong_sv")
+    private Integer soLuongSv;
+
+    @Column(name = "so_luong_sv_dk")
+    private Integer soLuongSvDaDk;
 }

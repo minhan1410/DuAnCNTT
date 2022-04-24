@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Controller
 public class SidebarController {
@@ -39,9 +41,9 @@ public class SidebarController {
 
         model.addAttribute("user", user);
 
-        if(user.getPermissions().equals("ROLE_Student")){
+        if (user.getPermissions().equals("ROLE_Student")) {
             model.addAttribute("student", studentRepository.findByUserId(user.getId()));
-        }else{
+        } else {
             model.addAttribute("student", teacherRepository.findByUserId(user.getId()));
         }
 
@@ -58,7 +60,7 @@ public class SidebarController {
     }
 
     @PostMapping("/updateUser")
-    public String updateUser(Model model, Principal principal, @ModelAttribute User updateUser){
+    public String updateUser(Model model, Principal principal, @ModelAttribute User updateUser) {
         User user = (User) ((Authentication) principal).getPrincipal();
         user.setName(updateUser.getName());
         user.setAddress(updateUser.getAddress());
@@ -91,9 +93,9 @@ public class SidebarController {
         model.addAttribute("student", studentRepository.findByUserId(user.getId()));
 
 //
-        model.addAttribute("listSubject",subjectRepository.findAll());
-        model.addAttribute("teacherRepository",teacherRepository);
-        model.addAttribute("userRepository",userRepository);
+        model.addAttribute("listSubject", subjectRepository.findAll());
+        model.addAttribute("teacherRepository", teacherRepository);
+        model.addAttribute("userRepository", userRepository);
 
         return "sidebar/thoikhoabieutoantruong";
     }
@@ -102,15 +104,29 @@ public class SidebarController {
     public String dangkimonhoc(Model model, Principal principal) {
 //        header
         User user = (User) ((Authentication) principal).getPrincipal();
+        Student student = studentRepository.findByUserId(user.getId());
 
         model.addAttribute("user", user);
-        model.addAttribute("student", studentRepository.findByUserId(user.getId()));
+        model.addAttribute("student", student);
 //
-        model.addAttribute("listSubject",subjectRepository.findAll());
+        List<Subject> subjects = subjectRepository.findAll(); //TKB toan truong
+        Set<Subject> subjectDk = studentPointRepository.findSubjectsByStudentId(student.getId()); // ds mon da dk
+
+        subjects.remove(subjectDk);
+
+        for(Subject sb: subjects) {
+            sb.setSoLuongSvDaDk(studentPointRepository.findStudentsBySubjectId(sb.getId()).size());
+            subjectRepository.save(sb);
+        }
+
+        model.addAttribute("listSubject", subjects);
+        model.addAttribute("subjectDk", subjectDk.size() == 0 ? null : subjectDk);
+
+
         return "sidebar/dangkimonhoc";
     }
 
-    @GetMapping("/checkdkh/{id}")
+    @GetMapping("/dkh/{id}")
     public String dangkimonhoc(@PathVariable("id") String id, Model model, Principal principal) {
 //        header
         User user = (User) ((Authentication) principal).getPrincipal();
@@ -119,16 +135,68 @@ public class SidebarController {
         model.addAttribute("user", user);
         model.addAttribute("student", student);
 //
+        List<Subject> subjects = subjectRepository.findAll();
+        Set<Subject> subjectDk = studentPointRepository.findSubjectsByStudentId(student.getId());
+
         Optional<Subject> subject = subjectRepository.findById(id);
-        if(subject.isPresent()){
+        if (subject.isPresent()) {
             StudentPoint studentPoint = new StudentPoint();
             studentPoint.setStudentId(student.getId());
             studentPoint.setSubjectId(subject.get().getId());
 
-            studentPointRepository.save(studentPoint);
+            if (subjectDk.add(subject.get())) {
+                subjects.remove(subjectDk);
+                studentPointRepository.save(studentPoint);
+            } else {
+                model.addAttribute("mess", "Đã đăng ký môn trước đó");
+            }
+
+            System.out.println("\n\n" + "\n\n");
         }
 
-        return "null";
+        for(Subject sb: subjects) {
+            sb.setSoLuongSvDaDk(studentPointRepository.findStudentsBySubjectId(sb.getId()).size());
+            subjectRepository.save(sb);
+        }
+
+        model.addAttribute("listSubject", subjects);
+        model.addAttribute("subjectDk", subjectDk);
+
+        return "sidebar/dangkimonhoc";
+    }
+
+    @GetMapping("/huydkh/{id}")
+    public String huydangkimonhoc(@PathVariable("id") String id, Model model, Principal principal) {
+//        header
+        User user = (User) ((Authentication) principal).getPrincipal();
+        Student student = studentRepository.findByUserId(user.getId());
+
+        model.addAttribute("user", user);
+        model.addAttribute("student", student);
+//
+        List<Subject> subjects = subjectRepository.findAll();
+        Set<Subject> subjectDk = studentPointRepository.findSubjectsByStudentId(student.getId());
+
+        Optional<Subject> subject = subjectRepository.findById(id);
+        if (subject.isPresent()) {
+            for (StudentPoint sp : studentPointRepository.findAll()) {
+                if (id.equals(sp.getSubjectId())) {
+                    studentPointRepository.deleteById(sp.getId());
+                }
+            }
+
+            subjectDk.remove(subject.get());
+        }
+
+        for(Subject sb: subjects) {
+            sb.setSoLuongSvDaDk(studentPointRepository.findStudentsBySubjectId(sb.getId()).size());
+            subjectRepository.save(sb);
+        }
+
+        model.addAttribute("listSubject", subjects);
+        model.addAttribute("subjectDk", subjectDk);
+
+        return "sidebar/dangkimonhoc";
     }
 
     @GetMapping("/lichthichinhthuc")

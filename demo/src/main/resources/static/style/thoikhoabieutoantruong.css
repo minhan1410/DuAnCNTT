@@ -21,3 +21,11 @@
     border-bottom: 1px dotted #ccc;
     padding: 3px 4px;
 }
+
+.btn{
+    font-size:12px;
+
+}
+.btnhuy{
+    display: none;
+}

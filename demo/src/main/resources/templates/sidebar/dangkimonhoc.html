@@ -57,7 +57,10 @@
 
             <tr th:each="subject, iStat : ${listSubject}">
               <td th:text="${iStat.index+1}"></td>
-              <td><input type="checkbox" name="check" class="accept" th:attr="data-subject = ${subject.id}" /></td>
+              <td>
+                <button class="btn btndk" style="color: #175765"><a th:href="@{/dkh/{id}(id=${subject.id})}" >Đăng kí</a></button>
+<!--                <button class="btn btnhuy" style="color: red;"><a href="">Hủy</a></button>-->
+              </td>
               <td th:text="${subject.name}"></td>
               <td th:text="${subject.tenLop}"></td>
               <td th:text="${subject.thu}"></td>
@@ -89,49 +92,30 @@
             <tbody>
             <tr>
               <th scope="col">STT</th>
+              <th scope="col"></th>
               <th scope="col">Tên Môn</th>
+              <th scope="col">Tên Lớp</th>
               <th scope="col">Thứ</th>
               <th scope="col">Ca</th>
-              <th scope="col">TC</th>
+              <th scope="col">Phòng học</th>
+              <th scope="col">Tín chỉ</th>
               <th scope="col">Giá tiền</th>
-              <th scope="col">Trạng thái</th>
             </tr>
-            <tr>
-              <td>1</td>
-              <td>Bố cục màu</td>
-              <td>2</td>
-              <td>8-10</td>
-              <td>3</td>
-              <td>1.200.000</td>
-              <td>đã đăng kí</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Cấu trúc dữ liệu</td>
-              <td>4</td>
-              <td>6-10</td>
-              <td>3</td>
-              <td>1.200.000</td>
-              <td>đã đăng kí</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Đồ Họa</td>
-              <td>2</td>
-              <td>1-5</td>
-              <td>3</td>
-              <td>1.200.000</td>
-              <td>đã đăng kí</td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>Tiếng Anh Trung Cấp 2</td>
-              <td>7</td>
-              <td>3-5</td>
-              <td>2</td>
-              <td>1.200.000</td>
-              <td>đã đăng kí</td>
-            </tr>
+            <div th:if="${subjectDk != null }">
+              <tr th:each="subject, iStat : ${subjectDk}">
+                <td th:text="${iStat.index+1}"></td>
+                <td>
+                  <button class="btn btndk" style="color: #175765"><a th:href="@{/huydkh/{id}(id=${subject.id})}" >Hủy</a></button>
+                </td>
+                <td th:text="${subject.name}"></td>
+                <td th:text="${subject.tenLop}"></td>
+                <td th:text="${subject.thu}"></td>
+                <td th:text="${subject.ca}"></td>
+                <td th:text="${subject.phongHoc}"></td>
+                <td th:text="${subject.soTinChi}"></td>
+                <td th:text="${subject.giaTien}"></td>
+              </tr>
+            </div>
             </tbody>
           </table>
         </div>

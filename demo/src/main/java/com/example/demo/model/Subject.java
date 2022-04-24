@@ -55,6 +55,6 @@ public class Subject {
     @Column(name = "so_luong_sv")
     private Integer soLuongSv;
 
-    @Column(name = "so_luong_sv_dk")
-    private Integer soLuongSvDaDk;
+    @Column(name = "so_luong_sv_dk", columnDefinition = "0")
+    private Integer soLuongSvDaDk = 0;
 }

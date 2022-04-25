@@ -46,7 +46,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (17,'$2a$10$EtQnWITrI2dIz7PmRUUAqe6Ay/0VyYuu4y5R7NWoNBIRbE1Y7MGKi','ROLE_Student','minhan','An','Thường Tín','minhan14102001@gmail.com','111','https://afamilycdn.com/150157425591193600/2020/3/21/batch6615a53a-51f3-336e-b7ba-ed456e3c89ca-15848021328151422868524.jpg','2022-03-27','0123456789','Nam'),(18,'$2a$10$VqjIUBFl7aPOfObk6zPcj.reNUEpJjIPWeWRZiG5ghMxPQ3H7UUSO','ROLE_Teacher','minhan1','Nguyễn Minh An','Thường Tín','minhan14102001@gmail.com','222','https://halocatravel.com/wp-content/uploads/2020/0','2022-04-22','0123456789','Nam'),(19,'$2a$10$Jd.Hqxwr7ZW5zzvBj.K8ROTw3Yt2DZGQ7GnYd5Ru6zB8z9T1YB2Me','ROLE_Teacher','vietanh','Nguyễn Việt Anh','Thường Tín','vietanh@gmail.com','111','http://studiochupanhdep.com//Upload/Images/Album/a','2022-04-22','0123456789','Nam'),(20,'$2a$10$uAtNjCize1mGubd/nWaYcO.kVCllQ/gWj4yu9ub99b8udC9hxSuQC','ROLE_Student','vietanh1','Nguyễn Việt Anh','Thường Tín','vietanh1@gmail.com','123','https://luv.vn/wp-content/uploads/2021/08/hinh-anh-gai-xinh-73.jpg','2022-04-25','0123456789','Nam');
+INSERT INTO `user` VALUES (17,'$2a$10$EtQnWITrI2dIz7PmRUUAqe6Ay/0VyYuu4y5R7NWoNBIRbE1Y7MGKi','ROLE_Student','minhan','Nguyễn Minh An','Thường Tín','minhan14102001@gmail.com','111','https://afamilycdn.com/150157425591193600/2020/3/21/batch6615a53a-51f3-336e-b7ba-ed456e3c89ca-15848021328151422868524.jpg','2022-03-27','0123456789','Nam'),(18,'$2a$10$VqjIUBFl7aPOfObk6zPcj.reNUEpJjIPWeWRZiG5ghMxPQ3H7UUSO','ROLE_Teacher','minhan1','Nguyễn Minh An','Thường Tín','minhan14102001@gmail.com','222','https://halocatravel.com/wp-content/uploads/2020/0','2022-04-22','0123456789','Nam'),(19,'$2a$10$Jd.Hqxwr7ZW5zzvBj.K8ROTw3Yt2DZGQ7GnYd5Ru6zB8z9T1YB2Me','ROLE_Teacher','vietanh','Nguyễn Việt Anh','Thường Tín','vietanh@gmail.com','111','http://studiochupanhdep.com//Upload/Images/Album/a','2022-04-22','0123456789','Nam'),(20,'$2a$10$uAtNjCize1mGubd/nWaYcO.kVCllQ/gWj4yu9ub99b8udC9hxSuQC','ROLE_Student','vietanh1','Nguyễn Việt Anh','Thường Tín','vietanh1@gmail.com','123','https://luv.vn/wp-content/uploads/2021/08/hinh-anh-gai-xinh-73.jpg','2022-04-25','0123456789','Nam');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -59,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-25 13:59:35
+-- Dump completed on 2022-04-26  0:18:26

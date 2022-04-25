@@ -20,11 +20,11 @@ public class StudentPoint {
     private String subjectId;
 
     @Column(name = "diem_qua_trinh")
-    private Integer diemQuaTrinh;
+    private Double diemQuaTrinh;
 
     @Column(name = "diem_cuoi_ky")
-    private Integer diemCuoiKy;
+    private Double diemCuoiKy;
 
     @Column(name = "diem_tong_ket")
-    private Integer diemTongket;
+    private Double diemTongket;
 }

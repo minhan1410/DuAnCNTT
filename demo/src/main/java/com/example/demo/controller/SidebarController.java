@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -74,14 +75,36 @@ public class SidebarController {
         return thongtincanhan(model, principal);
     }
 
-
     @GetMapping("/bangdiem")
     public String bangdiem(Model model, Principal principal) {
         User user = (User) ((Authentication) principal).getPrincipal();
-        System.out.printf("\n\n%s\n\n", studentRepository.findByUserId(user.getId()));
+        Student student = studentRepository.findByUserId(user.getId());
 
         model.addAttribute("user", user);
-        model.addAttribute("student", studentRepository.findByUserId(user.getId()));
+        model.addAttribute("student", student);
+
+//
+        int tcttl = 0;
+        double tbctl = 0;
+
+        List<StudentPoint> studentPoints = new ArrayList<StudentPoint>();
+        for (StudentPoint studentPoint : studentPointRepository.findAll()) {
+            if (studentPoint.getStudentId().equals(student.getId())) {
+                studentPoints.add(studentPoint);
+                if (studentPoint.getDiemTongket() >= 4.0) {
+                    Subject subject = subjectRepository.findById(studentPoint.getSubjectId()).get();
+                    tcttl += subject.getSoTinChi();
+                }
+            }
+        }
+        model.addAttribute("studentPoint", studentPoints);
+
+        Set<Subject> subjectDk = studentPointRepository.findSubjectsByStudentId(student.getId());
+        model.addAttribute("subjectDk", subjectDk);
+
+        model.addAttribute("tcttl", tcttl);
+        model.addAttribute("tbctl", tbctl);
+
         return "sidebar/bangdiem";
     }
 
@@ -115,7 +138,7 @@ public class SidebarController {
 
         subjects.remove(subjectDk);
 
-        for(Subject sb: subjects) {
+        for (Subject sb : subjects) {
             sb.setSoLuongSvDaDk(studentPointRepository.findStudentsBySubjectId(sb.getId()).size());
             subjectRepository.save(sb);
         }
@@ -148,10 +171,9 @@ public class SidebarController {
 
             if (subject.get().getSoLuongSvDaDk() >= subject.get().getSoLuongSv()) {
                 model.addAttribute("mess", "Lớp đầy");
-            } else if(!subjectDk.add(subject.get())){
+            } else if (!subjectDk.add(subject.get())) {
                 model.addAttribute("mess", "Đã đăng ký môn trước đó");
-            }
-            else {
+            } else {
                 subjects.remove(subjectDk);
                 studentPointRepository.save(studentPoint);
                 model.addAttribute("mess", "Đã đăng ký thành công");
@@ -160,7 +182,7 @@ public class SidebarController {
             System.out.println("\n\n" + "\n\n");
         }
 
-        for(Subject sb: subjects) {
+        for (Subject sb : subjects) {
             sb.setSoLuongSvDaDk(studentPointRepository.findStudentsBySubjectId(sb.getId()).size());
             subjectRepository.save(sb);
         }
@@ -194,7 +216,7 @@ public class SidebarController {
             subjectDk.remove(subject.get());
         }
 
-        for(Subject sb: subjects) {
+        for (Subject sb : subjects) {
             sb.setSoLuongSvDaDk(studentPointRepository.findStudentsBySubjectId(sb.getId()).size());
             subjectRepository.save(sb);
             model.addAttribute("mess", "Đã hủy thành công");

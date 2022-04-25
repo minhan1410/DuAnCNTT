@@ -68,6 +68,7 @@ public class SidebarController {
         user.setEmail(updateUser.getEmail());
         user.setBirthday(updateUser.getBirthday());
         user.setSex(updateUser.getSex());
+        user.setAvatar(updateUser.getAvatar());
 
         userRepository.save(user);
         return thongtincanhan(model, principal);
@@ -119,6 +120,7 @@ public class SidebarController {
             subjectRepository.save(sb);
         }
 
+        model.addAttribute("mess", null);
         model.addAttribute("listSubject", subjects);
         model.addAttribute("subjectDk", subjectDk.size() == 0 ? null : subjectDk);
 
@@ -144,11 +146,15 @@ public class SidebarController {
             studentPoint.setStudentId(student.getId());
             studentPoint.setSubjectId(subject.get().getId());
 
-            if (subjectDk.add(subject.get())) {
+            if (subject.get().getSoLuongSvDaDk() >= subject.get().getSoLuongSv()) {
+                model.addAttribute("mess", "Lớp đầy");
+            } else if(!subjectDk.add(subject.get())){
+                model.addAttribute("mess", "Đã đăng ký môn trước đó");
+            }
+            else {
                 subjects.remove(subjectDk);
                 studentPointRepository.save(studentPoint);
-            } else {
-                model.addAttribute("mess", "Đã đăng ký môn trước đó");
+                model.addAttribute("mess", "Đã đăng ký thành công");
             }
 
             System.out.println("\n\n" + "\n\n");
@@ -191,6 +197,7 @@ public class SidebarController {
         for(Subject sb: subjects) {
             sb.setSoLuongSvDaDk(studentPointRepository.findStudentsBySubjectId(sb.getId()).size());
             subjectRepository.save(sb);
+            model.addAttribute("mess", "Đã hủy thành công");
         }
 
         model.addAttribute("listSubject", subjects);

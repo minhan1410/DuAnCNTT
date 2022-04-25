@@ -25,10 +25,10 @@ DROP TABLE IF EXISTS `monhoc`;
 CREATE TABLE `monhoc` (
   `ma_mon` varchar(6) NOT NULL,
   `magv` varchar(6) NOT NULL,
-  `macn` varchar(10) DEFAULT NULL,
-  `ten_mon` varchar(255) DEFAULT NULL,
-  `ten_lop` varchar(255) DEFAULT NULL,
-  `sotc` int DEFAULT NULL,
+  `macn` varchar(10) NOT NULL,
+  `ten_mon` varchar(255) NOT NULL,
+  `ten_lop` varchar(255) NOT NULL,
+  `sotc` int NOT NULL,
   `phong_hoc` varchar(255) DEFAULT NULL,
   `ca` varchar(5) DEFAULT NULL,
   `thu` varchar(10) DEFAULT NULL,
@@ -41,7 +41,6 @@ CREATE TABLE `monhoc` (
   PRIMARY KEY (`ma_mon`),
   KEY `fk_ChuyenNganh_MonHoc_idx` (`macn`),
   KEY `fk_ChuyenNganh_gv_idx` (`magv`),
-  CONSTRAINT `fk_ChuyenNganh_gv` FOREIGN KEY (`magv`) REFERENCES `giaovien` (`MaGV`),
   CONSTRAINT `fk_ChuyenNganh_MonHoc` FOREIGN KEY (`macn`) REFERENCES `chuyennganh` (`MaCN`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -52,7 +51,7 @@ CREATE TABLE `monhoc` (
 
 LOCK TABLES `monhoc` WRITE;
 /*!40000 ALTER TABLE `monhoc` DISABLE KEYS */;
-INSERT INTO `monhoc` VALUES ('CS131','2','333','Cấu trúc dữ liệu','	CTDL.1',3,'A704','6-9','3',NULL,NULL,1200000,'2022-03-27',50,1),('FA131','1','333','Bố cục màu','	BOCUCMAU.1',2,'BOMON','8-9','1',NULL,NULL,3400000,'2022-03-27',30,0);
+INSERT INTO `monhoc` VALUES ('CS102','1','333','Công dân số','CONGDANSO.11',3,'MSteam','1-2','3',NULL,NULL,3500000,'2022-03-27',1,1),('CS131','2','333','Cấu trúc dữ liệu','CTDL.1',3,'A704','6-9','3',NULL,NULL,1200000,'2022-03-27',50,2),('FA131','1','333','Bố cục màu','BOCUCMAU.1',2,'BOMON','8-9','1',NULL,NULL,3400000,'2022-03-27',30,2);
 /*!40000 ALTER TABLE `monhoc` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -65,4 +64,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-25  2:39:38
+-- Dump completed on 2022-04-25 13:59:35

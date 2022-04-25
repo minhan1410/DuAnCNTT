@@ -30,6 +30,11 @@
             Danh sách các môn được đăng kí
           </p>
         </div>
+
+        <div th:if="${mess != null}">
+          <span style="color: red" th:text="${mess}"></span>
+        </div>
+
         <div>
           <table
                   class="grid"

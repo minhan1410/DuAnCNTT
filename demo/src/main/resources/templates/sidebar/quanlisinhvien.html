@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html
+  lang="vi"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+  <head
+    th:replace="template/template.html :: head('TRƯỜNG ĐẠI HỌC THĂNG LONG')"
+  ></head>
+
+  <head>
+    <link rel="stylesheet" th:href="@{/style/dangkihoc.css}" />
+    <link rel="stylesheet" th:href="@{/style/quanlisinhvien.css}" />
+  </head>
+
+  <body>
+    <div id="head">
+      <div th:replace="template/template.html :: header"></div>
+
+      <div id="page">
+        <div th:replace="template/template.html :: sidebar"></div>
+        <div id="right">
+          <div class="title">Quản lí sinh viên</div>
+          <div class="entry">
+            <button id="add">Thêm sinh viên +</button>
+            <br />
+            <div>
+              Chọn chuyên ngành :
+              <select name="id">
+                <option selected="selected" value="146">Tất cả</option>
+                <option value="145">Học Kỳ III Nhóm 2</option>
+                <option value="144">Học Kỳ III Nhóm 1</option>
+                <option value="143">Học Kỳ II Nhóm 3</option>
+                <option value="142">Học Kỳ II Nhóm 2</option>
+              </select>
+            </div>
+            <br />
+
+            <div>
+              <table
+                class="grid"
+                border="0"
+                cellspacing="0"
+                style="
+                  border-style: none;
+                  width: 100%;
+                  border-collapse: collapse;
+                "
+              >
+                <tbody>
+                  <tr>
+                    <th scope="col">STT</th>
+                    <th scope="col">Mã sinh viên</th>
+                    <th scope="col">Tên sinh viên</th>
+                    <th scope="col">Trạng thái</th>
+                    <th scope="col">Hành động</th>
+                  </tr>
+                  <tr>
+                    <td>1</td>
+                    <td>IT000</td>
+                    <td>Nguyễn Việt Anh</td>
+                    <td>
+                      <select name="id">
+                        <option selected="selected" value="146">Chọn</option>
+                        <option value="145">Bình thường</option>
+                        <option value="144">Về hưu</option>
+                        <option value="143">Tạm nghỉ</option>
+                      </select>
+                    </td>
+                    <td>
+                      <button class="btn">Xem chi tiết</button>
+                      <button class="btn">Đánh giá</button>
+                      <button class="btn">Cập nhật</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div th:replace="template/template.html :: footer"></div>
+    </div>
+  </body>
+</html>

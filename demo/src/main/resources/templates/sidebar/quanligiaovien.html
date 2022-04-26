@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html
+  lang="vi"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+  <head
+    th:replace="template/template.html :: head('TRƯỜNG ĐẠI HỌC THĂNG LONG')"
+  ></head>
+
+  <head>
+    <link rel="stylesheet" th:href="@{/style/dangkihoc.css}" />
+    <link rel="stylesheet" th:href="@{/style/quanligiaovien.css}" />
+  </head>
+
+  <body>
+    <div id="head">
+      <div th:replace="template/template.html :: header"></div>
+
+      <div id="page">
+        <div th:replace="template/template.html :: sidebar"></div>
+        <div id="right">
+            <div class="title">
+                Quản lí giáo viên
+            </div>
+            <div class="entry">
+                <button id="add">
+                    Thêm giáo viên +
+                </button>
+            </div>
+            <br>
+            <div>
+                Chọn chuyên ngành :
+                <select name="id">
+                  <option selected="selected" value="146">Tất cả</option>
+                  <option value="145">Học Kỳ III Nhóm 2</option>
+                  <option value="144">Học Kỳ III Nhóm 1</option>
+                  <option value="143">Học Kỳ II Nhóm 3</option>
+                  <option value="142">Học Kỳ II Nhóm 2</option>
+                </select>
+              </div>
+              <br />
+              <div>
+                Chọn tình trạng :
+                <select name="id">
+                  <option selected="selected" value="146">Tất cả</option>
+                  <option value="145">Bình thường</option>
+                  <option value="144">Đã nghĩ hưu</option>
+                  <option value="143">Tạm nghỉ</option>
+                </select>
+              </div>
+              <br>
+
+              <div>
+                <table
+                        class="grid"
+                        border="0"
+                        cellspacing="0"
+                        style="
+                        border-style: none;
+                        width: 100%;
+                        border-collapse: collapse;
+                      "
+                >
+                  <tbody>
+                  <tr>
+                    <th scope="col">STT</th>
+                    <th scope="col">Mã giáo viên</th>
+                    <th scope="col">Tên giáo viên</th>
+                    <th scope="col">Trạng thái</th>
+                    <th scope="col">Hành động</th>
+                  </tr>
+                  <tr>
+                      <td>1</td>
+                      <td>IT000</td>
+                      <td>Nguyễn Việt Anh</td>
+                      <td>
+                        <select name="id">
+                            <option selected="selected" value="146">Chọn</option>
+                            <option value="145">Bình thường</option>
+                            <option value="144">Về hưu</option>
+                            <option value="143">Tạm nghỉ</option>
+                        
+                          </select>
+                      </td>
+                      <td><button class="btn">Xem chi tiết</button></td>
+                  </tr>
+      
+                  </tbody>
+                </table>
+              </div>
+
+        </div>
+
+      </div>
+
+      <div th:replace="template/template.html :: footer"></div>
+    </div>
+    <div class="entry1">
+
+        <table class="table">
+          <tr>
+            <td ><b style="font-size:18px">Thông tin giáo viên</b></td>
+            <td><a href=""
+              style="color:red ;font-size:20px">x</a></td>
+          </tr>
+          <tr>
+            <td >Mã giáo viên :</td>
+            <td th:text="${student.id}"> </td>
+          </tr>
+          <tr>
+            <td width>Họ tên :</td>
+            <td th:text="${user.name}"></td>
+          </tr>
+          <tr>
+            <td width>Giới tính :</td>
+            <td th:text="${user.sex}"></td>
+          </tr>
+          <tr>
+            <td width>Ngày sinh :</td>
+            <td th:text="${user.birthdayStr}"></td>
+          </tr>
+          <tr>
+            <td width>Điện thoại :</td>
+            <td th:text="${user.phoneNumber}"></td>
+          </tr>
+          <tr>
+              <td>Chủ nghiệm lớp :</td>
+              <td>TT32h1</td>
+          </tr>
+          <tr>
+            <td width>Email :</td>
+            <td th:text="${user.email}"></td>
+          </tr>
+          <tr>
+            <td width>Chỗ ở :</td>
+            <td th:text="${user.address}"></td>
+          </tr>
+        </table>
+        <!-- <div class="avatar">
+          <tr>
+            <td><img th:src="${user.avatar}" /></td>
+          </tr>
+        </div> -->
+      </div>
+  </body>
+  <script>
+    const buttonUpdate = document.querySelector(".btn");
+    const entry1 = document.querySelector(".entry1");
+    const Table = document.querySelector(".table");
+  
+    if (buttonUpdate) {
+      buttonUpdate.addEventListener("click", function (e) {
+        entry1.style.display = "block";
+        console.log("haha");
+      });
+    }
+  </script>
+</html>

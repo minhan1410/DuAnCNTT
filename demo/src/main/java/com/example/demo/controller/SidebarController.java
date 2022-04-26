@@ -245,4 +245,21 @@ public class SidebarController {
         model.addAttribute("student", studentRepository.findByUserId(user.getId()));
         return "sidebar/quanlilophoc";
     }
+
+    @GetMapping("/quanligiaovien")
+    public String quanligiaovien(Model model, Principal principal) {
+        User user = (User) ((Authentication) principal).getPrincipal();
+
+        model.addAttribute("user", user);
+        model.addAttribute("student", studentRepository.findByUserId(user.getId()));
+        return "sidebar/quanligiaovien";
+    }
+    @GetMapping("/quanlisinhvien")
+    public String quanlisinhvien(Model model, Principal principal) {
+        User user = (User) ((Authentication) principal).getPrincipal();
+
+        model.addAttribute("user", user);
+        model.addAttribute("student", studentRepository.findByUserId(user.getId()));
+        return "sidebar/quanlisinhvien";
+    }
 }

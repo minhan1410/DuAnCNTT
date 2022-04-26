@@ -1,0 +1,29 @@
+#add {
+    font-size:20px;
+    background-color:green;
+    color:white;
+    border-radius: 4px ;
+}
+.grid {
+    text-align: left;
+    border-color: #f3f3f3;
+    border-width: 1px;
+    border-style: hidden;
+    background: #fff;
+}
+
+.grid th {
+    margin-top: 0px;
+    border: 0;
+    font-family: Tahoma, "Times New Roman", Times, serif;
+    font-weight: bold;
+    color: White;
+    background: #6296c5;
+    padding: 2px;
+}
+
+.grid tr td {
+    font-size: 85%;
+    border-bottom: 1px dotted #ccc;
+    padding: 3px 4px;
+}

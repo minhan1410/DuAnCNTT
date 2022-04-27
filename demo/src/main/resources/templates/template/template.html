@@ -21,7 +21,7 @@
         <div class="logo"></div>
         <div class="right">
             <b>Chào
-                <span style="color: red" th:text="${user.username}"></span>
+                <span style="color: red" th:text="|${user.name} (${student.id})|"></span>
             </b>
             |
             <a href="#">Đổi mật khẩu</a>
@@ -30,10 +30,16 @@
             <form style="display: none" id="myform" th:action="@{/logout}" method="post"></form>
             <a onclick="document.getElementById('myform').submit();">Đăng xuất</a></br>
 
+            Chức vụ :
+            <strong>
+                <span style="color: brown" th:text="${user.permissions}"></span>
+            </strong>
+            &ensp;
             Tình Trạng :
             <strong>
                 <span style="color: brown" th:text="${student.trangThai}"></span>
             </strong>
+
         </div>
         <div class="maquee">
             <a href="#" style="color: red">Để nhận hỗ trợ từ hệ thống, đăng kí địa chỉ email, số điện
@@ -65,12 +71,7 @@
                     <li>
                         <a th:href="@{/thoikhoabieutoantruong}">Thời khóa biểu toàn trường</a>
                     </li>
-                    <li>
-                        <a href="#">Lịch thi lại toàn trường</a>
-                    </li>
-                    <li>
-                        <a href="#">Chương trình đào tạo</a>
-                    </li>
+
                 </ul>
             </li>
             <li>
@@ -79,15 +80,18 @@
                     <li>
                         <a th:href="@{/thongtincanhan}">Thông tin cá nhân</a>
                     </li>
-                    <li><a th:href="@{/dangkimonhoc}">Đăng kí học </a></li>
-                    <li><a href="#">Đăng kí thi lại</a></li>
-                    <li><a href="#">Thời khóa biểu</a></li>
-                    <li><a href="#">Phiếu báo thu tiền</a></li>
-                    <li><a th:href="@{/bangdiem}">Bảng điểm</a></li>
-                    <li><a th:href="@{/lichthichinhthuc}">Lịch thi chính thức</a></li>
-                    <li><a href="#">Lịch thi dự kiến</a></li>
-                    <li><a href="#">Phiếu bảo điểm</a></li>
-                    <li><a href="#">Lịch kí sổ gốc</a></li>
+                    <div th:if="${user.permissions == 'ROLE_Student'}">
+                        <li><a th:href="@{/dangkimonhoc}">Đăng kí học </a></li>
+                        <li><a th:href="@{/bangdiem}">Bảng điểm</a></li>
+                        <li><a th:href="@{/lichthichinhthuc}">Lịch thi chính thức</a></li>
+
+                    </div>
+
+                    <div th:if="${user.permissions == 'ROLE_Teacher'}">
+                        <li><a th:href="@{/quanlilophoc}">Quản lí lớp học</a></li>
+
+                    </div>
+
                 </ul>
             </li>
         </ul>

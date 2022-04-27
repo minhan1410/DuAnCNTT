@@ -19,12 +19,12 @@ public class StudentPoint {
     @Column(name = "ma_mon")
     private String subjectId;
 
-    @Column(name = "diem_qua_trinh")
-    private Double diemQuaTrinh;
+    @Column(name = "diem_qua_trinh", columnDefinition = "0.0")
+    private Double diemQuaTrinh = 0.0;
 
-    @Column(name = "diem_cuoi_ky")
-    private Double diemCuoiKy;
+    @Column(name = "diem_cuoi_ky", columnDefinition = "0.0")
+    private Double diemCuoiKy = 0.0;
 
-    @Column(name = "diem_tong_ket")
-    private Double diemTongket;
+    @Column(name = "diem_tong_ket", columnDefinition = "0.0")
+    private Double diemTongket = 0.0;
 }

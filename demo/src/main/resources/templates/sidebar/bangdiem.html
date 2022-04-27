@@ -41,7 +41,7 @@
             <b th:text="${user.name}" style="text-transform: uppercase"></b> -
             <b th:text="${user.birthday}" style="text-transform: uppercase"></b>
           </div>
-          <div class="entry">
+          <div class="entry" th:if="${studentPoint != null }">
             <table
                     class="grid table table-bordered table-striped"
                     border="0"

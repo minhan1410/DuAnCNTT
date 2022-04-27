@@ -32,7 +32,12 @@
         </div>
 
         <div th:if="${mess != null}">
-          <span style="color: red" th:text="${mess}"></span>
+          <div th:if="${mess == 'Đã đăng ký thành công' || mess == 'Đã hủy thành công'}">
+            <span style="color: blue" th:text="${mess}"></span>
+          </div>
+          <div th:unless="${mess == 'Đã đăng ký thành công' || mess == 'Đã hủy thành công'}">
+            <span style="color: red" th:text="${mess}"></span>
+          </div>
         </div>
 
         <div>

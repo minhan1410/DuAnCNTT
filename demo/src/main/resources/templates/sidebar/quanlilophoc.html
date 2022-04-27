@@ -26,25 +26,15 @@
       <div>
         Chọn môn học :
         <select name="id">
-          <option selected="selected" value="146">Tất cả</option>
-          <option value="145">Học Kỳ III Nhóm 2</option>
-          <option value="144">Học Kỳ III Nhóm 1</option>
-          <option value="143">Học Kỳ II Nhóm 3</option>
-          <option value="142">Học Kỳ II Nhóm 2</option>
+          <option
+                  th:each="subject : ${listSubject}"
+                  th:value="${subject.id}"
+                  th:text="${subject.name}"
+          ></option>
         </select>
       </div>
       <br />
-      <div>
-        Chọn tình trạng :
-        <select name="id">
-          <option selected="selected" value="146">Tất cả</option>
-          <option value="145">Bình thường</option>
-          <option value="144">Đã tốt nghiệp</option>
-          <option value="143">Bảo lưu</option>
-          <option value="142">Thôi học</option>
-        </select>
-      </div>
-      <br />
+
       <div>
         <table
                 class="grid"

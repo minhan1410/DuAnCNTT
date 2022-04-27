@@ -32,8 +32,8 @@ img {
 .table {
     justify-content: center;
     margin: auto;
-/ margin-top: 120px; /
-width: 30%;
+    margin-top: 120px;
+    width: 30%;
     height: 530px;
     line-height: 1;
 

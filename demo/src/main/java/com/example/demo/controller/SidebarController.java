@@ -1,9 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.Student;
-import com.example.demo.model.StudentPoint;
-import com.example.demo.model.Subject;
-import com.example.demo.model.User;
+import com.example.demo.model.*;
 import com.example.demo.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -34,6 +31,10 @@ public class SidebarController {
     private TeacherRepository teacherRepository;
     @Autowired
     private StudentPointRepository studentPointRepository;
+    @Autowired
+    private TeacherSubjectRepository teacherSubjectRepository;
+
+//    =========================================== dangkihoc ================================================
 
     @GetMapping("/dangkihoc")
     public String dangkihoc(Model model, Principal principal) {
@@ -51,12 +52,20 @@ public class SidebarController {
         return "dangkihoc";
     }
 
+//    =========================================== thongtincanhan ================================================
+
+
     @GetMapping("/thongtincanhan")
     public String thongtincanhan(Model model, Principal principal) {
         User user = (User) ((Authentication) principal).getPrincipal();
 
         model.addAttribute("user", user);
-        model.addAttribute("student", studentRepository.findByUserId(user.getId()));
+
+        if (user.getPermissions().equals("ROLE_Student")) {
+            model.addAttribute("student", studentRepository.findByUserId(user.getId()));
+        } else {
+            model.addAttribute("student", teacherRepository.findByUserId(user.getId()));
+        }
         return "sidebar/thongtincanhan";
     }
 
@@ -75,6 +84,8 @@ public class SidebarController {
         return thongtincanhan(model, principal);
     }
 
+//    =========================================== bangdiem ================================================
+
     @GetMapping("/bangdiem")
     public String bangdiem(Model model, Principal principal) {
         User user = (User) ((Authentication) principal).getPrincipal();
@@ -89,7 +100,7 @@ public class SidebarController {
 
         List<StudentPoint> studentPoints = new ArrayList<StudentPoint>();
         for (StudentPoint studentPoint : studentPointRepository.findAll()) {
-            if (studentPoint.getStudentId().equals(student.getId())) {
+            if (studentPoint.getStudentId().equals(student.getId()) && studentPoint.getDiemTongket() > 0.0) {
                 studentPoints.add(studentPoint);
                 if (studentPoint.getDiemTongket() >= 4.0) {
                     Subject subject = subjectRepository.findById(studentPoint.getSubjectId()).get();
@@ -97,7 +108,7 @@ public class SidebarController {
                 }
             }
         }
-        model.addAttribute("studentPoint", studentPoints);
+        model.addAttribute("studentPoint", studentPoints.size() > 0 ? studentPoints : null);
 
         Set<Subject> subjectDk = studentPointRepository.findSubjectsByStudentId(student.getId());
         model.addAttribute("subjectDk", subjectDk);
@@ -108,13 +119,20 @@ public class SidebarController {
         return "sidebar/bangdiem";
     }
 
+//    =========================================== thoikhoabieutoantruong ================================================
+
     @GetMapping("/thoikhoabieutoantruong")
     public String thoikhoabieutoantruong(Model model, Principal principal) {
 //        header
         User user = (User) ((Authentication) principal).getPrincipal();
 
         model.addAttribute("user", user);
-        model.addAttribute("student", studentRepository.findByUserId(user.getId()));
+
+        if (user.getPermissions().equals("ROLE_Student")) {
+            model.addAttribute("student", studentRepository.findByUserId(user.getId()));
+        } else {
+            model.addAttribute("student", teacherRepository.findByUserId(user.getId()));
+        }
 
 //
         model.addAttribute("listSubject", subjectRepository.findAll());
@@ -123,6 +141,8 @@ public class SidebarController {
 
         return "sidebar/thoikhoabieutoantruong";
     }
+
+//    =========================================== dangkimonhoc ================================================
 
     @GetMapping("/dangkimonhoc")
     public String dangkimonhoc(Model model, Principal principal) {
@@ -228,6 +248,8 @@ public class SidebarController {
         return "sidebar/dangkimonhoc";
     }
 
+//    =========================================== lichthichinhthuc ================================================
+
     @GetMapping("/lichthichinhthuc")
     public String lichthichinhthuc(Model model, Principal principal) {
         User user = (User) ((Authentication) principal).getPrincipal();
@@ -237,14 +259,29 @@ public class SidebarController {
         return "sidebar/lichthichinhthuc";
     }
 
+//    =========================================== quanlilophoc ================================================
+
     @GetMapping("/quanlilophoc")
     public String quanlilophoc(Model model, Principal principal) {
         User user = (User) ((Authentication) principal).getPrincipal();
+        Teacher teacher = teacherRepository.findByUserId(user.getId());
 
         model.addAttribute("user", user);
-        model.addAttribute("student", studentRepository.findByUserId(user.getId()));
+        model.addAttribute("student", teacher);
+
+//
+        System.out.println("\n\n" + teacher.getId() + "\n");
+        teacherSubjectRepository.findSubjectsByTeacherId(teacher.getId()).forEach(System.out::println);
+        System.out.println("\n");
+        teacherSubjectRepository.findStudentsByTeacherId(teacher.getId()).forEach(System.out::println);
+
+        model.addAttribute("listSubject", teacherSubjectRepository.findSubjectsByTeacherId(teacher.getId()));
+        model.addAttribute("listStudent", teacherSubjectRepository.findStudentsByTeacherId(teacher.getId()));
+
         return "sidebar/quanlilophoc";
     }
+
+//    =========================================== quanligiaovien ================================================
 
     @GetMapping("/quanligiaovien")
     public String quanligiaovien(Model model, Principal principal) {
@@ -254,6 +291,9 @@ public class SidebarController {
         model.addAttribute("student", studentRepository.findByUserId(user.getId()));
         return "sidebar/quanligiaovien";
     }
+
+//    =========================================== quanlisinhvien ================================================
+
     @GetMapping("/quanlisinhvien")
     public String quanlisinhvien(Model model, Principal principal) {
         User user = (User) ((Authentication) principal).getPrincipal();

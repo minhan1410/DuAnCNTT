@@ -29,6 +29,7 @@ CREATE TABLE `sinhvien_diem` (
   `diem_qua_trinh` double DEFAULT '0',
   `diem_cuoi_ky` double DEFAULT '0',
   `diem_tong_ket` double DEFAULT '0',
+  `tinh_trang` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT 'Bình Thường',
   PRIMARY KEY (`id`),
   KEY `FK_SinhVien_Diem_MonHoc` (`ma_mon`),
   KEY `FK_SinhVien_Diem_SinhVien` (`MaSV`),
@@ -43,7 +44,7 @@ CREATE TABLE `sinhvien_diem` (
 
 LOCK TABLES `sinhvien_diem` WRITE;
 /*!40000 ALTER TABLE `sinhvien_diem` DISABLE KEYS */;
-INSERT INTO `sinhvien_diem` VALUES (45,'A00017','CS102',10,9,9),(46,'A00020','FA131',0,0,0);
+INSERT INTO `sinhvien_diem` VALUES (45,'A00017','CS102',10,9,9,'Bình Thường'),(46,'A00020','FA131',0,0,0,'Bình Thường');
 /*!40000 ALTER TABLE `sinhvien_diem` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-28 14:06:34
+-- Dump completed on 2022-04-28 16:10:08

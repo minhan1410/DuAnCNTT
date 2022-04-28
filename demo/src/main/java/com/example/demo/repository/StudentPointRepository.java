@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Set;
 
 public interface StudentPointRepository extends JpaRepository<StudentPoint, Long> {
@@ -19,4 +20,9 @@ public interface StudentPointRepository extends JpaRepository<StudentPoint, Long
             "from StudentPoint a join Student b on a.studentId = b.id " +
             "where a.subjectId like :subjectId")
     Set<Student> findStudentsBySubjectId(@Param("subjectId") String subjectId);
+
+    @Query("select distinct a " +
+            "from StudentPoint a join Student b on a.studentId = b.id " +
+            "where a.studentId like :studentId")
+    List<StudentPoint> findStudentPointByStudentId(@Param("studentId") String studentId);
 }

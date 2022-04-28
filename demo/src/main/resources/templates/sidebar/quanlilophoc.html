@@ -6,130 +6,125 @@
 <head th:replace="template/template.html :: head('TRƯỜNG ĐẠI HỌC THĂNG LONG')"></head>
 
 <head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-          integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
-          integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
-          integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-  </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
 
-  <link rel="stylesheet" th:href="@{/style/dangkihoc.css}" />
-  <link rel="stylesheet" th:href="@{/style/quanlilophoc.css}" />
+    <link rel="stylesheet" th:href="@{/style/dangkihoc.css}" />
+    <link rel="stylesheet" th:href="@{/style/quanlilophoc.css}" />
 </head>
 
 <body>
 <div id="head">
-  <div th:replace="template/template.html :: header"></div>
+    <div th:replace="template/template.html :: header"></div>
 
-  <div id="page">
-    <div th:replace="template/template.html :: sidebar"></div>
-    <div id="right">
-      <div class="title">Quản lí lớp học</div>
-      <div>
+    <div id="page">
+        <div th:replace="template/template.html :: sidebar"></div>
+        <div id="right">
+            <div class="title">Quản lí lớp học</div>
+            <div>
 
-        <div class="dropdown">
-          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Chọn môn
-            học
-            <span class="caret"></span></button>
-          <ul class="dropdown-menu">
-            <li><a th:href="@{/quanlilophoc}"> Tất cả </a></li>
-            <th:block th:each="subject : ${listSubject}">
-              <li><a th:text="${subject.name}"
-                     th:href="@{/quanlilophoc/{id}(id = ${subject.id})}"></a>
-              </li>
-            </th:block>
-          </ul>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Chọn môn
+                        học
+                        <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a th:href="@{/quanlilophoc}"> Tất cả </a></li>
+                        <th:block th:each="subject : ${listSubject}">
+                            <li><a th:text="${subject.name}"
+                                   th:href="@{/quanlilophoc/{id}(id = ${subject.id})}"></a>
+                            </li>
+                        </th:block>
+                    </ul>
+                </div>
+
+                <br />
+
+                <div>
+                    <table class="grid" border="0" cellspacing="0"
+                           style="border-style: none; width: 100%; border-collapse: collapse">
+                        <thead>
+                        <tr>
+                            <th scope="col">STT</th>
+                            <th scope="col">Mã sinh viên</th>
+                            <th scope="col">Họ tên</th>
+<!--                            <th scope="col">Tình trạng</th>-->
+                            <th scope="col">Thêm</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="student, iStat : ${listStudent}">
+                            <td th:text="${iStat.index+1}"></td>
+                            <td th:text="${student.id}"></td>
+                            <td th:text="${userRepository.findById(student.getUserId()).get().getName()}"></td>
+                            <!-- <td>
+                        <select name="id" th:field="${student.trangThai}">
+                            <option selected="selected" value="Bình thường">Bình thường</option>
+                            <option value="Tốt nghiệp">Tốt nghiệp</option>
+                            <option value="Bảo lưu">Bảo lưu</option>
+                            <option value = "Thôi học">Thôi học</option>
+                        </select>
+                    </td> -->
+                            <td>
+                                <button>Đánh giá</button>
+                                <button class="btnChiTiet">
+                                    Chi tiết
+
+                                  <div class="entry" style="display: none">
+                                        <table width="100%" class="table">
+                                            <tr>
+                                                <td width="30%">Mã sinh viên :</td>
+                                                <td th:text="${student.id}"></td>
+                                                <td><a href=""
+                                                       style="color:red ; margin-left:140px;font-size:25px">x</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width>Họ tên :</td>
+                                                <td th:text="${userRepository.findById(student.getUserId()).get().name}"></td>
+                                            </tr>
+                                            <tr>
+                                                <td width>Giới tính :</td>
+                                                <td th:text="${userRepository.findById(student.getUserId()).get().sex}"></td>
+                                            </tr>
+                                            <tr>
+                                                <td width>Ngày sinh :</td>
+                                                <td th:text="${userRepository.findById(student.getUserId()).get().birthdayStr}"></td>
+                                            </tr>
+                                            <tr>
+                                                <td width>Điện thoại :</td>
+                                                <td th:text="${userRepository.findById(student.getUserId()).get().phoneNumber}"></td>
+                                            </tr>
+                                            <tr>
+                                                <td width>Email :</td>
+                                                <td th:text="${userRepository.findById(student.getUserId()).get().email}"></td>
+                                            </tr>
+                                            <tr>
+                                                <td width>Chỗ ở :</td>
+                                                <td th:text="${userRepository.findById(student.getUserId()).get().address}"></td>
+                                            </tr>
+                                            <tr>
+                                                <div >
+                                                  <td><img th:src="${userRepository.findById(student.getUserId()).get().avatar}" /></td>
+                                                </div>
+                                            </tr>
+                                        </table>
+                                  </div>
+                               </button>
+                            </td>
+                        </tr>
+            </tbody>
+            </table>
         </div>
-
-        <br />
-
-        <div>
-          <table class="grid" border="0" cellspacing="0"
-                 style="border-style: none; width: 100%; border-collapse: collapse">
-            <thead>
-            <tr>
-              <th scope="col">STT</th>
-              <th scope="col">Mã sinh viên</th>
-              <th scope="col">Họ tên</th>
-              <th scope="col">Tình trạng</th>
-              <th scope="col">Thêm</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="student, iStat : ${listStudent}">
-              <td th:text="${iStat.index+1}"></td>
-              <td th:text="${student.id}"></td>
-              <td th:text="${userRepository.findById(student.getUserId()).get().getName()}"></td>
-              <!-- <td>
-          <select name="id" th:field="${student.trangThai}">
-              <option selected="selected" value="Bình thường">Bình thường</option>
-              <option value="Tốt nghiệp">Tốt nghiệp</option>
-              <option value="Bảo lưu">Bảo lưu</option>
-              <option value = "Thôi học">Thôi học</option>
-          </select>
-      </td> -->
-              <td>
-                <button>Đánh giá</button>
-                <button class="btnChiTiet">
-                  Chi tiết
-
-                  <div class="entry" style="display: none">
-
-                    <table width="100%" class="table">
-                      <tr>
-                        <td width="30%">Mã sinh viên :</td>
-                        <td th:text="${student.id}"></td>
-                        <td><a href=""
-                               style="color:red ; margin-left:140px;font-size:25px">x</a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td width>Họ tên :</td>
-                        <td th:text="${user.name}"></td>
-                      </tr>
-                      <tr>
-                        <td width>Giới tính :</td>
-                        <td th:text="${user.sex}"></td>
-                      </tr>
-                      <tr>
-                        <td width>Ngày sinh :</td>
-                        <td th:text="${user.birthdayStr}"></td>
-                      </tr>
-                      <tr>
-                        <td width>Giáo viên chủ nghiệm :</td>
-                        <td>Đậu Hải Phong</td>
-                      </tr>
-                      <tr>
-                        <td width>Điện thoại :</td>
-                        <td th:text="${user.phoneNumber}"></td>
-                      </tr>
-                      <tr>
-                        <td width>Email :</td>
-                        <td th:text="${user.email}"></td>
-                      </tr>
-                      <tr>
-                        <td width>Chỗ ở :</td>
-                        <td th:text="${user.address}"></td>
-                      </tr>
-                    </table>
-                    <div class="avatar">
-            <tr>
-              <td><img th:src="${user.avatar}" /></td>
-            </tr>
-        </div>
-      </div>
-      </button>
-      </td>
-      </tr>
-      </tbody>
-      </table>
     </div>
-  </div>
 </div>
 
 <div th:replace="template/template.html :: footer"></div>
@@ -137,15 +132,15 @@
 
 </body>
 <script>
-  const buttonUpdate = document.querySelectorAll(".btnChiTiet");
-  const entry = document.querySelector(".entry");
-  const Table = document.querySelector(".table");
+    const buttonUpdate = document.querySelectorAll(".btnChiTiet");
+    const entry = document.querySelectorAll(".entry");
+    const Table = document.querySelector(".table");
 
-  if (buttonUpdate) {
-    buttonUpdate.addEventListener("click", function (e) {
-      entry.style.display = "block";
-    });
-  }
+    for (let i = 0; i< buttonUpdate.length;i++) {
+        buttonUpdate[i].addEventListener("click", function (e) {
+            entry[i].style.display = "block"
+        });
+    }
 </script>
 
 </html>

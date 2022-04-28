@@ -253,9 +253,21 @@ public class SidebarController {
     @GetMapping("/lichthichinhthuc")
     public String lichthichinhthuc(Model model, Principal principal) {
         User user = (User) ((Authentication) principal).getPrincipal();
-
+        Student student = studentRepository.findByUserId(user.getId());
         model.addAttribute("user", user);
-        model.addAttribute("student", studentRepository.findByUserId(user.getId()));
+        model.addAttribute("student", student);
+
+//
+        Set<Subject> subjects = studentPointRepository.findSubjectsByStudentId(student.getId());
+        model.addAttribute("listSubject", subjects);
+
+        List<StudentPoint> studentPoints = studentPointRepository.findStudentPointByStudentId(student.getId());
+
+        System.out.println("\n");
+        studentPoints.stream().forEach(System.out::println);
+        System.out.println("\n");
+        model.addAttribute("studentPoint", studentPoints);
+
         return "sidebar/lichthichinhthuc";
     }
 
@@ -277,7 +289,7 @@ public class SidebarController {
 
         model.addAttribute("listSubject", teacherSubjectRepository.findSubjectsByTeacherId(teacher.getId()));
         model.addAttribute("listStudent", teacherSubjectRepository.findStudentsByTeacherId(teacher.getId()));
-        model.addAttribute("userRepository",userRepository);
+        model.addAttribute("userRepository", userRepository);
 
 
         return "sidebar/quanlilophoc";
@@ -293,7 +305,7 @@ public class SidebarController {
 //
 
         Set<Subject> listSubject = teacherSubjectRepository.findSubjectsByTeacherId(teacher.getId());
-        Set<Student> listStudent = teacherSubjectRepository.findStudentsByTeacherIdAndSubjectId(teacher.getId(),subjectId);
+        Set<Student> listStudent = teacherSubjectRepository.findStudentsByTeacherIdAndSubjectId(teacher.getId(), subjectId);
 
         System.out.println("\n\n");
         listSubject.forEach(System.out::println);
@@ -302,7 +314,7 @@ public class SidebarController {
 
         model.addAttribute("listSubject", listSubject);
         model.addAttribute("listStudent", listStudent);
-        model.addAttribute("userRepository",userRepository);
+        model.addAttribute("userRepository", userRepository);
 
         return "sidebar/quanlilophoc";
     }

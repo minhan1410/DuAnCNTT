@@ -11,6 +11,18 @@
   ></head>
 
   <head>
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.css"
+    />
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+            integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+            crossorigin="anonymous"
+    />
+
     <link rel="stylesheet" th:href="@{/style/dangkihoc.css}" />
     <link rel="stylesheet" th:href="@{/style/lichthichinhthuc}" />
   </head>
@@ -25,28 +37,6 @@
         <div id="right">
           <div class="title">Lịch thi sinh viên</div>
           <div class="entry">
-            <br />
-            <form action="?" method="get">
-              <h2>
-                Phiếu báo dự thi kết thúc học kỳ (dữ liệu chỉ có trước mỗi kỳ
-                thi học kỳ).
-              </h2>
-              Chọn học kì :
-              <select name="id">
-                <option selected="selected" value="146">
-                  Học Kỳ III Nhóm 3 năm 2020-2021
-                </option>
-                <option value="145">Học Kỳ III Nhóm 2 năm 2020-2021</option>
-                <option value="144">Học Kỳ III Nhóm 1 năm 2020-2021</option>
-                <option value="143">Học Kỳ II Nhóm 3 năm 2020-2021</option>
-                <option value="142">Học Kỳ II Nhóm 2 năm 2020-2021</option>
-                <option value="141">Học Kỳ II Nhóm 1 năm 2020-2021</option>
-                <option value="140">Học Kỳ I Nhóm 3 năm 2020-2021</option>
-                <option value="139">Học Kỳ I Nhóm 2 năm 2020-2021</option>
-                <option value="138">Học Kỳ I Nhóm 1 năm 2020-2021</option>
-              </select>
-              <input type="submit" value="Gửi đi" class="fr" />
-            </form>
             <br />
             <div>
               <table cellpadding="0" cellspacing="0" width="720px">
@@ -68,18 +58,39 @@
               </table>
             </div>
             <br />
-            <table class="tablesv" cellpadding="0" cellspacing="0">
+            
+            <div class="entry">
+            <table
+                    class="grid table table-bordered table-striped"
+                    border="0"
+                    cellspacing="0"
+                    style="border-style: none; width: 100%; border-collapse: collapse"
+                    id="employeeTable"
+            >
               <thead>
-                <tr>
-                  <th>STT</th>
-                  <th>Mã học phần</th>
-                  <th>Tên học phần</th>
-                  <th>Ca thi/Mã phòng thi</th>
-                  <th>Ngày thi</th>
-                  <th>Tình trạng</th>
-                </tr>
+              <tr>
+                <th scope="col">STT</th>
+                <th scope="col">Mã Môn</th>
+                <th scope="col">Tên Môn</th>
+                <th scope="col">Số TC</th>
+                <th scope="col">Ca thi</th>
+                <th scope="col">Ngày thi</th>
+                <th scope="col">Tình trạng</th>
+              </tr>
               </thead>
+              <tbody>
+               <tr th:each="subject, iStat : ${listSubject}">
+                <td th:text="${iStat.index+1}"></td>
+                <td th:text="${subject.id}"></td>
+                <td th:text="${subject.name}"></td>
+                <td th:text="${subject.soTinChi}"></td>
+                <td th:text="${subject.caThi}"></td>
+                <td th:text="${subject.ngayThi}"></td>
+                <td th:text="${studentPoint.get(iStat.index).tinhTrang}"></td>
+              </tr>
+              </tbody>
             </table>
+
           </div>
         </div>
       </div>
@@ -87,4 +98,23 @@
       <div th:replace="template/template.html :: footer"></div>
     </div>
   </body>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script
+          type="text/javascript"
+          src="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.js"
+  ></script>
+  <script>
+    $(document).ready(function () {
+      $("#employeeTable").DataTable({
+        aoColumnDefs: [
+          {
+            bSortable: false,
+            aTargets: [-1]
+          },
+        ],
+      });
+    });
+  </script>
+
 </html>

@@ -26,6 +26,7 @@ CREATE TABLE `giaovien_monhoc` (
   `id` bigint NOT NULL,
   `MaGV` varchar(6) DEFAULT NULL,
   `ma_mon` varchar(6) DEFAULT NULL,
+  PRIMARY KEY (`id`),
   KEY `FK_GiaoVien_MonHoc_MonHoc` (`ma_mon`),
   KEY `FK_GiaoVien_MonHoc_Giaovien` (`MaGV`),
   CONSTRAINT `FK_GiaoVien_MonHoc_Giaovien` FOREIGN KEY (`MaGV`) REFERENCES `giaovien` (`MaGV`),
@@ -39,6 +40,7 @@ CREATE TABLE `giaovien_monhoc` (
 
 LOCK TABLES `giaovien_monhoc` WRITE;
 /*!40000 ALTER TABLE `giaovien_monhoc` DISABLE KEYS */;
+INSERT INTO `giaovien_monhoc` VALUES (1,'1','CS102'),(2,'1','FA131'),(3,'2','CS131');
 /*!40000 ALTER TABLE `giaovien_monhoc` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-26  0:18:27
+-- Dump completed on 2022-04-28 14:06:34

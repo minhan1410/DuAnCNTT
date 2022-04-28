@@ -11,6 +11,8 @@
 ></head>
 
 <head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
   <link rel="stylesheet" th:href="@{/style/dangkihoc.css}" />
   <link rel="stylesheet" th:href="@{/style/thoikhoabieutoantruong.css}" />
 
@@ -68,8 +70,9 @@
             <tr th:each="subject, iStat : ${listSubject}">
               <td th:text="${iStat.index+1}"></td>
               <td>
-                <button class="btn btndk" style="color: #175765"><a th:href="@{/dkh/{id}(id=${subject.id})}" >Đăng kí</a></button>
-<!--                <button class="btn btnhuy" style="color: red;"><a href="">Hủy</a></button>-->
+                <a th:href="@{/dkh/{id}(id=${subject.id})}" >
+                  <button class="btn btn-sm btn-outline-primary">Đăng kí</button>
+                </a>
               </td>
               <td th:text="${subject.name}"></td>
               <td th:text="${subject.tenLop}"></td>
@@ -115,7 +118,9 @@
               <tr th:each="subject, iStat : ${subjectDk}">
                 <td th:text="${iStat.index+1}"></td>
                 <td>
-                  <button class="btn btndk" style="color: #175765"><a th:href="@{/huydkh/{id}(id=${subject.id})}" >Hủy</a></button>
+                  <a th:href="@{/huydkh/{id}(id=${subject.id})}" >
+                    <button class="btn btn-sm btn-outline-danger">Hủy</button>
+                  </a>
                 </td>
                 <td th:text="${subject.name}"></td>
                 <td th:text="${subject.tenLop}"></td>

@@ -44,7 +44,7 @@ CREATE TABLE `giaovien` (
 
 LOCK TABLES `giaovien` WRITE;
 /*!40000 ALTER TABLE `giaovien` DISABLE KEYS */;
-INSERT INTO `giaovien` VALUES ('1','333',1,18,NULL),('2','333',1,19,NULL);
+INSERT INTO `giaovien` VALUES ('1','333',1,18,'Bình thường'),('2','333',1,19,'Bình thường');
 /*!40000 ALTER TABLE `giaovien` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -57,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-26  0:18:27
+-- Dump completed on 2022-04-28 14:06:34

@@ -39,7 +39,7 @@ public class SidebarController {
     @GetMapping("/dangkihoc")
     public String dangkihoc(Model model, Principal principal) {
         User user = (User) ((Authentication) principal).getPrincipal();
-        System.out.printf("\n\n%s\n\n", studentRepository.findByUserId(user.getId()));
+//        System.out.printf("\n\n%s\n\n", studentRepository.findByUserId(user.getId()));
 
         model.addAttribute("user", user);
 
@@ -270,13 +270,39 @@ public class SidebarController {
         model.addAttribute("student", teacher);
 
 //
-        System.out.println("\n\n" + teacher.getId() + "\n");
-        teacherSubjectRepository.findSubjectsByTeacherId(teacher.getId()).forEach(System.out::println);
-        System.out.println("\n");
-        teacherSubjectRepository.findStudentsByTeacherId(teacher.getId()).forEach(System.out::println);
+//        System.out.println("\n\n" + teacher.getId() + "\n");
+//        teacherSubjectRepository.findSubjectsByTeacherId(teacher.getId()).forEach(System.out::println);
+//        System.out.println("\n");
+//        teacherSubjectRepository.findStudentsByTeacherId(teacher.getId()).forEach(System.out::println);
 
         model.addAttribute("listSubject", teacherSubjectRepository.findSubjectsByTeacherId(teacher.getId()));
         model.addAttribute("listStudent", teacherSubjectRepository.findStudentsByTeacherId(teacher.getId()));
+        model.addAttribute("userRepository",userRepository);
+
+
+        return "sidebar/quanlilophoc";
+    }
+
+    @GetMapping("/quanlilophoc/{id}")
+    public String chonMonQuanlilophoc(Model model, Principal principal, @PathVariable("id") String subjectId) {
+        User user = (User) ((Authentication) principal).getPrincipal();
+        Teacher teacher = teacherRepository.findByUserId(user.getId());
+
+        model.addAttribute("user", user);
+        model.addAttribute("student", teacher);
+//
+
+        Set<Subject> listSubject = teacherSubjectRepository.findSubjectsByTeacherId(teacher.getId());
+        Set<Student> listStudent = teacherSubjectRepository.findStudentsByTeacherIdAndSubjectId(teacher.getId(),subjectId);
+
+        System.out.println("\n\n");
+        listSubject.forEach(System.out::println);
+        listStudent.forEach(System.out::println);
+        System.out.println("\n\n");
+
+        model.addAttribute("listSubject", listSubject);
+        model.addAttribute("listStudent", listStudent);
+        model.addAttribute("userRepository",userRepository);
 
         return "sidebar/quanlilophoc";
     }

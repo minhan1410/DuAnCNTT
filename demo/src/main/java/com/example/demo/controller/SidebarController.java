@@ -198,8 +198,6 @@ public class SidebarController {
                 studentPointRepository.save(studentPoint);
                 model.addAttribute("mess", "Đã đăng ký thành công");
             }
-
-            System.out.println("\n\n" + "\n\n");
         }
 
         for (Subject sb : subjects) {
@@ -263,9 +261,9 @@ public class SidebarController {
 
         List<StudentPoint> studentPoints = studentPointRepository.findStudentPointByStudentId(student.getId());
 
-        System.out.println("\n");
-        studentPoints.stream().forEach(System.out::println);
-        System.out.println("\n");
+//        System.out.println("\n");
+//        studentPoints.stream().forEach(System.out::println);
+//        System.out.println("\n");
         model.addAttribute("studentPoint", studentPoints);
 
         return "sidebar/lichthichinhthuc";
@@ -307,8 +305,9 @@ public class SidebarController {
         Set<Subject> listSubject = teacherSubjectRepository.findSubjectsByTeacherId(teacher.getId());
         Set<Student> listStudent = teacherSubjectRepository.findStudentsByTeacherIdAndSubjectId(teacher.getId(), subjectId);
 
+//        System.out.println("\n\n");
+//        listSubject.forEach(System.out::println);
         System.out.println("\n\n");
-        listSubject.forEach(System.out::println);
         listStudent.forEach(System.out::println);
         System.out.println("\n\n");
 

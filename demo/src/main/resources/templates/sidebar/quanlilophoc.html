@@ -18,8 +18,8 @@
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
 
-    <link rel="stylesheet" th:href="@{/style/dangkihoc.css}" />
-    <link rel="stylesheet" th:href="@{/style/quanlilophoc.css}" />
+    <link rel="stylesheet" th:href="@{/style/dangkihoc.css}"/>
+    <link rel="stylesheet" th:href="@{/style/quanlilophoc.css}"/>
 </head>
 
 <body>
@@ -46,7 +46,7 @@
                     </ul>
                 </div>
 
-                <br />
+                <br/>
 
                 <div>
                     <table class="grid" border="0" cellspacing="0"
@@ -56,7 +56,7 @@
                             <th scope="col">STT</th>
                             <th scope="col">Mã sinh viên</th>
                             <th scope="col">Họ tên</th>
-<!--                            <th scope="col">Tình trạng</th>-->
+                            <!--                            <th scope="col">Tình trạng</th>-->
                             <th scope="col">Thêm</th>
                         </tr>
                         </thead>
@@ -65,20 +65,18 @@
                             <td th:text="${iStat.index+1}"></td>
                             <td th:text="${student.id}"></td>
                             <td th:text="${userRepository.findById(student.getUserId()).get().getName()}"></td>
-                            <!-- <td>
-                        <select name="id" th:field="${student.trangThai}">
-                            <option selected="selected" value="Bình thường">Bình thường</option>
-                            <option value="Tốt nghiệp">Tốt nghiệp</option>
-                            <option value="Bảo lưu">Bảo lưu</option>
-                            <option value = "Thôi học">Thôi học</option>
-                        </select>
-                    </td> -->
+<!--                            <td>-->
+<!--                                <select name="id" th:field="${student.trangThai}">-->
+<!--                                    <option selected="selected" value="Bình thường">Bình thường</option>-->
+<!--                                    <option value="Cấm thi">Cấm thi</option>-->
+<!--                                </select>-->
+<!--                            </td>-->
                             <td>
                                 <button>Đánh giá</button>
                                 <button class="btnChiTiet">
                                     Chi tiết
 
-                                  <div class="entry" style="display: none">
+                                    <div class="entry" style="display: none">
                                         <table width="100%" class="table">
                                             <tr>
                                                 <td width="30%">Mã sinh viên :</td>
@@ -112,23 +110,25 @@
                                                 <td th:text="${userRepository.findById(student.getUserId()).get().address}"></td>
                                             </tr>
                                             <tr>
-                                                <div >
-                                                  <td><img th:src="${userRepository.findById(student.getUserId()).get().avatar}" /></td>
+                                                <div>
+                                                    <td><img
+                                                            th:src="${userRepository.findById(student.getUserId()).get().avatar}"/>
+                                                    </td>
                                                 </div>
                                             </tr>
                                         </table>
-                                  </div>
-                               </button>
+                                    </div>
+                                </button>
                             </td>
                         </tr>
-            </tbody>
-            </table>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 
-<div th:replace="template/template.html :: footer"></div>
-</div>
+        <div th:replace="template/template.html :: footer"></div>
+    </div>
 
 </body>
 <script>
@@ -136,7 +136,7 @@
     const entry = document.querySelectorAll(".entry");
     const Table = document.querySelector(".table");
 
-    for (let i = 0; i< buttonUpdate.length;i++) {
+    for (let i = 0; i < buttonUpdate.length; i++) {
         buttonUpdate[i].addEventListener("click", function (e) {
             entry[i].style.display = "block"
         });

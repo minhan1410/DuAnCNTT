@@ -28,6 +28,6 @@ public interface TeacherSubjectRepository extends JpaRepository<TeacherSubject, 
             "from StudentPoint studentP join Subject subject on studentP.subjectId = subject.id " +
             "join TeacherSubject teacherS on teacherS.teacherId = subject.teacherId " +
             "join Student student on studentP.studentId = student.id " +
-            "where teacherS.teacherId like :teacherId and teacherS.subjectId like :subjectId")
+            "where teacherS.teacherId like :teacherId and studentP.subjectId like :subjectId")
     Set<Student> findStudentsByTeacherIdAndSubjectId(@Param("teacherId") String teacherId, @Param("subjectId") String subjectId);
 }

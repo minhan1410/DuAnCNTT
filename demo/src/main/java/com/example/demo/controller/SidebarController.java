@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -100,7 +102,7 @@ public class SidebarController {
 
         List<StudentPoint> studentPoints = new ArrayList<StudentPoint>();
         for (StudentPoint studentPoint : studentPointRepository.findAll()) {
-            if (studentPoint.getStudentId().equals(student.getId()) && studentPoint.getDiemTongket() > 0.0) {
+            if (studentPoint.getStudentId().equals(student.getId())) {
                 studentPoints.add(studentPoint);
                 if (studentPoint.getDiemTongket() >= 4.0) {
                     Subject subject = subjectRepository.findById(studentPoint.getSubjectId()).get();
@@ -224,21 +226,26 @@ public class SidebarController {
         Set<Subject> subjectDk = studentPointRepository.findSubjectsByStudentId(student.getId());
 
         Optional<Subject> subject = subjectRepository.findById(id);
-        if (subject.isPresent()) {
+
+        if(studentPointRepository.findStudentPointByStudentIdAndSubjectId(student.getId(),subject.get().getId()).getDiemQuaTrinh() > 0.0){
+            model.addAttribute("mess", "Đã có điểm, không được hủy môn");
+        }
+        else if (subject.isPresent()) {
             for (StudentPoint sp : studentPointRepository.findAll()) {
                 if (id.equals(sp.getSubjectId())) {
                     studentPointRepository.deleteById(sp.getId());
                 }
             }
-
             subjectDk.remove(subject.get());
+
+            for (Subject sb : subjects) {
+                sb.setSoLuongSvDaDk(studentPointRepository.findStudentsBySubjectId(sb.getId()).size());
+                subjectRepository.save(sb);
+                model.addAttribute("mess", "Đã hủy thành công");
+            }
         }
 
-        for (Subject sb : subjects) {
-            sb.setSoLuongSvDaDk(studentPointRepository.findStudentsBySubjectId(sb.getId()).size());
-            subjectRepository.save(sb);
-            model.addAttribute("mess", "Đã hủy thành công");
-        }
+
 
         model.addAttribute("listSubject", subjects);
         model.addAttribute("subjectDk", subjectDk);
@@ -258,6 +265,7 @@ public class SidebarController {
 //
         Set<Subject> subjects = studentPointRepository.findSubjectsByStudentId(student.getId());
         model.addAttribute("listSubject", subjects);
+        model.addAttribute("dateFormat", new SimpleDateFormat("yyyy-MM-dd"));
 
         List<StudentPoint> studentPoints = studentPointRepository.findStudentPointByStudentId(student.getId());
 

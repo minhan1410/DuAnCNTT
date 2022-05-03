@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html
-  lang="vi"
-  xmlns="http://www.w3.org/1999/xhtml"
-  xmlns:th="http://www.thymeleaf.org"
-  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        lang="vi"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 >
-  <head
-    th:replace="template/template.html :: head('TRƯỜNG ĐẠI HỌC THĂNG LONG')"
-  ></head>
+<head
+        th:replace="template/template.html :: head('TRƯỜNG ĐẠI HỌC THĂNG LONG')"
+></head>
 
-  <head>
+<head>
     <link
             rel="stylesheet"
             type="text/css"
@@ -23,83 +23,84 @@
             crossorigin="anonymous"
     />
 
-    <link rel="stylesheet" th:href="@{/style/dangkihoc.css}" />
-    <link rel="stylesheet" th:href="@{/style/bangdiem.css}" />
-  </head>
+    <link rel="stylesheet" th:href="@{/style/dangkihoc.css}"/>
+    <link rel="stylesheet" th:href="@{/style/bangdiem.css}"/>
+</head>
 
-  <body>
-    <div id="head">
-      <div th:replace="template/template.html :: header"></div>
+<body>
+<div id="head">
+    <div th:replace="template/template.html :: header"></div>
 
-      <div id="page">
+    <div id="page">
         <div th:replace="template/template.html :: sidebar"></div>
 
         <div id="right">
-          <div class="title">
-            Bảng điểm sinh viên
-            <b th:text="${student.id}" style="text-transform: uppercase"></b> -
-            <b th:text="${user.name}" style="text-transform: uppercase"></b> -
-            <b th:text="${user.birthday}" style="text-transform: uppercase"></b>
-          </div>
-          <div class="entry" th:if="${studentPoint != null }">
-            <table
-                    class="grid table table-bordered table-striped"
-                    border="0"
-                    cellspacing="0"
-                    style="border-style: none; width: 100%; border-collapse: collapse"
-                    id="employeeTable"
-            >
-              <thead>
-              <tr>
-                <th scope="col">STT</th>
-                <th scope="col">Mã Môn</th>
-                <th scope="col">Tên Môn</th>
-                <th scope="col">Số TC</th>
-                <th scope="col">Điểm quá trình</th>
-                <th scope="col">Điểm thi</th>
-                <th scope="col">Điểm tổng</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr th:each="subject, iStat : ${subjectDk}">
-                <td th:text="${iStat.index+1}"></td>
-                <td th:text="${subject.id}"></td>
-                <td th:text="${subject.name}"></td>
-                <td th:text="${subject.soTinChi}"></td>
-                <td th:text="${studentPoint.get(iStat.index).diemQuaTrinh}"></td>
-                <td th:text="${studentPoint.get(iStat.index).diemCuoiKy}"></td>
-                <td th:text="${studentPoint.get(iStat.index).diemTongket}"></td>
-              </tr>
-              </tbody>
-            </table>
+            <div class="title">
+                Bảng điểm sinh viên
+                <b th:text="${student.id}" style="text-transform: uppercase"></b> -
+                <b th:text="${user.name}" style="text-transform: uppercase"></b> -
+                <b th:text="${user.birthday}" style="text-transform: uppercase"></b>
+            </div>
+            <div class="entry" th:if="${studentPoint != null }">
+                <table
+                        class="grid table table-bordered table-striped"
+                        border="0"
+                        cellspacing="0"
+                        style="border-style: none; width: 100%; border-collapse: collapse"
+                        id="employeeTable"
+                >
+                    <thead>
+                    <tr>
+                        <th scope="col">STT</th>
+                        <th scope="col">Mã Môn</th>
+                        <th scope="col">Tên Môn</th>
+                        <th scope="col">Số TC</th>
+                        <th scope="col">Điểm quá trình</th>
+                        <th scope="col">Điểm thi</th>
+                        <th scope="col">Điểm tổng</th>
+                    </tr>
+                    </thead>
+                    <tbody th:each="subject, iStat : ${subjectDk}">
+                    <tr th:if="${studentPoint.get(iStat.index).tinhTrang == 'Bình Thường' && studentPoint.get(iStat.index).diemQuaTrinh > 0.0}"
+                        th:style="${studentPoint.get(iStat.index).diemTongket > 0.0 ? 'background-color: #F8F8F8' : 'background-color: #F08080' }">
+                        <td th:text="${iStat.index+1}"></td>
+                        <td th:text="${subject.id}"></td>
+                        <td th:text="${subject.name}"></td>
+                        <td th:text="${subject.soTinChi}"></td>
+                        <td th:text="${studentPoint.get(iStat.index).diemQuaTrinh}"></td>
+                        <td th:text="${studentPoint.get(iStat.index).diemCuoiKy}"></td>
+                        <td th:text="${studentPoint.get(iStat.index).diemTongket}"></td>
+                    </tr>
+                    </tbody>
+                </table>
 
-            <h6 th:text="|Tổng số tín chỉ tích lũy: ${tcttl}|"></h6>
-            <h6 th:text="|Trung bình chung tích lũy: ${tbctl}|"></h6>
+                <h6 th:text="|Tổng số tín chỉ tích lũy: ${tcttl}|"></h6>
+                <h6 th:text="|Trung bình chung tích lũy: ${tbctl}|"></h6>
 
-          </div>
+            </div>
         </div>
-      </div>
-
-      <div th:replace="template/template.html :: footer"></div>
     </div>
-  </body>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script
-          type="text/javascript"
-          src="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.js"
-  ></script>
-  <script>
+    <div th:replace="template/template.html :: footer"></div>
+</div>
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+        type="text/javascript"
+        src="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.js"
+></script>
+<script>
     $(document).ready(function () {
-      $("#employeeTable").DataTable({
-        aoColumnDefs: [
-          {
-            bSortable: false,
-            aTargets: [-1]
-          },
-        ],
-      });
+        $("#employeeTable").DataTable({
+            aoColumnDefs: [
+                {
+                    bSortable: false,
+                    aTargets: [-1]
+                },
+            ],
+        });
     });
-  </script>
+</script>
 
 </html>

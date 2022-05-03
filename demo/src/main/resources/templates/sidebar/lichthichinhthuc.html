@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html
-  lang="vi"
-  xmlns="http://www.w3.org/1999/xhtml"
-  xmlns:th="http://www.thymeleaf.org"
-  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        lang="vi"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 >
-  <head
-    th:replace="template/template.html :: head('TRƯỜNG ĐẠI HỌC THĂNG LONG')"
-  ></head>
+<head
+        th:replace="template/template.html :: head('TRƯỜNG ĐẠI HỌC THĂNG LONG')"
+></head>
 
-  <head>
+<head>
     <link
             rel="stylesheet"
             type="text/css"
@@ -23,98 +23,98 @@
             crossorigin="anonymous"
     />
 
-    <link rel="stylesheet" th:href="@{/style/dangkihoc.css}" />
-    <link rel="stylesheet" th:href="@{/style/lichthichinhthuc}" />
-  </head>
+    <link rel="stylesheet" th:href="@{/style/dangkihoc.css}"/>
+    <link rel="stylesheet" th:href="@{/style/lichthichinhthuc}"/>
+</head>
 
-  <body>
-    <div id="head">
-      <div th:replace="template/template.html :: header"></div>
+<body>
+<div id="head">
+    <div th:replace="template/template.html :: header"></div>
 
-      <div id="page">
+    <div id="page">
         <div th:replace="template/template.html :: sidebar"></div>
 
         <div id="right">
-          <div class="title">Lịch thi sinh viên</div>
-          <div class="entry">
-            <br />
-            <div>
-              <table cellpadding="0" cellspacing="0" width="720px">
-                <tbody>
-                  <tr>
-                    <td colspan="3" align="center">
-                      <h3>PHIẾU DỰ THI</h3>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">
-                      Mã sinh viên <b th:text="${student.id}"></b>
-                    </td>
-                    <td align="left">
-                      Họ và tên : <b th:text="${user.name}"></b>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <br />
-            
+            <div class="title">Lịch thi sinh viên</div>
             <div class="entry">
-            <table
-                    class="grid table table-bordered table-striped"
-                    border="0"
-                    cellspacing="0"
-                    style="border-style: none; width: 100%; border-collapse: collapse"
-                    id="employeeTable"
-            >
-              <thead>
-              <tr>
-                <th scope="col">STT</th>
-                <th scope="col">Mã Môn</th>
-                <th scope="col">Tên Môn</th>
-                <th scope="col">Số TC</th>
-                <th scope="col">Ca thi</th>
-                <th scope="col">Ngày thi</th>
-                <th scope="col">Tình trạng</th>
-              </tr>
-              </thead>
-              <tbody>
-               <tr th:each="subject, iStat : ${listSubject}">
-                <td th:text="${iStat.index+1}"></td>
-                <td th:text="${subject.id}"></td>
-                <td th:text="${subject.name}"></td>
-                <td th:text="${subject.soTinChi}"></td>
-                <td th:text="${subject.caThi}"></td>
-                <td th:text="${subject.ngayThi}"></td>
-                <td th:text="${studentPoint.get(iStat.index).tinhTrang}"></td>
-              </tr>
-              </tbody>
-            </table>
+                <br/>
+                <div>
+                    <table cellpadding="0" cellspacing="0" width="720px">
+                        <tbody>
+                        <tr>
+                            <td colspan="3" align="center">
+                                <h3>PHIẾU DỰ THI</h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left">
+                                Mã sinh viên <b th:text="${student.id}"></b>
+                            </td>
+                            <td align="left">
+                                Họ và tên : <b th:text="${user.name}"></b>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br/>
 
-          </div>
+                <div class="entry">
+                    <table
+                            class="grid table table-bordered table-striped"
+                            border="0"
+                            cellspacing="0"
+                            style="border-style: none; width: 100%; border-collapse: collapse"
+                            id="employeeTable"
+                    >
+                        <thead>
+                        <tr>
+                            <th scope="col">STT</th>
+                            <th scope="col">Mã Môn</th>
+                            <th scope="col">Tên Môn</th>
+                            <th scope="col">Số TC</th>
+                            <th scope="col">Ca thi</th>
+                            <th scope="col">Ngày thi</th>
+                            <th scope="col">Tình trạng</th>
+                        </tr>
+                        </thead>
+                        <tbody th:each="subject, iStat : ${listSubject}">
+                        <tr th:style="${studentPoint.get(iStat.index).tinhTrang == 'Bình Thường' ? 'background-color: #F8F8F8' : 'background-color: #F08080'}">
+                            <td th:text="${iStat.index+1}"></td>
+                            <td th:text="${subject.id}"></td>
+                            <td th:text="${subject.name}"></td>
+                            <td th:text="${subject.soTinChi}"></td>
+                            <td th:text="${subject.caThi}"></td>
+                            <td th:text="${dateFormat.format(subject.ngayThi)}"></td>
+                            <td th:text="${studentPoint.get(iStat.index).tinhTrang}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
         </div>
-      </div>
 
-      <div th:replace="template/template.html :: footer"></div>
+        <div th:replace="template/template.html :: footer"></div>
     </div>
-  </body>
+</body>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script
-          type="text/javascript"
-          src="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.js"
-  ></script>
-  <script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+        type="text/javascript"
+        src="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.js"
+></script>
+<script>
     $(document).ready(function () {
-      $("#employeeTable").DataTable({
-        aoColumnDefs: [
-          {
-            bSortable: false,
-            aTargets: [-1]
-          },
-        ],
-      });
+        $("#employeeTable").DataTable({
+            aoColumnDefs: [
+                {
+                    bSortable: false,
+                    aTargets: [-1]
+                },
+            ],
+        });
     });
-  </script>
+</script>
 
 </html>

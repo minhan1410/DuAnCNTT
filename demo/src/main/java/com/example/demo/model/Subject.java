@@ -4,6 +4,8 @@ import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -39,6 +41,7 @@ public class Subject {
     private String thu;
 
     @Column(name = "ngay_thi")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date ngayThi;
 
     @Column(name = "ca_thi")

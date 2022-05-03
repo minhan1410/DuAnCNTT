@@ -25,4 +25,7 @@ public interface StudentPointRepository extends JpaRepository<StudentPoint, Long
             "from StudentPoint a join Student b on a.studentId = b.id " +
             "where a.studentId like :studentId")
     List<StudentPoint> findStudentPointByStudentId(@Param("studentId") String studentId);
+
+    @Query("select a from StudentPoint a where a.studentId like :studentId and a.subjectId like :subjectId")
+    StudentPoint findStudentPointByStudentIdAndSubjectId(@Param("studentId") String studentId,@Param("subjectId") String subjectId);
 }

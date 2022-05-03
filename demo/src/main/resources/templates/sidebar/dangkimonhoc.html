@@ -57,6 +57,7 @@
             <tr>
               <th scope="col">STT</th>
               <th scope="col"></th>
+              <th scope="col">Mã Môn</th>
               <th scope="col">Tên Môn</th>
               <th scope="col">Tên Lớp</th>
               <th scope="col">Thứ</th>
@@ -74,6 +75,7 @@
                   <button class="btn btn-sm btn-outline-primary">Đăng kí</button>
                 </a>
               </td>
+              <td th:text="${subject.id}"></td>
               <td th:text="${subject.name}"></td>
               <td th:text="${subject.tenLop}"></td>
               <td th:text="${subject.thu}"></td>

@@ -1,8 +1,10 @@
--- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
+CREATE DATABASE  IF NOT EXISTS `testdb` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `testdb`;
+-- MySQL dump 10.13  Distrib 8.0.29, for Win64 (x86_64)
 --
 -- Host: localhost    Database: testdb
 -- ------------------------------------------------------
--- Server version	8.0.28
+-- Server version	8.0.29
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -29,13 +31,13 @@ CREATE TABLE `sinhvien_diem` (
   `diem_qua_trinh` double DEFAULT '0',
   `diem_cuoi_ky` double DEFAULT '0',
   `diem_tong_ket` double DEFAULT '0',
-  `tinh_trang` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT 'Bình Thường',
+  `tinh_trang` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_general_ci DEFAULT 'Bình Thường',
   PRIMARY KEY (`id`),
   KEY `FK_SinhVien_Diem_MonHoc` (`ma_mon`),
   KEY `FK_SinhVien_Diem_SinhVien` (`MaSV`),
   CONSTRAINT `FK_SinhVien_Diem_MonHoc` FOREIGN KEY (`ma_mon`) REFERENCES `monhoc` (`ma_mon`),
   CONSTRAINT `FK_SinhVien_Diem_SinhVien` FOREIGN KEY (`MaSV`) REFERENCES `sinhvien` (`MaSV`)
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +46,7 @@ CREATE TABLE `sinhvien_diem` (
 
 LOCK TABLES `sinhvien_diem` WRITE;
 /*!40000 ALTER TABLE `sinhvien_diem` DISABLE KEYS */;
-INSERT INTO `sinhvien_diem` VALUES (45,'A00017','CS102',10,9,9,'Bình Thường'),(46,'A00020','FA131',0,0,0,'Bình Thường');
+INSERT INTO `sinhvien_diem` VALUES (45,'A00017','CS102',10,9,9,'Bình Thường'),(65,'A00017','FA131',0,0,0,'Cấm thi');
 /*!40000 ALTER TABLE `sinhvien_diem` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -57,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-28 16:10:08
+-- Dump completed on 2022-05-03 10:42:52

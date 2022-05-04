@@ -344,7 +344,19 @@ public class SidebarController {
         User user = (User) ((Authentication) principal).getPrincipal();
 
         model.addAttribute("user", user);
-        model.addAttribute("student", studentRepository.findByUserId(user.getId()));
+
+        if (user.getPermissions().equals("ROLE_Student")) {
+            model.addAttribute("student", studentRepository.findByUserId(user.getId()));
+        } else {
+            model.addAttribute("student", teacherRepository.findByUserId(user.getId()));
+        }
+
+//
+        model.addAttribute("listStudent", studentRepository.findAll());
+        model.addAttribute("userRepository", userRepository);
+
+//        https://stackoverflow.com/questions/53375549/spring-1-form-2-entities
+
         return "sidebar/quanlisinhvien";
     }
 }

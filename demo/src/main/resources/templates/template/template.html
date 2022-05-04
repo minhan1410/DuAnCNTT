@@ -92,6 +92,10 @@
 
                     </div>
 
+                    <div th:if="${user.permissions == 'ROLE_TrainingDepartment'}">
+                        <li><a th:href="@{/quanlisinhvien}">Quản lí sinh viên</a></li>
+
+                    </div>
                 </ul>
             </li>
         </ul>

@@ -19,8 +19,8 @@ public class Teacher {
     @Column(name = "GVCN")
     private Boolean gvChuNhiem;
 
-    @Column(name = "trang_thai")
-    private String trangThai;
+    @Column(name = "trang_thai", columnDefinition = "Bình Thường")
+    private String trangThai  = "Bình Thường";
 
     @Column(name = "user_id")   
     private Long userId;

@@ -25,8 +25,6 @@ public class WebController {
     @Autowired
     private SpecializedRepository specializedRepository;
     @Autowired
-    private StudentRepository studentRepository;
-    @Autowired
     PasswordEncoder passwordEncoder;
 
     @GetMapping(value = {"/"})
@@ -37,11 +35,6 @@ public class WebController {
     @GetMapping(value = {"/login"})
     public String login() {
         return "login";
-    }
-
-    @GetMapping("/hello")
-    public String hello() {
-        return "hello";
     }
 
     @GetMapping("/registrationSpecialized")
@@ -87,24 +80,6 @@ public class WebController {
     public String registrationTeacher(Model model) {
         model.addAttribute("listSpecialized", specializedRepository.findAll());
         return "registration/registrationTeacher";
-    }
-
-    @GetMapping("/user")
-    public String user(Model model, Principal principal) {
-        User customUser = (User) ((Authentication) principal).getPrincipal();
-        System.out.printf("\n\n%s\n\n", customUser);
-        System.out.printf("\n\n%s\n\n", studentRepository.findByUserId(customUser.getId()));
-        model.addAttribute("user", customUser);
-        model.addAttribute("student", studentRepository.findByUserId(customUser.getId()));
-        return "user";
-    }
-
-    @GetMapping("/admin")
-    public String admin(Model model, Principal principal) {
-        User customUser = (User) ((Authentication) principal).getPrincipal();
-        System.out.printf("\n\n%s\n\n", customUser);
-        model.addAttribute("user", customUser);
-        return "admin";
     }
 }
 

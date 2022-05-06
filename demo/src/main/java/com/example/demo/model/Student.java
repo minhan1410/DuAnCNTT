@@ -25,8 +25,8 @@ public class Student {
     @Column(name = "GVCN")
     private String giaoVienId;
 
-    @Column(name = "trang_thai")
-    private String trangThai;
+    @Column(name = "trang_thai", columnDefinition = "Bình Thường")
+    private String trangThai  = "Bình Thường";
 
     @Column(name = "user_id")
     private Long userId;

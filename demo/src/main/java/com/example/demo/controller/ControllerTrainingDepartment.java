@@ -38,12 +38,7 @@ public class ControllerTrainingDepartment {
         User user = (User) ((Authentication) principal).getPrincipal();
 
         model.addAttribute("user", user);
-
-        if (user.getPermissions().equals("ROLE_Student")) {
-            model.addAttribute("student", studentRepository.findByUserId(user.getId()));
-        } else {
-            model.addAttribute("student", teacherRepository.findByUserId(user.getId()));
-        }
+        model.addAttribute("student", teacherRepository.findByUserId(user.getId()));
 
 //
         model.addAttribute("listStudent", studentRepository.findAll());
@@ -54,9 +49,9 @@ public class ControllerTrainingDepartment {
         model.addAttribute("newUser", new User());
         model.addAttribute("listSpecialized", specializedRepository.findAll());
 
-        Map<String,String> mapGVCN = new HashMap<String,String>();
-        for(Teacher t: teacherRepository.findByGvChuNhiem(true)){
-            mapGVCN.put(t.getId(),userRepository.findById(t.getUserId()).get().getName());
+        Map<String, String> mapGVCN = new HashMap<String, String>();
+        for (Teacher t : teacherRepository.findByGvChuNhiem(true)) {
+            mapGVCN.put(t.getId(), userRepository.findById(t.getUserId()).get().getName());
         }
         model.addAttribute("listTeacher", mapGVCN);
 
@@ -82,4 +77,17 @@ public class ControllerTrainingDepartment {
 
         return quanlisinhvien(model, principal);
     }
+
+
+//    =========================================== quanligiaovien ================================================
+
+    @GetMapping("/quanligiaovien")
+    public String quanligiaovien(Model model, Principal principal) {
+        User user = (User) ((Authentication) principal).getPrincipal();
+
+        model.addAttribute("user", user);
+        model.addAttribute("student", teacherRepository.findByUserId(user.getId()));
+        return "sidebar/quanligiaovien";
+    }
+
 }

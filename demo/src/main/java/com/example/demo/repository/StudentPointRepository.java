@@ -8,9 +8,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 public interface StudentPointRepository extends JpaRepository<StudentPoint, Long> {
+    @Override
+    Optional<StudentPoint> findById(Long id);
+
     @Query("select distinct b " +
             "from StudentPoint a join Subject b on a.subjectId = b.id " +
             "where a.studentId like :studentId")

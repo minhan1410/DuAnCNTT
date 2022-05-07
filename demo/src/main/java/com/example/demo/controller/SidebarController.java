@@ -109,15 +109,4 @@ public class SidebarController {
         return "sidebar/thoikhoabieutoantruong";
     }
 
-//    =========================================== quanligiaovien ================================================
-
-    @GetMapping("/quanligiaovien")
-    public String quanligiaovien(Model model, Principal principal) {
-        User user = (User) ((Authentication) principal).getPrincipal();
-
-        model.addAttribute("user", user);
-        model.addAttribute("student", studentRepository.findByUserId(user.getId()));
-        return "sidebar/quanligiaovien";
-    }
-
 }

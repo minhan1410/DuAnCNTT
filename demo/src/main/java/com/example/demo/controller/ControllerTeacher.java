@@ -1,19 +1,15 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.Student;
-import com.example.demo.model.Subject;
-import com.example.demo.model.Teacher;
-import com.example.demo.model.User;
+import com.example.demo.model.*;
 import com.example.demo.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.Set;
+import java.util.*;
 
 @Controller
 public class ControllerTeacher {
@@ -23,6 +19,8 @@ public class ControllerTeacher {
     private TeacherRepository teacherRepository;
     @Autowired
     private TeacherSubjectRepository teacherSubjectRepository;
+    @Autowired
+    private StudentPointRepository studentPointRepository;
 
 
 //    =========================================== quanlilophoc ================================================
@@ -42,7 +40,8 @@ public class ControllerTeacher {
 //        teacherSubjectRepository.findStudentsByTeacherId(teacher.getId()).forEach(System.out::println);
 
         model.addAttribute("listSubject", teacherSubjectRepository.findSubjectsByTeacherId(teacher.getId()));
-        model.addAttribute("listStudent", teacherSubjectRepository.findStudentsByTeacherId(teacher.getId()));
+        model.addAttribute("listStudent", null);
+//        model.addAttribute("listStudent", teacherSubjectRepository.findStudentsByTeacherId(teacher.getId()));
         model.addAttribute("userRepository", userRepository);
 
 
@@ -58,20 +57,50 @@ public class ControllerTeacher {
         model.addAttribute("student", teacher);
 //
 
-        Set<Subject> listSubject = teacherSubjectRepository.findSubjectsByTeacherId(teacher.getId());
-        Set<Student> listStudent = teacherSubjectRepository.findStudentsByTeacherIdAndSubjectId(teacher.getId(), subjectId);
+        List<Subject> listSubject = teacherSubjectRepository.findSubjectsByTeacherId(teacher.getId());
+        List<Student> listStudent = teacherSubjectRepository.findStudentsByTeacherIdAndSubjectId(teacher.getId(), subjectId);
+
+        List<StudentPoint> listStudentPoints = new ArrayList<StudentPoint>();
+        for(Subject subject : listSubject){
+            if(subject.getId().equals(subjectId)){
+                for(Student student : listStudent){
+                    StudentPoint sp = studentPointRepository.findStudentPointByStudentIdAndSubjectId(student.getId(),subject.getId());
+                    if(sp != null){
+                        listStudentPoints.add(sp);
+                    }
+                }
+            }
+
+        }
 
 //        System.out.println("\n\n");
 //        listSubject.forEach(System.out::println);
-        System.out.println("\n\n");
-        listStudent.forEach(System.out::println);
-        System.out.println("\n\n");
+//        System.out.println("\n\n");
+//        listStudent.forEach(System.out::println);
+//        System.out.println("\n\n");
+//        listStudentPoints.forEach(System.out::println);
+//        System.out.println("\n\n");
 
         model.addAttribute("listSubject", listSubject);
         model.addAttribute("listStudent", listStudent);
+        model.addAttribute("listStudentPoints", listStudentPoints);
         model.addAttribute("userRepository", userRepository);
 
         return "sidebar/quanlilophoc";
     }
 
+    @PostMapping("/danhgiasv")
+    public String danhgiasv(Model model, Principal principal, @RequestParam("idstudentPoint") Long idstudentPoint, @RequestParam("tinhTrang") String tinhTrang,
+                            @RequestParam("quaTrinh") Double quaTrinh, @RequestParam("cuoiKi") Double cuoiKi, @RequestParam("tongKet") Double tongKet) {
+
+        StudentPoint sp = studentPointRepository.findById(idstudentPoint).get();
+        sp.setTinhTrang(tinhTrang);
+        sp.setDiemQuaTrinh(quaTrinh);
+        sp.setDiemCuoiKy(cuoiKi);
+        sp.setDiemTongket(tongKet);
+
+        System.out.println("\n\n"+sp+"\n\n");
+        studentPointRepository.save(sp);
+        return chonMonQuanlilophoc(model, principal,sp.getSubjectId());
+    }
 }

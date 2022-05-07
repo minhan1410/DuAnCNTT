@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `testdb` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `testdb`;
--- MySQL dump 10.13  Distrib 8.0.29, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
 --
 -- Host: localhost    Database: testdb
 -- ------------------------------------------------------
--- Server version	8.0.29
+-- Server version	8.0.28
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -29,7 +29,7 @@ CREATE TABLE `giaovien` (
   `MaCN` varchar(10) DEFAULT NULL,
   `GVCN` tinyint(1) DEFAULT NULL,
   `user_id` int NOT NULL,
-  `trang_thai` varchar(255) DEFAULT NULL,
+  `trang_thai` varchar(255) DEFAULT 'Bình Thường',
   PRIMARY KEY (`MaGV`),
   UNIQUE KEY `MaGV_UNIQUE` (`MaGV`),
   UNIQUE KEY `user_id_UNIQUE` (`user_id`),
@@ -46,7 +46,7 @@ CREATE TABLE `giaovien` (
 
 LOCK TABLES `giaovien` WRITE;
 /*!40000 ALTER TABLE `giaovien` DISABLE KEYS */;
-INSERT INTO `giaovien` VALUES ('1','333',1,18,'Bình thường'),('2','333',1,19,'Bình thường');
+INSERT INTO `giaovien` VALUES ('1','333',1,18,'Bình thường'),('2','333',1,19,'Bình thường'),('3','333',0,21,'Bình thường');
 /*!40000 ALTER TABLE `giaovien` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -59,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-03 10:42:52
+-- Dump completed on 2022-05-07 22:06:59

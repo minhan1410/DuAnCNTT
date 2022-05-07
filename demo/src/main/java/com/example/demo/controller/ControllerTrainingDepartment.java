@@ -79,7 +79,7 @@ public class ControllerTrainingDepartment {
         newStudent.setChuyenNganhId(chuyenNganh);
         newStudent.setGiaoVienId(gvcn);
         studentRepository.save(newStudent);
-        
+
         return quanlisinhvien(model, principal);
     }
 }

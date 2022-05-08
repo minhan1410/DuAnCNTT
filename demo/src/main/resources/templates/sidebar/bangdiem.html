@@ -61,8 +61,7 @@
                     </tr>
                     </thead>
                     <tbody th:each="subject, iStat : ${subjectDk}">
-                    <tr th:if="${studentPoint.get(iStat.index).tinhTrang == 'Bình Thường' && studentPoint.get(iStat.index).diemQuaTrinh > 0.0}"
-                        th:style="${studentPoint.get(iStat.index).diemTongket > 0.0 ? 'background-color: #F8F8F8' : 'background-color: #F08080' }">
+                    <tr th:style="${studentPoint.get(iStat.index).diemTongket > 4.0 ? 'background-color: #F8F8F8' : 'background-color: #F08080' }">
                         <td th:text="${iStat.index+1}"></td>
                         <td th:text="${subject.id}"></td>
                         <td th:text="${subject.name}"></td>

@@ -28,6 +28,6 @@ public class StudentPoint {
     @Column(name = "diem_tong_ket", columnDefinition = "0.0")
     private Double diemTongket = 0.0;
 
-    @Column(name = "tinh_trang", columnDefinition = "Bình Thường")
-    private String tinhTrang = "Bình Thường";
+    @Column(name = "tinh_trang", columnDefinition = "Bình thường")
+    private String tinhTrang = "Bình thường";
 }

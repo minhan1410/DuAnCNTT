@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html
+        lang="vi"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head
+        th:replace="template/template.html :: head('TRƯỜNG ĐẠI HỌC THĂNG LONG')"
+></head>
+
+<head>
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.css"
+    />
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+            integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+            crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" th:href="@{/style/dangkihoc.css}" />
+    <link rel="stylesheet" th:href="@{/style/laplichthi.css}" />
+</head>
+
+<body>
+<div id="head">
+    <div th:replace="template/template.html :: header"></div>
+
+    <div id="page">
+        <div th:replace="template/template.html :: sidebar"></div>
+        <div id="right">
+            <div class="title">Xếp lịch thi</div>
+            <div>
+                <table
+                        class="grid table table-bordered table-striped"
+                        border="0"
+                        cellspacing="0"
+                        style="border-style: none; width: 100%; border-collapse: collapse"
+                        id="employeeTable"
+                >
+                    <thead>
+                    <tr>
+                        <th scope="col">STT</th>
+                        <th scope="col">Mã môn</th>
+                        <th scope="col">Tên môn</th>
+                        <th scope="col">Ngày thi</th>
+                        <th scope="col">Ca thi</th>
+                        <th scope="col">Trạng thái</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>TT</td>
+                        <td>Toán Tin</td>
+                        <td><input type="date"></td>
+                        <td>5</td>
+                        <td><button>Cập nhật</button></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>TE</td>
+                        <td>Du Lịch</td>
+                        <td><input type="date"></td>
+                        <td>3</td>
+                        <td><button>Cập nhật</button></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="template/template.html :: footer"></div>
+</div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+        type="text/javascript"
+        src="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.js"
+></script>
+<script>
+    $(document).ready(function () {
+        $("#employeeTable").DataTable({
+            aoColumnDefs: [
+                {
+                    bSortable: false,
+                    aTargets: [-1],
+                },
+            ],
+        });
+    });
+</script>
+</html>

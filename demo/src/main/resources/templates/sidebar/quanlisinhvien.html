@@ -49,9 +49,6 @@
                                 <div
                                     class="d-flex flex-row align-items-center mb-4"
                                 >
-                                    <i
-                                        class="fas fa-envelope fa-lg me-3 fa-fw"
-                                    ></i>
                                     <div class="form-outline flex-fill mb-0">
                                         <label
                                             class="form-label"
@@ -76,7 +73,6 @@
                                 <div
                                     class="d-flex flex-row align-items-center mb-4"
                                 >
-                                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                     <div class="form-outline flex-fill mb-0">
                                         <label
                                             class="form-label"
@@ -98,7 +94,6 @@
                                 <div
                                     class="d-flex flex-row align-items-center mb-4"
                                 >
-                                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                     <div class="form-outline flex-fill mb-0">
                                         <label
                                             class="form-label"
@@ -120,7 +115,6 @@
                                 <div
                                     class="d-flex flex-row align-items-center mb-4"
                                 >
-                                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                     <div class="form-outline flex-fill mb-0">
                                         <label
                                             class="form-label"
@@ -142,7 +136,6 @@
                                 <div
                                     class="d-flex flex-row align-items-center mb-4"
                                 >
-                                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                     <div class="form-outline flex-fill mb-0">
                                         <label
                                             class="form-label"
@@ -164,7 +157,6 @@
                                 <div
                                     class="d-flex flex-row align-items-center mb-4"
                                 >
-                                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                     <div class="form-outline flex-fill mb-0">
                                         <label
                                             class="form-label"
@@ -186,7 +178,6 @@
                                 <div
                                     class="d-flex flex-row align-items-center mb-4"
                                 >
-                                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                     <div class="form-outline flex-fill mb-0">
                                         <label
                                             class="form-label"
@@ -208,7 +199,6 @@
                                 <div
                                     class="d-flex flex-row align-items-center mb-4"
                                 >
-                                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                     <div class="form-outline flex-fill mb-0">
                                         <label
                                             class="form-label"
@@ -229,9 +219,6 @@
                                 <div
                                     class="d-flex flex-row align-items-center mb-4"
                                 >
-                                    <i
-                                        class="fas fa-envelope fa-lg me-3 fa-fw"
-                                    ></i>
                                     <div class="form-outline flex-fill mb-0">
                                         <label
                                             class="form-label"
@@ -254,9 +241,6 @@
                                 <div
                                     class="d-flex flex-row align-items-center mb-4"
                                 >
-                                    <i
-                                        class="fas fa-envelope fa-lg me-3 fa-fw"
-                                    ></i>
                                     <div class="form-outline flex-fill mb-0">
                                         <label
                                             class="form-label"
@@ -280,9 +264,6 @@
                                 <div
                                     class="d-flex flex-row align-items-center mb-4"
                                 >
-                                    <i
-                                        class="fas fa-envelope fa-lg me-3 fa-fw"
-                                    ></i>
                                     <div class="form-outline flex-fill mb-0">
                                         <label
                                             class="form-label"
@@ -336,10 +317,10 @@
                                         <th scope="col">Hành động</th>
                                     </tr>
                                 </thead>
-                                <tbody
-                                    th:each="student, iStat : ${listStudent}"
-                                >
-                                    <tr>
+                                <tbody>
+                                    <tr
+                                        th:each="student, iStat : ${listStudent}"
+                                    >
                                         <td th:text="${iStat.index+1}"></td>
                                         <td th:text="${student.id}"></td>
                                         <td
@@ -436,11 +417,52 @@
                                                     </table>
                                                 </div>
                                             </button>
-                                            <button class="btn">
-                                                Đánh giá
-                                            </button>
-                                            <button class="btn">
-                                                Cập nhật
+                                            <button class="btnCapNhat">
+                                                Cập nhật trạng thái
+                                                <div
+                                                    style="display: none"
+                                                    class="capNhat"
+                                                >
+                                                    <form
+                                                        class="mx-1 mx-md-4"
+                                                        th:action="@{/capNhatTrangThai/{index}(index=${iStat.index})}"
+                                                        th:object="${student}"
+                                                        method="post"
+                                                    >
+                                                        <select
+                                                            class="select"
+                                                            th:field="*{trangThai}"
+                                                        >
+                                                            <option
+                                                                value="Bình thường"
+                                                                selected
+                                                            >
+                                                                Bình thường
+                                                            </option>
+                                                            <option
+                                                                value="Đã nghỉ"
+                                                                selected
+                                                            >
+                                                                Đã nghỉ
+                                                            </option>
+                                                            <option
+                                                                value="Đã tốt nghiệp"
+                                                                selected
+                                                            >
+                                                                Đã tốt nghiệp
+                                                            </option>
+                                                            <option
+                                                                value="Đang bảo lưu"
+                                                                selected
+                                                            >
+                                                                Đang bảo lưu
+                                                            </option>
+                                                        </select>
+                                                        <input
+                                                            type="submit"
+                                                        ></input>
+                                                    </form>
+                                                </div>
                                             </button>
                                         </td>
                                     </tr>
@@ -489,9 +511,24 @@
         const buttonUpdate = document.querySelectorAll(".btnChiTiet");
         const chitiet = document.querySelectorAll(".chiTiet");
 
+        const btnCapNhat = document.querySelectorAll(".btnCapNhat");
+        const capNhat = document.querySelectorAll(".capNhat");
+
         for (let i = 0; i < buttonUpdate.length; i++) {
             buttonUpdate[i].addEventListener("click", function (e) {
-                chitiet[i].style.display = "block";
+                if (chitiet[i].style.display == "block") {
+                    chitiet[i].style.display = "none";
+                } else {
+                    chitiet[i].style.display = "block";
+                }
+            });
+
+            btnCapNhat[i].addEventListener("click", function (e) {
+                if (capNhat[i].style.display == "block") {
+                    capNhat[i].style.display = "none";
+                } else {
+                    capNhat[i].style.display = "block";
+                }
             });
         }
     </script>

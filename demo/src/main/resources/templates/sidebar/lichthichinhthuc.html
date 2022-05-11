@@ -78,16 +78,18 @@
                             <th scope="col">Tình trạng</th>
                         </tr>
                         </thead>
-                        <tbody th:each="subject, iStat : ${listSubject}">
-                        <tr th:style="${studentPoint.get(iStat.index).tinhTrang == 'Bình thường' ? 'background-color: #F8F8F8' : 'background-color: #F08080'}">
-                            <td th:text="${iStat.index+1}"></td>
-                            <td th:text="${subject.id}"></td>
-                            <td th:text="${subject.name}"></td>
-                            <td th:text="${subject.soTinChi}"></td>
-                            <td th:text="${subject.caThi}"></td>
-                            <td th:text="${dateFormat.format(subject.ngayThi)}"></td>
-                            <td th:text="${studentPoint.get(iStat.index).tinhTrang}"></td>
-                        </tr>
+                        <tbody>
+                            <th:block th:each="map, iStart: ${mapSPSubject}">
+                                <tr th:style="${map.key.tinhTrang == 'Bình thường' ? 'background-color: #F8F8F8' : 'background-color: #F08080'}">
+                                    <td th:text="${iStart.index + 1}"></td>
+                                    <td th:text="${map.value.id}"></td>
+                                    <td th:text="${map.value.name}"></td>
+                                    <td th:text="${map.value.soTinChi}"></td>
+                                    <td th:text="${map.value.caThi}"></td>
+                                    <td th:text="${dateFormat.format(map.value.ngayThi)}"></td>
+                                    <td th:text="${map.key.tinhTrang }"></td>
+                                </tr>
+                            </th:block>
                         </tbody>
                     </table>
 

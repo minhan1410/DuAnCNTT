@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.Specialized;
 import com.example.demo.model.Student;
 import com.example.demo.model.Teacher;
 import com.example.demo.model.User;
@@ -9,10 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.HashMap;
@@ -41,8 +39,6 @@ public class ControllerTrainingDepartment {
         model.addAttribute("student", teacherRepository.findByUserId(user.getId()));
 
 //
-        model.addAttribute("listStudent", studentRepository.findAll());
-        model.addAttribute("userRepository", userRepository);
 
 //        https://stackoverflow.com/questions/53375549/spring-1-form-2-entities
 
@@ -55,10 +51,11 @@ public class ControllerTrainingDepartment {
         }
         model.addAttribute("listTeacher", mapGVCN);
 
+        model.addAttribute("listStudent", studentRepository.findAll());
+        model.addAttribute("userRepository", userRepository);
+
         return "sidebar/quanlisinhvien";
     }
-
-//    =========================================== themsinhvien ================================================
 
     @PostMapping("/dangKiSinhVien")
     public String registrationUser(Model model, Principal principal, @ModelAttribute User newUser, @RequestParam("chuyenNganh") String chuyenNganh, @RequestParam("gvcn") String gvcn) {
@@ -78,6 +75,14 @@ public class ControllerTrainingDepartment {
         return quanlisinhvien(model, principal);
     }
 
+    @PostMapping("/capNhatTrangThai/{index}")
+    public String capNhatTrangThai(Model model, Principal principal, @PathVariable("index") int index, @ModelAttribute Student student) {
+        Student s = studentRepository.findAll().get(index);
+        s.setTrangThai(student.getTrangThai());
+        studentRepository.save(s);
+
+        return quanlisinhvien(model, principal);
+    }
 
 //    =========================================== quanligiaovien ================================================
 
@@ -90,4 +95,37 @@ public class ControllerTrainingDepartment {
         return "sidebar/quanligiaovien";
     }
 
+//    =========================================== quanlichuyennganh ================================================
+
+    @GetMapping("/quanlichuyennganh")
+    public String quanlichuyennganh(Model model, Principal principal) {
+        User user = (User) ((Authentication) principal).getPrincipal();
+
+        model.addAttribute("user", user);
+        model.addAttribute("student", teacherRepository.findByUserId(user.getId()));
+//
+        model.addAttribute("newSpecialized", new Specialized());
+        model.addAttribute("listSpecialized", specializedRepository.findAll());
+        return "sidebar/quanlichuyennganh";
+    }
+
+    @PostMapping("/dangKiChuyenNganh")
+    public String dangKiChuyenNganh(Model model, Principal principal, @ModelAttribute Specialized newSpecialized) {
+        String mess = null;
+        if (specializedRepository.findById(newSpecialized.getId()).isPresent()) {
+            mess = "Mã chuyên ngành đã tồn tại";
+        } else if (specializedRepository.findByName(newSpecialized.getName()) != null) {
+            mess = "Tên chuyên ngành đã tồn tại";
+        } else {
+            specializedRepository.save(newSpecialized);
+        }
+        model.addAttribute("mess", mess);
+        return quanlichuyennganh(model, principal);
+    }
+
+    @GetMapping("xoaChuyenNganh/{idSpecialized}")
+    public String xoaChuyenNganh(Model model, Principal principal, @PathVariable("idSpecialized") String idSpecialized) {
+        specializedRepository.deleteById(idSpecialized);
+        return quanlichuyennganh(model, principal);
+    }
 }

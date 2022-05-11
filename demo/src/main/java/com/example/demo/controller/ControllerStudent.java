@@ -14,10 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.security.Principal;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Controller
 public class ControllerStudent {
@@ -42,20 +39,17 @@ public class ControllerStudent {
         int tcttl = 0;
         double tbctl = 0;
 
-        List<StudentPoint> studentPoints = new ArrayList<StudentPoint>();
+        Map<StudentPoint,Subject> mapSPSubject = new HashMap<StudentPoint,Subject>();
         for (StudentPoint studentPoint : studentPointRepository.findAll()) {
             if (studentPoint.getStudentId().equals(student.getId())) {
-                studentPoints.add(studentPoint);
+                Subject subject = subjectRepository.findById(studentPoint.getSubjectId()).get();
+                mapSPSubject.put(studentPoint,subject);
                 if (studentPoint.getDiemTongket() >= 4.0) {
-                    Subject subject = subjectRepository.findById(studentPoint.getSubjectId()).get();
                     tcttl += subject.getSoTinChi();
                 }
             }
         }
-        model.addAttribute("studentPoint", studentPoints.size() > 0 ? studentPoints : null);
-
-        Set<Subject> subjectDk = studentPointRepository.findSubjectsByStudentId(student.getId());
-        model.addAttribute("subjectDk", subjectDk);
+        model.addAttribute("mapSPSubject", mapSPSubject);
 
         model.addAttribute("tcttl", tcttl);
         model.addAttribute("tbctl", tbctl);
@@ -182,16 +176,15 @@ public class ControllerStudent {
         model.addAttribute("student", student);
 
 //
-        Set<Subject> subjects = studentPointRepository.findSubjectsByStudentId(student.getId());
-        model.addAttribute("listSubject", subjects);
+        Map<StudentPoint,Subject> mapSPSubject = new HashMap<StudentPoint,Subject>();
+        for (StudentPoint studentPoint : studentPointRepository.findAll()) {
+            if (studentPoint.getStudentId().equals(student.getId())) {
+                Subject subject = subjectRepository.findById(studentPoint.getSubjectId()).get();
+                mapSPSubject.put(studentPoint,subject);
+            }
+        }
+        model.addAttribute("mapSPSubject", mapSPSubject);
         model.addAttribute("dateFormat", new SimpleDateFormat("yyyy-MM-dd"));
-
-        List<StudentPoint> studentPoints = studentPointRepository.findStudentPointByStudentId(student.getId());
-
-//        System.out.println("\n");
-//        studentPoints.stream().forEach(System.out::println);
-//        System.out.println("\n");
-        model.addAttribute("studentPoint", studentPoints);
 
         return "sidebar/lichthichinhthuc";
     }

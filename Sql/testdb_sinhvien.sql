@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `testdb` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `testdb`;
--- MySQL dump 10.13  Distrib 8.0.29, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
 --
 -- Host: localhost    Database: testdb
 -- ------------------------------------------------------
--- Server version	8.0.29
+-- Server version	8.0.28
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -28,7 +28,7 @@ CREATE TABLE `sinhvien` (
   `MaSV` varchar(6) NOT NULL,
   `MaCN` varchar(10) DEFAULT NULL,
   `GVCN` varchar(10) DEFAULT NULL,
-  `trang_thai` varchar(255) DEFAULT 'Bình Thường',
+  `trang_thai` varchar(255) DEFAULT 'Bình thường',
   `user_id` int DEFAULT NULL,
   PRIMARY KEY (`MaSV`),
   UNIQUE KEY `MaSV_UNIQUE` (`MaSV`),
@@ -58,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-08  2:48:27
+-- Dump completed on 2022-05-11 10:33:58

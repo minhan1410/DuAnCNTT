@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `testdb` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `testdb`;
--- MySQL dump 10.13  Distrib 8.0.29, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
 --
 -- Host: localhost    Database: testdb
 -- ------------------------------------------------------
--- Server version	8.0.29
+-- Server version	8.0.28
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -53,7 +53,7 @@ CREATE TABLE `monhoc` (
 
 LOCK TABLES `monhoc` WRITE;
 /*!40000 ALTER TABLE `monhoc` DISABLE KEYS */;
-INSERT INTO `monhoc` VALUES ('CS102','1','333','Công dân số','CONGDANSO.11',3,'MSteam','1-2','3','2022-07-01','3',3500000,'2022-03-27',1,1),('CS131','2','333','Cấu trúc dữ liệu','CTDL.1',3,'A704','6-9','3','2022-07-01 00:00:00','1',1200000,'2022-03-27',50,2),('FA131','1','333','Bố cục màu','BOCUCMAU.1',2,'BOMON','8-9','1','2022-07-01 00:00:00','3',3400000,'2022-03-27',30,2);
+INSERT INTO `monhoc` VALUES ('CS102','1','333','Công dân số','CONGDANSO.11',3,'MSteam','1-2','3','2022-05-03 00:00:00','2',3500000,'2022-03-27',1,1),('CS131','2','333','Cấu trúc dữ liệu','CTDL.1',3,'A704','6-9','3','2022-07-01 00:00:00','4',1200000,'2022-03-27',50,2),('FA131','1','333','Bố cục màu','BOCUCMAU.1',2,'BOMON','8-9','1','2022-02-01 00:00:00','3',3400000,'2022-03-27',30,2);
 /*!40000 ALTER TABLE `monhoc` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -66,4 +66,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-11 23:39:12
+-- Dump completed on 2022-05-12 14:49:43

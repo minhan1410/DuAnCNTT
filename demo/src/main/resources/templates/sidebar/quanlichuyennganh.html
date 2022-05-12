@@ -77,8 +77,21 @@
                                 <td th:text="${specialized.name}"></td>
 
                                 <td>
-                                    <button>Cập nhật</button>
-                                    <a th:href="@{xoaChuyenNganh/{idSpecialized}(idSpecialized = ${specialized.id})}"><button class="btnXoa">Xóa</button></a>
+                                    <button class="btnCapNhat">
+                                        Cập nhật
+                                        <div style="display: none" class="capNhat">
+                                            <form class="mx-1 mx-md-4"
+                                                th:action="@{/capNhatChuyenNganh/{index}(index = ${iStat.index})}" method="post">
+                                                
+                                                <label>Tên chuyên ngành</label>
+                                                 <input field="*{name}" name = "nameSpecialized" th:value="${specialized.name}"/>
+                                                
+                                                <input type="submit"></input>
+                                            </form>
+                                        </div>
+                                    </button>
+                                    <a th:href="@{xoaChuyenNganh/{idSpecialized}(idSpecialized = ${specialized.id})}"><button
+                                            class="btnXoa">Xóa</button></a>
                                 </td>
                             </tr>
                         </tbody>
@@ -113,6 +126,14 @@
             divAdd.style.display = "block";
         }
     });
+
+    const btnCapNhat = document.querySelectorAll(".btnCapNhat");
+    const capNhat = document.querySelectorAll(".capNhat");
+    for (let i = 0; i < btnCapNhat.length; i++) {
+        btnCapNhat[i].addEventListener("click", function (e) {
+            capNhat[i].style.display = "block";
+        });
+    }
 </script>
 
 </html>

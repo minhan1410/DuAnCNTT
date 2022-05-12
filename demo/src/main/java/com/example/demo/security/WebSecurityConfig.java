@@ -35,10 +35,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                còn những gì cấm hoặc yêu cầu xác thực sẽ dùng .authenticated()
         http
                 .authorizeRequests()
-                .antMatchers("/", "/home", "/registrationUser","/registrationSpecialized","/registrationTeacher").permitAll() // Cho phép tất cả mọi người truy cập vào 2 địa chỉ này
-                .antMatchers("/bangdiem","/dangkimonhoc","/lichthichinhthuc").access("hasRole('ROLE_Student')")
-                .antMatchers("/quanlilophoc").access("hasRole('ROLE_Teacher')")
-                .antMatchers("/quanlisinhvien").access("hasRole('ROLE_TrainingDepartment')")
+                .antMatchers("/", "/home", "/registrationUser", "/registrationSpecialized", "/registrationTeacher").permitAll() // Cho phép tất cả mọi người truy cập vào 2 địa chỉ này
+
+                .antMatchers("/bangdiem", "/dangkimonhoc", "/dkh/{id}", "/huydkh/{id}", "/lichthichinhthuc").access("hasRole('ROLE_Student')")
+
+                .antMatchers("/quanlilophoc", "/quanlilophoc/{id}", "/danhgiasv").access("hasRole('ROLE_Teacher')")
+
+                .antMatchers("/quanlisinhvien", "/dangKiSinhVien", "/capNhatTrangThai/{index}", "/quanligiaovien",
+                        "/dangKiGiaoVien", "capNhatTrangThaiGV/{index}", "/quanlichuyennganh", "/dangKiChuyenNganh",
+                        "xoaChuyenNganh/{idSpecialized}", "capNhatChuyenNganh/{index}").access("hasRole('ROLE_TrainingDepartment')")
+
                 .anyRequest().authenticated() // Tất cả các request khác đều cần phải xác thực mới được truy cập
                 .and()
                 .formLogin() // Cho phép người dùng xác thực bằng form login

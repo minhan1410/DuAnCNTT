@@ -38,6 +38,7 @@ public class ControllerStudent {
 //
         int tcttl = 0;
         double tbctl = 0;
+        int soMonQua = 0;
 
         Map<StudentPoint,Subject> mapSPSubject = new HashMap<StudentPoint,Subject>();
         for (StudentPoint studentPoint : studentPointRepository.findAll()) {
@@ -45,6 +46,8 @@ public class ControllerStudent {
                 Subject subject = subjectRepository.findById(studentPoint.getSubjectId()).get();
                 mapSPSubject.put(studentPoint,subject);
                 if (studentPoint.getDiemTongket() >= 4.0) {
+                    soMonQua++;
+                    tbctl += studentPoint.getDiemTongket();
                     tcttl += subject.getSoTinChi();
                 }
             }
@@ -52,7 +55,7 @@ public class ControllerStudent {
         model.addAttribute("mapSPSubject", mapSPSubject);
 
         model.addAttribute("tcttl", tcttl);
-        model.addAttribute("tbctl", tbctl);
+        model.addAttribute("tbctl", tbctl/soMonQua);
 
         return "sidebar/bangdiem";
     }

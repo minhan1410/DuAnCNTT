@@ -1,157 +1,362 @@
 <!DOCTYPE html>
-<html
-        lang="vi"
-        xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
->
-<head
-        th:replace="template/template.html :: head('TRƯỜNG ĐẠI HỌC THĂNG LONG')"
-></head>
+<html lang="vi" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head th:replace="template/template.html :: head('TRƯỜNG ĐẠI HỌC THĂNG LONG')"></head>
 
 <head>
-    <link
-            rel="stylesheet"
-            type="text/css"
-            href="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.css"
-    />
-    <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-            integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
-            crossorigin="anonymous"
-    />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous" />
     <link rel="stylesheet" th:href="@{/style/dangkihoc.css}" />
-    <link rel="stylesheet" th:href="@{/style/quanligiaovien.css}" />
+    <link rel="stylesheet" th:href="@{/style/quanlisinhvien.css}" />
 </head>
 
 <body>
-<div id="head">
-    <div th:replace="template/template.html :: header"></div>
+    <div id="head">
+        <div th:replace="template/template.html :: header"></div>
 
-    <div id="page">
-        <div th:replace="template/template.html :: sidebar"></div>
-        <div id="right">
-            <div class="title">Quản lí giáo viên</div>
-            <div class="entry">
-                <button id="add">Thêm giáo viên +</button>
-            </div>
-            <br />
+        <div id="page">
+            <div th:replace="template/template.html :: sidebar"></div>
+            <div id="right">
+                <div class="title">Quản lí giáo viên</div>
+                <div class="entry">
+                    <button id="add">Thêm giáo viên +</button>
 
-            <div>
-                <table
-                        class="grid table table-bordered table-striped"
-                        border="0"
-                        cellspacing="0"
-                        style="border-style: none; width: 100%; border-collapse: collapse"
-                        id="employeeTable"
-                >
-                    <thead>
-                    <tr>
-                        <th scope="col">STT</th>
-                        <th scope="col">Mã giáo viên</th>
-                        <th scope="col">Tên giáo viên</th>
-                        <th scope="col">Trạng thái</th>
-                        <th scope="col">Hành động</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>IT000</td>
-                        <td>Nguyễn Việt Anh</td>
-                        <td>
-                            <select name="id">
-                                <option selected="selected" value="146">Chọn</option>
-                                <option value="145">Bình thường</option>
-                                <option value="144">Về hưu</option>
-                                <option value="143">Tạm nghỉ</option>
-                            </select>
-                        </td>
-                        <td><button class="btn1">Xem chi tiết</button></td>
-                    </tr>
-                    </tbody>
-                </table>
+                    <div style="display: none" class="add">
+                        <form class="mx-1 mx-md-4" th:action="@{/dangKiGiaoVien}" th:object="${newUser}" method="post">
+                            <h2>USER</h2>
+
+                            <div class="d-flex flex-row align-items-center mb-4">
+                                <div class="form-outline flex-fill mb-0">
+                                    <label class="form-label" for="form3Example3c">
+                                        permissions:
+                                    </label>
+                                    <select class="select" th:field="*{permissions}">
+                                        <option value="ROLE_Teacher" selected>
+                                            Teacher
+                                        </option>
+                                        <option value="ROLE_TrainingDepartment">
+                                            Training Department
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-row align-items-center mb-4">
+                                <div class="form-outline flex-fill mb-0">
+                                    <label class="form-label" for="form3Example4c">name:
+                                    </label>
+                                    <input required minlength="2" maxlength="50" type="text" id="form3Example4c"
+                                        class="form-control form__input" th:field="*{name}" />
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-row align-items-center mb-4">
+                                <div class="form-outline flex-fill mb-0">
+                                    <label class="form-label" for="form3Example4c">address:
+                                    </label>
+                                    <input required minlength="3" maxlength="100" type="text" id="form3Example4c"
+                                        class="form-control form__input" th:field="*{address}" />
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-row align-items-center mb-4">
+                                <div class="form-outline flex-fill mb-0">
+                                    <label class="form-label" for="form3Example4c">email:
+                                    </label>
+                                    <input required minlength="3" maxlength="45" type="email" id="form3Example4c"
+                                        class="form-control form__input" th:field="*{email}" />
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-row align-items-center mb-4">
+                                <div class="form-outline flex-fill mb-0">
+                                    <label class="form-label" for="form3Example4c">phoneNumber:
+                                    </label>
+                                    <input required minlength="3" maxlength="50" type="text" id="form3Example4c"
+                                        class="form-control form__input" th:field="*{phoneNumber}" />
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-row align-items-center mb-4">
+                                <div class="form-outline flex-fill mb-0">
+                                    <label class="form-label" for="form3Example4c">peopleID:
+                                    </label>
+                                    <input required minlength="3" maxlength="50" type="text" id="form3Example4c"
+                                        class="form-control form__input" th:field="*{peopleID}" />
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-row align-items-center mb-4">
+                                <div class="form-outline flex-fill mb-0">
+                                    <label class="form-label" for="form3Example4c">birthday:
+                                    </label>
+                                    <input required minlength="3" maxlength="50" type="date" id="form3Example4c"
+                                        class="form-control form__input" th:field="*{birthday}" />
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-row align-items-center mb-4">
+                                <div class="form-outline flex-fill mb-0">
+                                    <label class="form-label" for="form3Example4c">avatar:
+                                    </label>
+                                    <input required minlength="3" type="url" id="form3Example4c"
+                                        class="form-control form__input" th:field="*{avatar}" />
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-row align-items-center mb-4">
+                                <div class="form-outline flex-fill mb-0">
+                                    <label class="form-label" for="form3Example3c">
+                                        sex:
+                                    </label>
+                                    <select class="select" th:field="*{sex}">
+                                        <option value="Nam">Nam</option>
+                                        <option value="Nu">Nu</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <h2>Teacher</h2>
+
+                            <div class="d-flex flex-row align-items-center mb-4">
+                                <div class="form-outline flex-fill mb-0">
+                                    <label class="form-label" for="form3Example3c">
+                                        chuyen nganh:
+                                    </label>
+                                    <select class="select" name="chuyenNganh">
+                                        <option th:each="specializeds : ${listSpecialized}"
+                                            th:value="${specializeds.id}" th:text="${specializeds.name}"></option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-row align-items-center mb-4">
+                                <div class="form-outline flex-fill mb-0">
+                                    <label class="form-label" for="form3Example3c">
+                                        GVCN:
+                                    </label>
+                                    <select class="select" name="gvcn">
+                                        <option value="1">Có</option>
+                                        <option value="0">Không</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    Register
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <br />
+
+                    <div>
+                        <table class="grid table table-bordered table-striped" border="0" cellspacing="0" style="
+                                    border-style: none;
+                                    width: 100%;
+                                    border-collapse: collapse;
+                                " id="employeeTable">
+                            <thead>
+                                <tr>
+                                    <th scope="col">STT</th>
+                                    <th scope="col">Mã</th>
+                                    <th scope="col">Tên</th>
+                                    <th scope="col">Chức vụ</th>
+                                    <th scope="col">Trạng thái</th>
+                                    <th scope="col">Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="teacher, iStat : ${listTeacher}">
+                                    <td th:text="${iStat.index+1}"></td>
+                                    <td th:text="${teacher.id}"></td>
+                                    <td th:text="${userRepository.findById(teacher.getUserId()).get().getName()}"></td>
+                                    <td
+                                        th:text="${userRepository.findById(teacher.getUserId()).get().getPermissions()}">
+                                    </td>
+                                    <td th:text="${teacher.trangThai}"></td>
+                                    <td>
+                                        <button class="btnChiTiet">
+                                            Xem chi tiết
+                                            <div class="chiTiet" style="display: none">
+                                                <table width="100%" class="table">
+                                                    <tr>
+                                                        <td width="30%">
+                                                            Mã sinh viên :
+                                                        </td>
+                                                        <td th:text="${teacher.id}"></td>
+                                                        <td>
+                                                            <a href="" style="
+                                                                        color: red;
+                                                                        margin-left: 140px;
+                                                                        font-size: 25px;
+                                                                    ">x</a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width>
+                                                            Họ tên :
+                                                        </td>
+                                                        <td
+                                                            th:text="${userRepository.findById(teacher.getUserId()).get().name}">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width>
+                                                            Giới tính :
+                                                        </td>
+                                                        <td
+                                                            th:text="${userRepository.findById(teacher.getUserId()).get().sex}">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width>
+                                                            Ngày sinh :
+                                                        </td>
+                                                        <td
+                                                            th:text="${userRepository.findById(teacher.getUserId()).get().birthdayStr}">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width>
+                                                            Điện thoại :
+                                                        </td>
+                                                        <td
+                                                            th:text="${userRepository.findById(teacher.getUserId()).get().phoneNumber}">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width>
+                                                            Email :
+                                                        </td>
+                                                        <td
+                                                            th:text="${userRepository.findById(teacher.getUserId()).get().email}">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width>
+                                                            Chỗ ở :
+                                                        </td>
+                                                        <td
+                                                            th:text="${userRepository.findById(teacher.getUserId()).get().address}">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width>
+                                                            CMTND :
+                                                        </td>
+                                                        <td
+                                                            th:text="${userRepository.findById(teacher.getUserId()).get().peopleID}">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <div>
+                                                            <td>
+                                                                <img
+                                                                    th:src="${userRepository.findById(teacher.getUserId()).get().avatar}" />
+                                                            </td>
+                                                        </div>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </button>
+                                        <button class="btnCapNhat">
+                                            Cập nhật trạng thái
+                                            <div style="display: none" class="capNhat">
+                                                <form
+                                                        class="mx-1 mx-md-4"
+                                                        th:action="@{/capNhatTrangThaiGV/{index}(index=${iStat.index})}"
+                                                        method="post"
+                                                    >
+                                                        <select
+                                                            class="select"
+                                                            field="*{trangThai}"
+                                                            name = "trangThai"
+                                                        >
+                                                            <option
+                                                                value="Bình thường"
+                                                            >
+                                                                Bình thường
+                                                            </option>
+                                                            <option
+                                                                value="Đã nghỉ"
+                                                            >
+                                                                Đã nghỉ
+                                                            </option>
+                                                        </select>
+                                                        <input
+                                                            type="submit"
+                                                        ></input>
+                                                    </form>
+                                            </div>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
+
+        <div th:replace="template/template.html :: footer"></div>
     </div>
-
-    <div th:replace="template/template.html :: footer"></div>
-</div>
-<div class="entry1">
-    <table class="table1">
-        <tr>
-            <td><b style="font-size: 18px">Thông tin giáo viên</b></td>
-            <td><a href="" style="color: red; font-size: 20px">x</a></td>
-        </tr>
-        <tr>
-            <td>Mã giáo viên :</td>
-            <td th:text="${student.id}"></td>
-        </tr>
-        <tr>
-            <td width>Họ tên :</td>
-            <td th:text="${user.name}"></td>
-        </tr>
-        <tr>
-            <td width>Giới tính :</td>
-            <td th:text="${user.sex}"></td>
-        </tr>
-        <tr>
-            <td width>Ngày sinh :</td>
-            <td th:text="${user.birthdayStr}"></td>
-        </tr>
-        <tr>
-            <td width>Điện thoại :</td>
-            <td th:text="${user.phoneNumber}"></td>
-        </tr>
-        <tr>
-            <td>Chủ nghiệm lớp :</td>
-            <td>TT32h1</td>
-        </tr>
-        <tr>
-            <td width>Email :</td>
-            <td th:text="${user.email}"></td>
-        </tr>
-        <tr>
-            <td width>Chỗ ở :</td>
-            <td th:text="${user.address}"></td>
-        </tr>
-    </table>
-    <!-- <div class="avatar">
-        <tr>
-          <td><img th:src="${user.avatar}" /></td>
-        </tr>
-      </div> -->
-</div>
 </body>
-<script>
-    const buttonUpdate = document.querySelector(".btn1");
-    const entry1 = document.querySelector(".entry1");
-    const Table = document.querySelector(".table1");
-
-    if (buttonUpdate) {
-        buttonUpdate.addEventListener("click", function (e) {
-            entry1.style.display = "block";
-            console.log("haha");
-        });
-    }
-</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-        type="text/javascript"
-        src="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.js"
-></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.js"></script>
 <script>
     $(document).ready(function () {
         $("#employeeTable").DataTable({
-            aoColumnDefs: [
-                {
-                    bSortable: false,
-                    aTargets: [-1],
-                },
-            ],
+            aoColumnDefs: [{
+                bSortable: false,
+                aTargets: [-1],
+            }, ],
         });
     });
 </script>
+
+<script>
+    const btnAdd = document.getElementById("add");
+    const divAdd = document.querySelector(".add");
+
+    btnAdd.addEventListener("click", () => {
+        if (divAdd.style.display == "block") {
+            divAdd.style.display = "none";
+        } else {
+            divAdd.style.display = "block";
+        }
+    });
+</script>
+
+<script>
+    const buttonUpdate = document.querySelectorAll(".btnChiTiet");
+    const chitiet = document.querySelectorAll(".chiTiet");
+
+    const btnCapNhat = document.querySelectorAll(".btnCapNhat");
+    const capNhat = document.querySelectorAll(".capNhat");
+
+    for (let i = 0; i < buttonUpdate.length; i++) {
+        buttonUpdate[i].addEventListener("click", function (e) {
+            if (chitiet[i].style.display == "block") {
+                chitiet[i].style.display = "none";
+            } else {
+                chitiet[i].style.display = "block";
+            }
+        });
+
+        btnCapNhat[i].addEventListener("click", function (e) {
+            capNhat[i].style.display = "block";
+            /*if (capNhat[i].style.display == "block") {
+            } else {
+                capNhat[i].style.display = "block";
+            }*/
+        });
+    }
+</script>
+
 </html>

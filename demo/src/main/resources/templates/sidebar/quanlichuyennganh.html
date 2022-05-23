@@ -1,139 +1,194 @@
 <!DOCTYPE html>
-<html lang="vi" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html
+  lang="vi"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+  <head
+    th:replace="template/template.html :: head('TRƯỜNG ĐẠI HỌC THĂNG LONG')"
+  ></head>
 
-<head th:replace="template/template.html :: head('TRƯỜNG ĐẠI HỌC THĂNG LONG')"></head>
-
-<head>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous" />
+  <head>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+      integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+      crossorigin="anonymous"
+    />
 
     <link rel="stylesheet" th:href="@{/style/dangkihoc.css}" />
     <link rel="stylesheet" th:href="@{/style/quanlichuyennganh.css}" />
-</head>
+  </head>
 
-<body>
+  <body>
     <div id="head">
-        <div th:replace="template/template.html :: header"></div>
+      <div th:replace="template/template.html :: header"></div>
 
-        <div id="page">
-            <div th:replace="template/template.html :: sidebar"></div>
-            <div id="right">
-                <div class="title">Quản lí chuyên ngành</div>
-                <div>
-                    <button id="add">Thêm chuyên ngành +</button>
-                    <div th:if="${mess != null}">
-                        <h4 color="red" th:text="${mess}"></h4>
-                    </div>
-                    <div style="display: none" class="add">
-                        <form class="mx-1 mx-md-4" th:action="@{/dangKiChuyenNganh}" th:object="${newSpecialized}"
-                            method="post">
-
-                            <div class="d-flex flex-row align-items-center mb-4">
-                                <div class="form-outline flex-fill mb-0">
-                                    <label class="form-label" for="form3Example4c">id:
-                                    </label>
-                                    <input required minlength="2" maxlength="6" type="text" id="form3Example4c"
-                                        class="form-control form__input" th:field="*{id}" />
-                                </div>
-                            </div>
-
-                            <div class="d-flex flex-row align-items-center mb-4">
-                                <div class="form-outline flex-fill mb-0">
-                                    <label class="form-label" for="form3Example4c">name:
-                                    </label>
-                                    <input required minlength="2" maxlength="50" type="text" id="form3Example4c"
-                                        class="form-control form__input" th:field="*{name}" />
-                                </div>
-                            </div>
-
-                            <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                <button type="submit" class="btn btn-primary btn-lg">
-                                    Register
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                    </br>
-                </div>
-                <br />
-                <div>
-                    <table class="grid table table-bordered table-striped" border="0" cellspacing="0"
-                        style="border-style: none; width: 100%; border-collapse: collapse" id="employeeTable">
-                        <thead>
-                            <tr>
-                                <th scope="col">STT</th>
-                                <th scope="col">Mã chuyên ngành</th>
-                                <th scope="col">Tên chuyên ngành</th>
-                                <th scope="col">Thêm</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="specialized, iStat : ${listSpecialized}">
-                                <td th:text="${iStat.index+1}"></td>
-                                <td th:text="${specialized.id}"></td>
-                                <td th:text="${specialized.name}"></td>
-
-                                <td>
-                                    <button class="btnCapNhat">
-                                        Cập nhật
-                                        <div style="display: none" class="capNhat">
-                                            <form class="mx-1 mx-md-4"
-                                                th:action="@{/capNhatChuyenNganh/{index}(index = ${iStat.index})}" method="post">
-                                                
-                                                <label>Tên chuyên ngành</label>
-                                                 <input field="*{name}" name = "nameSpecialized" th:value="${specialized.name}"/>
-                                                
-                                                <input type="submit"></input>
-                                            </form>
-                                        </div>
-                                    </button>
-                                    <a th:href="@{xoaChuyenNganh/{idSpecialized}(idSpecialized = ${specialized.id})}"><button
-                                            class="btnXoa">Xóa</button></a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+      <div id="page">
+        <div th:replace="template/template.html :: sidebar"></div>
+        <div id="right">
+          <div class="title">Quản lí chuyên ngành</div>
+          <div>
+            <button id="add">Thêm chuyên ngành +</button>
+            <div th:if="${mess != null}">
+              <h4 color="red" th:text="${mess}"></h4>
             </div>
-        </div>
+            <div style="display: none" class="add1">
+              <form
+                class="table2"
+                th:action="@{/dangKiChuyenNganh}"
+                th:object="${newSpecialized}"
+                method="post"
+              >
+                <div class="div">
+                  <div>
+                    <label class="form-label" for="form3Example4c">id: </label>
+                    <a
+                      href=""
+                      style="color: red; font-size: 19px; margin-left: 390px"
+                      >X</a>
+                    <input
+                      required
+                      minlength="2"
+                      maxlength="6"
+                      type="text"
+                      id="form3Example4c"
+                      class="form-control form__input"
+                      th:field="*{id}"
+                    />
+                    
+                  </div>
+                </div>
 
-        <div th:replace="template/template.html :: footer"></div>
+                <div class="div">
+                  <div>
+                    <label class="form-label" for="form3Example4c"
+                      >name:
+                    </label>
+                    <input
+                      required
+                      minlength="2"
+                      maxlength="50"
+                      type="text"
+                      id="form3Example4c"
+                      class="form-control form__input"
+                      th:field="*{name}"
+                    />
+                  </div>
+                </div>
+
+                <div class="div">
+                  <button
+                    id="submit"
+                    type="submit"
+                    class="btn btn-primary btn-lg"
+                  >
+                    Register
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <br />
+          <div>
+            <table
+              class="grid table table-bordered table-striped"
+              border="0"
+              cellspacing="0"
+              style="border-style: none; width: 100%; border-collapse: collapse"
+              id="employeeTable"
+            >
+              <thead>
+                <tr>
+                  <th scope="col">STT</th>
+                  <th scope="col">Mã chuyên ngành</th>
+                  <th scope="col">Tên chuyên ngành</th>
+                  <th scope="col">Thêm</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="specialized, iStat : ${listSpecialized}">
+                  <td th:text="${iStat.index+1}"></td>
+                  <td th:text="${specialized.id}"></td>
+                  <td th:text="${specialized.name}"></td>
+
+                  <td>
+                    <button class="btnCapNhat">
+                      Cập nhật
+                      <div style="display: none" class="capNhat">
+                        <form
+                          class="mx-1 mx-md-4"
+                          th:action="@{/capNhatChuyenNganh/{index}(index = ${iStat.index})}"
+                          method="post"
+                        >
+                          <label>Tên chuyên ngành</label>
+                          <input
+                            field="*{name}"
+                            name="nameSpecialized"
+                            th:value="${specialized.name}"
+                          />
+
+                          <input type="submit"></input>
+                        </form>
+                      </div>
+                    </button>
+                    <a
+                      th:href="@{xoaChuyenNganh/{idSpecialized}(idSpecialized = ${specialized.id})}"
+                      ><button class="btnXoa">Xóa</button></a
+                    >
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div th:replace="template/template.html :: footer"></div>
     </div>
-</body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.js"></script>
-<script>
+  </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script
+    type="text/javascript"
+    src="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.js"
+  ></script>
+  <script>
     $(document).ready(function () {
-        $("#employeeTable").DataTable({
-            aoColumnDefs: [{
-                bSortable: false,
-                aTargets: [-1],
-            }, ],
-        });
+      $("#employeeTable").DataTable({
+        aoColumnDefs: [
+          {
+            bSortable: false,
+            aTargets: [-1],
+          },
+        ],
+      });
     });
-</script>
-<script>
+  </script>
+  <script>
     const btnAdd = document.getElementById("add");
-    const divAdd = document.querySelector(".add");
+    const divAdd = document.querySelector(".add1");
 
     btnAdd.addEventListener("click", () => {
-        if (divAdd.style.display == "block") {
-            divAdd.style.display = "none";
-        } else {
-            divAdd.style.display = "block";
-        }
+      if (divAdd.style.display == "block") {
+        divAdd.style.display = "none";
+      } else {
+        divAdd.style.display = "block";
+      }
     });
 
     const btnCapNhat = document.querySelectorAll(".btnCapNhat");
     const capNhat = document.querySelectorAll(".capNhat");
     for (let i = 0; i < btnCapNhat.length; i++) {
-        btnCapNhat[i].addEventListener("click", function (e) {
-            capNhat[i].style.display = "block";
-        });
+      btnCapNhat[i].addEventListener("click", function (e) {
+        capNhat[i].style.display = "block";
+      });
     }
-</script>
-
+  </script>
 </html>

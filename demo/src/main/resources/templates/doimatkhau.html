@@ -5,7 +5,7 @@
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Login page - Thang Long University</title>
+    <title>Đổi mật khẩu - Thang Long University</title>
     <!-- <link rel="stylesheet" href="style.css"> -->
     <link rel="shortcut icon" href="http://cdn.onlinewebfonts.com/svg/download_153418.png" type="image/x-icon"/>
     <link href="https://fonts.googleapis.com/css2?family=Cabin&display=swap" rel="stylesheet"/>
@@ -199,7 +199,7 @@
         .wrap{
             background-color: #9152f8;
             width: 500px;
-            height: 525px;
+            height: 625px;
             border-radius: 10px;
             overflow: hidden;
             padding: 55px 55px 37px 55px;
@@ -370,9 +370,9 @@
 <body>
 <div class="main">
     <div class="wrap">
-        <form class="form" th:action="@{/login}" method="post">
+        <form class="form" th:action="@{/changePassword}" method="post">
             <img src="https://login.thanglong.edu.vn/images/logotlu.jpg" id="anh1" alt="logo"/>
-            <p id="title">Đăng Nhập</p>
+            <p id="title">Đổi mật khẩu</p>
 
             <div th:if="${param.error}" class="alert alert-danger" role="alert">
                 Username hoặc password không hợp lệ
@@ -385,8 +385,11 @@
 
 
             <!-- <label for="password"/>password</label> -->
-            <div class="password" data-validate="Điền tên mật khẩu">
-                <input type="password" minlength="3" name="password" id="password" placeholder="Mật khẩu" class="input100">
+            <div class="password" data-validate="Điền tên mật mới">
+                <input type="password" minlength="3" name="password" id="password" placeholder="Mật khẩu mới" class="input100">
+            </div>
+            <div class="password" data-validate="Nhập lại mật khẩu mới">
+                <input type="password" minlength="3" name="password" id="password" placeholder="Mật khẩu mới" class="input100">
             </div>
             <!-- <input type="password" id="password" name="password"/> -->
             <!-- <div class="form-checkbox">

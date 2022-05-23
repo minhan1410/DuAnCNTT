@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head th:replace="template/template.html :: head('Thông tin cá nhân')"></head>
+
+<head>
+    <link
+        rel="stylesheet"
+        type="text/css"
+        href="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.css"
+    />
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+        crossorigin="anonymous"
+    />
+    <link rel="stylesheet" th:href="@{/style/dangkihoc.css}" />
+    <link rel="stylesheet" th:href="@{/style/phanconggiangday.css}" />
+</head>
+
+<body>
+<div id="head">
+
+    <div th:replace="template/template.html :: header"></div>
+
+    <div id="page">
+
+        <div th:replace="template/template.html :: sidebar"></div>
+
+        <div id="right">
+            <div class="title">
+                Phân công giảng dạy
+            </div>
+            <div>
+                <table
+                    class="grid table-bordered table-striped"
+                    border="0"
+                    cellspacing="0"
+                    style="
+                        border-style: none;
+                        width: 100%;
+                        border-collapse: collapse;
+                    "
+                    id="employeeTable"
+                >
+                    <thead>
+                        <tr>
+                            <th scope="col">STT</th>
+                            <th scope="col">Mã môn</th>
+                            <th scope="col">Tên môn</th>
+                            <th scope="col">Giáo viên</th>
+                            <th scope="col">Phòng học</th>
+                            <th scope="col">Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>CSS</td>
+                                <td>Cơ sở dữ liệu</td>
+                                <td>Đậu Hải Phong</td>
+                                <td>A503</td>
+                                <td><button class="btn1">Cập nhật</button></td>
+                            </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+
+
+
+
+        </div>
+
+    </div>
+
+</div>
+
+<div th:replace="template/template.html :: footer"></div>
+
+</div>
+<div class="update">
+    <div class="table">
+        <h4 style="font-size:18px">Cập nhật phân công giảng dạy<a href=""
+                                                                   style="color:red ; margin-left:140px;font-size:25px">x</a></h4>
+        <hr>
+        <div id="div">
+            <form th:action="@{/updateUser}" th:object="${user}" method="post" class="form">
+                <label>Giáo Viên</label>
+                <input type="text" minlength="2" maxlength="50" th:field="*{name}">
+
+                <label>Phòng học</label>
+                <input type="text" th:field="*{address}">
+
+                <label>Phone Number</label>
+                <input type="tel" pattern="[0-9]{10}" th:field="*{phoneNumber}">
+
+                <label>Email</label>
+                <input type="email" th:field="*{email}">
+
+                <input type="submit" value="Update" id="submit">    
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+        type="text/javascript"
+        src="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.js"
+    ></script>
+    <script>
+        $(document).ready(function () {
+            $("#employeeTable").DataTable({
+                aoColumnDefs: [
+                    {
+                        bSortable: false,
+                        aTargets: [-1],
+                    },
+                ],
+            });
+        });
+    </script>
+
+    <script>
+        const buttonUpdate = document.querySelector('.btn1')
+        const Update = document.querySelector('.update')
+        const Table = document.querySelector('.table')
+    
+        if (buttonUpdate) {
+            buttonUpdate.addEventListener('click', function (e) {
+                Update.style.display = 'block'
+                console.log("haha")
+            })
+        }
+    </script>
+</html>

@@ -27,3 +27,47 @@
     border-bottom: 1px dotted #ccc;
     padding: 3px 4px;
 }
+.add1{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999999;
+    background-color: rgba(0, 0, 0, 0.75);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding-top:170px;
+      
+    
+}
+
+.table2 {
+    justify-content: center;
+    margin: auto;
+    width: 30%;
+    height: 250px;
+    line-height: 1;
+
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: #f2f2f2;
+    padding-top: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    
+}
+#submit {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.div{
+    margin-top:9px;
+}

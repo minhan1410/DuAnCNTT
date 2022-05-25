@@ -42,7 +42,7 @@ public class Subject {
 
     @Column(name = "ngay_thi")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date ngayThi;
+    private Date ngayThi = new Date();
 
     @Column(name = "ca_thi")
     private String caThi;
@@ -53,7 +53,7 @@ public class Subject {
     @Column(name = "NgayBatDau")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date ngayBatDau;
+    private Date ngayBatDau = new Date();
 
     @Column(name = "so_luong_sv")
     private Integer soLuongSv;

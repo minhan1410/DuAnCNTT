@@ -12,9 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class ControllerTrainingDepartment {
@@ -24,6 +23,8 @@ public class ControllerTrainingDepartment {
     private StudentRepository studentRepository;
     @Autowired
     private TeacherRepository teacherRepository;
+    @Autowired
+    private TeacherSubjectRepository teacherSubjectRepository;
     @Autowired
     private SpecializedRepository specializedRepository;
     @Autowired
@@ -60,7 +61,7 @@ public class ControllerTrainingDepartment {
     }
 
     @PostMapping("/dangKiSinhVien")
-    public String registrationUser(Model model, Principal principal, @ModelAttribute User newUser, @RequestParam("chuyenNganh") String chuyenNganh, @RequestParam("gvcn") String gvcn) {
+    public String registrationUser(@ModelAttribute User newUser, @RequestParam("chuyenNganh") String chuyenNganh, @RequestParam("gvcn") String gvcn) {
         int sizeStudents = studentRepository.findAll().size();
 
         newUser.setUsername(String.format("A%05d", ++sizeStudents));
@@ -74,16 +75,16 @@ public class ControllerTrainingDepartment {
         newStudent.setGiaoVienId(gvcn);
         studentRepository.save(newStudent);
 
-        return quanlisinhvien(model, principal);
+        return "redirect:/quanlisinhvien";
     }
 
     @PostMapping("/capNhatTrangThai/{index}")
-    public String capNhatTrangThai(Model model, Principal principal, @PathVariable("index") int index, @ModelAttribute Student student) {
+    public String capNhatTrangThai(@PathVariable("index") int index, @ModelAttribute Student student) {
         Student s = studentRepository.findAll().get(index);
         s.setTrangThai(student.getTrangThai());
         studentRepository.save(s);
 
-        return quanlisinhvien(model, principal);
+        return "redirect:/quanlisinhvien";
     }
 
 //    =========================================== quanligiaovien ================================================
@@ -98,14 +99,21 @@ public class ControllerTrainingDepartment {
         model.addAttribute("newUser", new User());
         model.addAttribute("listSpecialized", specializedRepository.findAll());
 
-        model.addAttribute("listTeacher", teacherRepository.findAll());
+        List<Teacher> listTeacher = new ArrayList<Teacher>();
+        for (Teacher teacher : teacherRepository.findAll()) {
+            if (userRepository.findById(teacher.getUserId()).get().getPermissions().equals("ROLE_Teacher")) {
+                listTeacher.add(teacher);
+            }
+        }
+
+        model.addAttribute("listTeacher", listTeacher);
         model.addAttribute("userRepository", userRepository);
 
         return "sidebar/quanligiaovien";
     }
 
     @PostMapping("/dangKiGiaoVien")
-    public String dangKiGiaoVien(Model model, Principal principal, @ModelAttribute User newUser, @RequestParam("chuyenNganh") String chuyenNganh, @RequestParam("gvcn") Boolean gvcn) {
+    public String dangKiGiaoVien(@ModelAttribute User newUser, @RequestParam("chuyenNganh") String chuyenNganh, @RequestParam("gvcn") Boolean gvcn) {
         int sizeTeacher = teacherRepository.findAll().size();
 
         newUser.setUsername(String.format("B%05d", ++sizeTeacher));
@@ -119,16 +127,16 @@ public class ControllerTrainingDepartment {
         newTeacher.setGvChuNhiem(gvcn);
         teacherRepository.save(newTeacher);
 
-        return quanligiaovien(model, principal);
+        return "redirect:/quanligiaovien";
     }
 
     @PostMapping("capNhatTrangThaiGV/{index}")
-    public String capNhatTrangThaiGV(Model model, Principal principal, @PathVariable("index") int index, @RequestParam("trangThai") String trangThai) {
+    public String capNhatTrangThaiGV(@PathVariable("index") int index, @RequestParam("trangThai") String trangThai) {
         Teacher s = teacherRepository.findAll().get(index);
         s.setTrangThai(trangThai);
 
         teacherRepository.save(s);
-        return quanligiaovien(model, principal);
+        return "redirect:/quanligiaovien";
     }
 //    =========================================== quanlichuyennganh ================================================
 
@@ -159,18 +167,18 @@ public class ControllerTrainingDepartment {
     }
 
     @GetMapping("xoaChuyenNganh/{idSpecialized}")
-    public String xoaChuyenNganh(Model model, Principal principal, @PathVariable("idSpecialized") String idSpecialized) {
+    public String xoaChuyenNganh(@PathVariable("idSpecialized") String idSpecialized) {
         specializedRepository.deleteById(idSpecialized);
-        return quanlichuyennganh(model, principal);
+        return "redirect:/quanlichuyennganh";
     }
 
     @PostMapping("capNhatChuyenNganh/{index}")
-    public String capNhatChuyenNganh(Model model, Principal principal, @PathVariable("index") int index, @RequestParam("nameSpecialized") String nameSpecialized) {
+    public String capNhatChuyenNganh(@PathVariable("index") int index, @RequestParam("nameSpecialized") String nameSpecialized) {
         Specialized s = specializedRepository.findAll().get(index);
         s.setName(nameSpecialized);
 
         specializedRepository.save(s);
-        return quanlichuyennganh(model, principal);
+        return "redirect:/quanlichuyennganh";
     }
 
 //    =========================================== laplichthi ================================================
@@ -192,7 +200,7 @@ public class ControllerTrainingDepartment {
     }
 
     @PostMapping("capNhatLichThi/{index}")
-    public String capNhatLichThi(Model model, Principal principal, @PathVariable("index") int index, @RequestParam("ngayThi") String ngayThi,
+    public String capNhatLichThi(@PathVariable("index") int index, @RequestParam("ngayThi") String ngayThi,
                                  @RequestParam("caThi") String caThi) throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -201,7 +209,38 @@ public class ControllerTrainingDepartment {
         s.setCaThi(caThi);
 
         subjectRepository.save(s);
-        return laplichthi(model, principal);
+        return "redirect:/laplichthi";
     }
 
+//    =========================================== phanconggiangday ================================================
+
+    @GetMapping("/phanconggiangday")
+    public String phanconggiangday(Model model, Principal principal) {
+        User user = (User) ((Authentication) principal).getPrincipal();
+
+        model.addAttribute("user", user);
+        model.addAttribute("student", teacherRepository.findByUserId(user.getId()));
+//
+        model.addAttribute("listSubject", subjectRepository.findAll());
+        model.addAttribute("listTeacher", teacherRepository.findAll());
+        model.addAttribute("teacherRepository", teacherRepository);
+        model.addAttribute("userRepository", userRepository);
+
+        return "sidebar/phanconggiangday";
+    }
+
+    @PostMapping("capnhapPCGD/{index}")
+    public String capnhapPCGD(@PathVariable("index") int index, @RequestParam("gvID") String gvID) {
+        Subject s = subjectRepository.findAll().get(index);
+        s.setTeacherId(gvID);
+        subjectRepository.save(s);
+
+        TeacherSubject teacherRepository = teacherSubjectRepository.findAll().stream()
+                .filter(teacherSubject -> teacherSubject.getSubjectId().equals(s.getId()))
+                .collect(Collectors.toList()).get(0);
+        teacherRepository.setTeacherId(gvID);
+        teacherSubjectRepository.save(teacherRepository);
+
+        return "redirect:/phanconggiangday";
+    }
 }

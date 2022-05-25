@@ -24,7 +24,7 @@
                 <span style="color: red" th:text="|${user.name} (${student.id})|"></span>
             </b>
             |
-            <a href="#">Đổi mật khẩu</a>
+            <a th:href="@{/doimatkhau}">Đổi mật khẩu</a>
             |
 
             <form style="display: none" id="myform" th:action="@{/logout}" method="post"></form>

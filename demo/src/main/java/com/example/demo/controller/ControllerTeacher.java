@@ -33,7 +33,6 @@ public class ControllerTeacher {
         model.addAttribute("user", user);
         model.addAttribute("student", teacher);
 
-//
 //        System.out.println("\n\n" + teacher.getId() + "\n");
 //        teacherSubjectRepository.findSubjectsByTeacherId(teacher.getId()).forEach(System.out::println);
 //        System.out.println("\n");

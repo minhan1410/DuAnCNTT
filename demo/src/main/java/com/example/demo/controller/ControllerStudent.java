@@ -161,8 +161,6 @@ public class ControllerStudent {
             }
         }
 
-
-
         model.addAttribute("listSubject", subjects);
         model.addAttribute("subjectDk", subjectDk);
 

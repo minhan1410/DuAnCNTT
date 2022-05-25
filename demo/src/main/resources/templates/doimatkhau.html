@@ -13,407 +13,67 @@
     <link rel="shortcut icon"
           href="https://th.bing.com/th/id/OIP.7ygufrwv0ZC8FpCGIlV5RAHaHa?pid=ImgDet&w=221&h=221&c=7&dpr=1.25"
           type="image/x-icon"/>
-    <style>
-        * {
-            margin: 0px;
-            padding: 0px;
-            box-sizing: border-box;
-        }
-
-        body, html {
-            height: 100%;
-            font-family: Roboto, sans-serif;
-        }
-
-        /*---------------------------------------------*/
-        a {
-            font-family: Roboto;
-            font-size: 14px;
-            line-height: 1.7;
-            color: #666666;
-            margin: 0px;
-            transition: all 0.4s;
-            -webkit-transition: all 0.4s;
-            -o-transition: all 0.4s;
-            -moz-transition: all 0.4s;
-        }
-
-        a:focus {
-            outline: none !important;
-        }
-
-        a:hover {
-            text-decoration: none;
-            color: #fff;
-        }
-
-        /*---------------------------------------------*/
-        h1, h2, h3, h4, h5, h6 {
-            margin: 0px;
-        }
-
-        p {
-            font-family: Roboto;
-            font-size: 14px;
-            line-height: 1.7;
-            color: #666666;
-            margin: 0px;
-        }
-
-        ul, li {
-            margin: 0px;
-            list-style-type: none;
-        }
-
-        input {
-            outline: none;
-            border: none;
-        }
-
-        textarea {
-            outline: none;
-            border: none;
-        }
-
-        textarea:focus, input:focus {
-            border-color: transparent !important;
-        }
-
-        input:focus::-webkit-input-placeholder {
-            color: transparent;
-        }
-
-        input:focus:-moz-placeholder {
-            color: transparent;
-        }
-
-        input:focus::-moz-placeholder {
-            color: transparent;
-        }
-
-        input:focus:-ms-input-placeholder {
-            color: transparent;
-        }
-
-        textarea:focus::-webkit-input-placeholder {
-            color: transparent;
-        }
-
-        textarea:focus:-moz-placeholder {
-            color: transparent;
-        }
-
-        textarea:focus::-moz-placeholder {
-            color: transparent;
-        }
-
-        textarea:focus:-ms-input-placeholder {
-            color: transparent;
-        }
-
-        input::-webkit-input-placeholder {
-            color: #fff;
-        }
-
-        input:-moz-placeholder {
-            color: #fff;
-        }
-
-        input::-moz-placeholder {
-            color: #fff;
-        }
-
-        input:-ms-input-placeholder {
-            color: #fff;
-        }
-
-        textarea::-webkit-input-placeholder {
-            color: #fff;
-        }
-
-        textarea:-moz-placeholder {
-            color: #fff;
-        }
-
-        textarea::-moz-placeholder {
-            color: #fff;
-        }
-
-        textarea:-ms-input-placeholder {
-            color: #fff;
-        }
-
-        label {
-            margin: 0;
-            display: block;
-            color: white;
-        }
-
-        /*---------------------------------------------*/
-        button {
-            outline: none !important;
-            border: none;
-            background: transparent;
-        }
-
-        button:hover {
-            cursor: pointer;
-        }
-
-        iframe {
-            border: none !important;
-        }
-
-        .main {
-            width: 100%;
-            min-height: 100vh;
-            display: -webkit-box;
-            display: -webkit-flex;
-            display: -moz-box;
-            display: -ms-flexbox;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            padding: 15px;
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: cover;
-            position: relative;
-            z-index: 1;
-            background-image: url(https://login.thanglong.edu.vn/images/bg-01.jpg);
-        }
-        .main::before {
-            content: "";
-            display: block;
-            position: absolute;
-            z-index: -1;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            background-color: rgba(255,255,255,0.75);
-
-        }
-
-        .wrap{
-            background-color: #9152f8;
-            width: 500px;
-            height: 625px;
-            border-radius: 10px;
-            overflow: hidden;
-            padding: 55px 55px 37px 55px;
-
-        }
-        .form{
-            height: 510px;
-            width: 390px;
-
-        }
-        #anh1 {
-            font-size: 60px;
-            color: #333333;
-            display: -webkit-box;
-            display: -webkit-flex;
-            display: -moz-box;
-            display: -ms-flexbox;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background-color: #fff;
-            margin: 0 auto;
-        }
-        #title {
-
-            font-size: 30px;
-            color: #fff;
-            line-height: 1.2;
-            text-align: center;
-            text-transform: uppercase;
-            display: block;
-            padding-top: 27px;;
-            padding-bottom: 34px;
-            font-family: Roboto, sans-serif;
-
-        }
-        .input{
-            width: 100%;
-            height: 45px;
-            position: relative;
-            margin-bottom: 30px;
-            /* font-size: 16px;
-            color: #fff;
-            line-height: 1.2;
-            display: block;
-            width: 100%;
-            height: 45px;
-            background: transparent;
-            padding: 0 5px 0 38px; */
-
-
-        }
-        .input100 {
-            font-size: 16px;
-            color:#333333;
-            line-height: 1.2;
-            display: block;
-            width: 100%;
-            height: 45px;
-            background: #9152f8;
-            padding: 0 5px;
-            border-bottom: 2px solid rgba(255,255,255,0.24);
-        }
-        .input100::after {
-            font-size: 16px;
-            color:#333333;
-            line-height: 1.2;
-            display: block;
-            width: 100%;
-            height: 45px;
-            background: transparent;
-            padding: 0 5px;
-            background-color: #E8F0FE;
-        }
-        .password{
-            width: 100%;
-            height: 45px;
-            position: relative;
-            margin-bottom: 30px;
-        }
-        .form-checkbox{
-            padding-left: 5px;
-            padding-top: 5px;
-            padding-bottom: 35px;
-            display:flex
-        }
-        .label-checkbox{
-            font-size: 13px;
-            color: #fff;
-            line-height: 1.2;
-            display: block;
-            position: relative;
-            padding-left: 26px;
-            cursor: pointer;
-        }
-        #ckb1{
-            height: 15px;
-            width: 15px;
-        }
-        .login{
-            width: 100%;
-            display: -webkit-box;
-            display: -webkit-flex;
-            display: -moz-box;
-            display: -ms-flexbox;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            background-color: #fff;
-        }
-        .login-form{
-            font-size: 16px;
-            color: #555555;
-            line-height: 1.2;
-            display: -webkit-box;
-            display: -webkit-flex;
-            display: -moz-box;
-            display: -ms-flexbox;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 0 20px;
-            width: 100%;
-            height: 50px;
-            border-radius: 25px;
-            /*background: #9152f8;
-            background: -webkit-linear-gradient(bottom, #7579ff, #b224ef);
-            background: -o-linear-gradient(bottom, #7579ff, #b224ef);
-            background: -moz-linear-gradient(bottom, #7579ff, #b224ef);
-            background: linear-gradient(bottom, #7579ff, #b224ef);*/
-            position: relative;
-            z-index: 1;
-            -webkit-transition: all 0.4s;
-            -o-transition: all 0.4s;
-            -moz-transition: all 0.4s;
-            transition: all 0.4s;
-        }
-        .login-form:hover {
-            color: #9152f8;
-        }
-        .text{
-            padding-top:26px;
-            font-size: 14px;
-        }
-        .text a{
-            text-decoration: none;
-        }
-        .text-white{
-            font-family: Roboto;
-
-            line-height: 1.7;
-            color: #fff!important;
-
-        }
-        #anh{
-            border-style: none;
-            width: 350px;
-            padding-top:26px;
-            text-align: center;
-            margin-left:17px;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/style/doimatkhau.css}"/>
 </head>
 
 <body>
 <div class="main">
     <div class="wrap">
-        <form class="form" th:action="@{/changePassword}" method="post">
+        <form class="form" th:action="@{/doimatkhau}" method="post">
             <img src="https://login.thanglong.edu.vn/images/logotlu.jpg" id="anh1" alt="logo"/>
             <p id="title">Đổi mật khẩu</p>
 
-            <div th:if="${param.error}" class="alert alert-danger" role="alert">
-                Username hoặc password không hợp lệ
+<!--            <div class="input" data-validate="Mật khẩu hiện tại">-->
+<!--                <input type="text" minlength="3" maxlength="20" name="username" id="username"-->
+<!--                       placeholder="Mật khẩu hiện tại" class="input100">-->
+<!--            </div>-->
+
+            <div th:if="${mess != null}">
+                <h4 style="color: red; padding-bottom: 20px" id="mess" th:text="${mess}"></h4>
             </div>
 
-            <!-- <label for="username">Username</label> -->
-            <div class="input" data-validate="Điền tên đăng nhập">
-                <input type="text" minlength="3" name="username" id="username" placeholder="Tên đăng nhập" class="input100">
+            <div class="password" data-validate="Điền tên mật khẩu">
+                <input type="password" minlength="3" maxlength="20" name="password" id="password"
+                       placeholder="Mật khẩu mới" class="input100">
             </div>
 
-
-            <!-- <label for="password"/>password</label> -->
-            <div class="password" data-validate="Điền tên mật mới">
-                <input type="password" minlength="3" name="password" id="password" placeholder="Mật khẩu mới" class="input100">
+            <div class="password" data-validate="Điền tên mật khẩu1">
+                <input type="password" minlength="3" maxlength="20" name="password1" id="password1"
+                       placeholder="Xác nhận mật khẩu mới" class="input100">
             </div>
-            <div class="password" data-validate="Nhập lại mật khẩu mới">
-                <input type="password" minlength="3" name="password" id="password" placeholder="Mật khẩu mới" class="input100">
-            </div>
-            <!-- <input type="password" id="password" name="password"/> -->
-            <!-- <div class="form-checkbox">
-                <input type="checkbox" name="ckb1" id="ckb1" checked="checked">
-                <label for="ckb1" class="label-checkbox">
-                    Remenber me
-                </label>
-            </div> -->
 
             <div class="from-action login">
-                <button type="submit" class="btn login-form " value="Đăng Nhập">Login</button>
+                <button type="submit" class="btn login-form" id = "updatePassword" value="Đổi mật khẩu">Đổi mật khẩu</button>
             </div>
-            <!-- <div class="login">
-                <input type="submit" name="btloggin" value="Đăng Nhập" id="btnLogin" class="login-form">
-            </div> -->
-            <!-- <div class="text">
-                <a href="" class="text-white">Quên mật khẩu ấn vào dòng này</a>
-            </div>
-            <div class="last">
-                <a href=""><img src="https://login.thanglong.edu.vn/images/gglg.png" alt="" id="anh"></a>
-            </div> -->
         </form>
     </div>
 </div>
 </body>
 
+<script>
+    let mess = document.getElementById("mess")
+    let password = document.getElementById("password")
+    let password1 = document.getElementById("password1")
+    let updatePassword = document.getElementById("updatePassword")
+    updatePassword.style.display = "none"
+
+    password1.addEventListener("input", e => {
+        if(e.target.value == password.value) {
+            updatePassword.style.display = "block"
+        }else {
+            updatePassword.style.display = "none"
+        }
+    })
+
+    if(mess.innerText == 'Đổi mật khẩu thành công'){
+        function Redirect() {
+            window.location="http://localhost:8080/";
+        }
+
+        document.write("You will be redirected to main page in 5 sec.");
+        setTimeout('Redirect()', 5000);
+    }
+
+</script>
+<!--http://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html#script-inlining-javascript-and-dart-->
 </html>

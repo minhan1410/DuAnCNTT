@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `testdb` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `testdb`;
--- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.29, for Win64 (x86_64)
 --
 -- Host: localhost    Database: testdb
 -- ------------------------------------------------------
--- Server version	8.0.28
+-- Server version	8.0.29
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -42,7 +42,7 @@ CREATE TABLE `giaovien_monhoc` (
 
 LOCK TABLES `giaovien_monhoc` WRITE;
 /*!40000 ALTER TABLE `giaovien_monhoc` DISABLE KEYS */;
-INSERT INTO `giaovien_monhoc` VALUES (1,'1','CS102'),(2,'1','FA131'),(3,'2','CS131');
+INSERT INTO `giaovien_monhoc` VALUES (1,'1','CS102'),(2,'1','FA131'),(3,'2','CS131'),(4,'B00004','CS1410');
 /*!40000 ALTER TABLE `giaovien_monhoc` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-12 14:49:43
+-- Dump completed on 2022-05-25 23:15:54

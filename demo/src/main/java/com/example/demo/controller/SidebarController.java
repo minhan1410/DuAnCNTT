@@ -6,11 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.context.request.async.DeferredResult;
+import org.springframework.web.servlet.HandlerMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -72,7 +76,7 @@ public class SidebarController {
     }
 
     @PostMapping("/updateUser")
-    public String updateUser(Model model, Principal principal, @ModelAttribute User updateUser) {
+    public String updateUser(Principal principal, @ModelAttribute User updateUser) {
         User user = (User) ((Authentication) principal).getPrincipal();
         user.setName(updateUser.getName());
         user.setAddress(updateUser.getAddress());
@@ -83,7 +87,8 @@ public class SidebarController {
         user.setAvatar(updateUser.getAvatar());
 
         userRepository.save(user);
-        return thongtincanhan(model, principal);
+//        return thongtincanhan(model, principal);
+        return "redirect:/thongtincanhan";
     }
 
 //    =========================================== thoikhoabieutoantruong ================================================

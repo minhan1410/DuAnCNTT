@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html
+        lang="vi"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head
+        th:replace="template/template.html :: head('TRƯỜNG ĐẠI HỌC THĂNG LONG')"
+></head>
+
+<head>
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.css"
+    />
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+            integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+            crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" th:href="@{/style/dangkihoc.css}" />
+    <link rel="stylesheet" th:href="@{/style/quanlimonhoc.css}" />
+</head>
+
+<body>
+<div id="head">
+    <div th:replace="template/template.html :: header"></div>
+
+    <div id="page">
+        <div th:replace="template/template.html :: sidebar"></div>
+        <div id="right">
+            <div class="title">Quản lí môn học</div>
+            <div>
+                <button id="add">Thêm môn học +</button>
+                <div th:if="${mess != null}">
+                    <h4 color="red" th:text="${mess}"></h4>
+                </div>
+                <div style="display: none" class="add1">
+                    <form
+                            class="table2"
+                            th:action="@{/dangKiMonHoc}"
+                            th:object="${newSubject}"
+                            method="post"
+                    >
+                        <div class="div">
+                            <div>
+                                <label class="form-label" for="form3Example4c">Mã môn: </label>
+                                <a
+                                        href=""
+                                        style="color: red; font-size: 19px; margin-left: 390px"
+                                >X</a>
+                                <input
+                                        required
+                                        minlength="2"
+                                        maxlength="6"
+                                        type="text"
+                                        id="form3Example4c"
+                                        class="form-control form__input"
+                                        th:field="*{id}"
+                                />
+                            </div>
+
+                            <div>
+                                <label class="form-label" for="form3Example4c">Tên môn: </label>
+                                <input
+                                        required
+                                        minlength="2"
+                                        maxlength="6"
+                                        type="text"
+                                        id="form3Example4c"
+                                        class="form-control form__input"
+                                        th:field="*{name}"
+                                />
+                            </div>
+
+                            <div>
+                                <label class="form-label" for="form3Example4c">Tên lớp: </label>
+                                <input
+                                        required
+                                        minlength="2"
+                                        maxlength="6"
+                                        type="text"
+                                        id="form3Example4c"
+                                        class="form-control form__input"
+                                        th:field="*{tenLop}"
+                                />
+                            </div>
+
+                            <div>
+                                <label class="form-label" for="form3Example4c">Ca: </label>
+                                <input
+                                        required
+                                        minlength="3"
+                                        maxlength="3"
+                                        type="text"
+                                        id="form3Example4c"
+                                        class="form-control form__input"
+                                        th:field="*{ca}"
+                                />
+                            </div>
+
+                            <div>
+                                <label class="form-label" for="form3Example4c">Thứ: </label>
+                                <input
+                                        required
+                                        minlength="1"
+                                        maxlength="1"
+                                        type="text"
+                                        id="form3Example4c"
+                                        class="form-control form__input"
+                                        th:field="*{thu}"
+                                />
+                            </div>
+
+                            <div>
+                                <label class="form-label" for="form3Example4c">Phòng học: </label>
+                                <input
+                                        required
+                                        minlength="2"
+                                        maxlength="6"
+                                        type="text"
+                                        id="form3Example4c"
+                                        class="form-control form__input"
+                                        th:field="*{phongHoc}"
+                                />
+                            </div>
+
+                            <div>
+                                <label class="form-label" for="form3Example4c">Số tín chỉ: </label>
+                                <input
+                                        required
+                                        minlength="1"
+                                        maxlength="1"
+                                        type="text"
+                                        id="form3Example4c"
+                                        class="form-control form__input"
+                                        th:field="*{soTinChi}"
+                                />
+                            </div>
+
+                            <div>
+                                <label class="form-label" for="form3Example4c">Giáo viên: </label>
+                                <select class="select" th:field="*{teacherId}">
+                                    <option
+                                            th:each="teacher : ${listTeacher}"
+                                            th:value="${teacher.id}"
+                                            th:text="${userRepository.findById(teacher.userId).get().getName()}"
+                                    ></option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="form-label" for="form3Example4c">Chuyên ngành: </label>
+                                <select class="select" th:field="*{maChuyenNganh}">
+                                    <option
+                                            th:each="specializeds : ${listSpecialized}"
+                                            th:value="${specializeds.id}"
+                                            th:text="${specializeds.name}"
+                                    ></option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="div">
+                            <button
+                                    id="submit"
+                                    type="submit"
+                                    class="btn btn-primary btn-lg"
+                            >
+                                Register
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br />
+            <div>
+                <table
+                        class="grid table table-bordered table-striped"
+                        border="0"
+                        cellspacing="0"
+                        style="border-style: none; width: 100%; border-collapse: collapse"
+                        id="employeeTable"
+                >
+                    <thead>
+                    <tr>
+                        <th scope="col">STT</th>
+                        <th scope="col">Mã môn học</th>
+                        <th scope="col">Mã chuyên ngành</th>
+                        <th scope="col">Tên môn học</th>
+                        <th scope="col">Tên lớp học</th>
+                        <th scope="col">Ca</th>
+                        <th scope="col">Thứ</th>
+                        <th scope="col">Phòng học</th>
+                        <th scope="col">Số tín chỉ</th>
+                        <th scope="col">Giáo viên</th>
+                        <th scope="col">Hành động</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="subject, iStat : ${listSubject}">
+                        <td th:text="${iStat.index+1}"></td>
+                        <td th:text="${subject.id}"></td>
+                        <td th:text="${subject.maChuyenNganh}"></td>
+                        <td th:text="${subject.name}"></td>
+                        <td th:text="${subject.tenLop}"></td>
+                        <td th:text="${subject.ca}"></td>
+                        <td th:text="${subject.thu}"></td>
+                        <td th:text="${subject.phongHoc}"></td>
+                        <td th:text="${subject.soTinChi}"></td>
+                        <td th:text="${userRepository.findById(teacherRepository.findById(subject.teacherId).get().getUserId()).get().getName()}"></td>
+
+                        <td>
+                            <button class="btnCapNhat">
+                                Cập nhật
+                                <div style="display: none" class="capNhat">
+                                    <form
+                                            class="mx-1 mx-md-4"
+                                            th:action="@{/capNhatMonHoc/{index}(index = ${iStat.index})}"
+                                            method="post"
+                                    >
+                                            <label class="form-label" for="form3Example4c">Tên môn: </label>
+                                            <input
+                                                    required
+                                                    minlength="2"
+                                                    maxlength="6"
+                                                    type="text"
+                                                    name="name"
+                                                    th:value="${subject.name}"
+                                            />
+
+                                            <label class="form-label" for="form3Example4c">Tên lớp: </label>
+                                            <input
+                                                    required
+                                                    minlength="2"
+                                                    maxlength="6"
+                                                    type="text"
+                                                    name="tenLop"
+                                                    th:value="${subject.tenLop}"
+                                            />
+
+                                        <div>
+                                            <label class="form-label" for="form3Example4c">Ca: </label>
+                                            <input
+                                                    required
+                                                    minlength="3"
+                                                    maxlength="3"
+                                                    type="text"
+                                                    name="ca"
+                                                    th:value="${subject.ca}"
+                                            />
+                                        </div>
+
+                                        <div>
+                                            <label class="form-label" for="form3Example4c">Thứ: </label>
+                                            <input
+                                                    required
+                                                    minlength="1"
+                                                    maxlength="1"
+                                                    type="text"
+                                                    name="thu"
+                                                    th:value="${subject.thu}"
+                                            />
+                                        </div>
+
+                                        <div>
+                                            <label class="form-label" for="form3Example4c">Phòng học: </label>
+                                            <input
+                                                    required
+                                                    minlength="2"
+                                                    maxlength="6"
+                                                    type="text"
+                                                    name="phongHoc"
+                                                    th:value="${subject.phongHoc}"
+                                            />
+                                        </div>
+
+                                        <div>
+                                            <label class="form-label" for="form3Example4c">Số tín chỉ: </label>
+                                            <input
+                                                    required
+                                                    minlength="1"
+                                                    maxlength="1"
+                                                    type="text"
+                                                    name="soTinChi"
+                                                    th:value="${subject.soTinChi}"
+                                            />
+                                        </div>
+
+                                        <input type="submit"></input>
+                                    </form>
+                                </div>
+                            </button>
+
+                            <a
+                                    th:href="@{xoaMonHoc/{idSubject}(idSubject = ${subject.id})}"
+                            ><button class="btnXoa">Xóa</button></a
+                            >
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="template/template.html :: footer"></div>
+</div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+        type="text/javascript"
+        src="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.js"
+></script>
+<script>
+    $(document).ready(function () {
+        $("#employeeTable").DataTable({
+            aoColumnDefs: [
+                {
+                    bSortable: false,
+                    aTargets: [-1],
+                },
+            ],
+        });
+    });
+</script>
+<script>
+    const btnAdd = document.getElementById("add");
+    const divAdd = document.querySelector(".add1");
+
+    btnAdd.addEventListener("click", () => {
+        if (divAdd.style.display == "block") {
+            divAdd.style.display = "none";
+        } else {
+            divAdd.style.display = "block";
+        }
+    });
+
+    const btnCapNhat = document.querySelectorAll(".btnCapNhat");
+    const capNhat = document.querySelectorAll(".capNhat");
+    for (let i = 0; i < btnCapNhat.length; i++) {
+        btnCapNhat[i].addEventListener("click", function (e) {
+            capNhat[i].style.display = "block";
+        });
+    }
+</script>
+</html>

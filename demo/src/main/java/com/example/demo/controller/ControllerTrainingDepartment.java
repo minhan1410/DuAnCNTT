@@ -138,6 +138,7 @@ public class ControllerTrainingDepartment {
         teacherRepository.save(s);
         return "redirect:/quanligiaovien";
     }
+
 //    =========================================== quanlichuyennganh ================================================
 
     @GetMapping("/quanlichuyennganh")
@@ -179,6 +180,61 @@ public class ControllerTrainingDepartment {
 
         specializedRepository.save(s);
         return "redirect:/quanlichuyennganh";
+    }
+
+//  =========================================== quanlimonhoc ================================================
+
+    @GetMapping("/quanlimonhoc")
+    public String quanlimonhoc(Model model, Principal principal) {
+        User user = (User) ((Authentication) principal).getPrincipal();
+
+        model.addAttribute("user", user);
+        model.addAttribute("student", teacherRepository.findByUserId(user.getId()));
+    //
+        model.addAttribute("newSubject", new Subject());
+        model.addAttribute("listSubject", subjectRepository.findAll());
+        model.addAttribute("listSpecialized", specializedRepository.findAll());
+        model.addAttribute("listTeacher", teacherRepository.findAll());
+        model.addAttribute("teacherRepository", teacherRepository);
+        model.addAttribute("userRepository", userRepository);
+
+        return "sidebar/quanlimonhoc";
+    }
+
+    @PostMapping("/dangKiMonHoc")
+    public String dangKiMonHoc(Model model, Principal principal, @ModelAttribute Subject newSubject) {
+        String mess = null;
+        if (subjectRepository.findById(newSubject.getId()).isPresent()) {
+            mess = "Mã môn đã tồn tại";
+        } else if (subjectRepository.findByName(newSubject.getName()) != null) {
+            mess = "Tên môn đã tồn tại";
+        } else {
+            subjectRepository.save(newSubject);
+        }
+        model.addAttribute("mess", mess);
+        return quanlimonhoc(model, principal);
+    }
+
+    @GetMapping("xoaMonHoc/{idSubject}")
+    public String xoaMonHoc(@PathVariable("idSubject") String idSubject) {
+        subjectRepository.deleteById(idSubject);
+        return "redirect:/quanlimonhoc";
+    }
+
+    @PostMapping("capNhatMonHoc/{index}")
+    public String capNhatMonHoc(@PathVariable("index") int index, @RequestParam("name") String name,
+                                @RequestParam("tenLop") String tenLop, @RequestParam("ca") String ca, @RequestParam("thu") String thu,
+                                @RequestParam("phongHoc") String phongHoc, @RequestParam("soTinChi") int soTinChi) {
+        Subject s = subjectRepository.findAll().get(index);
+        s.setName(name);
+        s.setTenLop(tenLop);
+        s.setCa(ca);
+        s.setThu(thu);
+        s.setPhongHoc(phongHoc);
+        s.setSoTinChi(soTinChi);
+
+        subjectRepository.save(s);
+        return "redirect:/quanlimonhoc";
     }
 
 //    =========================================== laplichthi ================================================

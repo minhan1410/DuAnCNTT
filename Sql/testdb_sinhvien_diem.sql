@@ -37,7 +37,7 @@ CREATE TABLE `sinhvien_diem` (
   KEY `FK_SinhVien_Diem_SinhVien` (`MaSV`),
   CONSTRAINT `FK_SinhVien_Diem_MonHoc` FOREIGN KEY (`ma_mon`) REFERENCES `monhoc` (`ma_mon`),
   CONSTRAINT `FK_SinhVien_Diem_SinhVien` FOREIGN KEY (`MaSV`) REFERENCES `sinhvien` (`MaSV`)
-) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,7 +46,7 @@ CREATE TABLE `sinhvien_diem` (
 
 LOCK TABLES `sinhvien_diem` WRITE;
 /*!40000 ALTER TABLE `sinhvien_diem` DISABLE KEYS */;
-INSERT INTO `sinhvien_diem` VALUES (45,'A00017','CS102',5.4,6.2,5.88,'Bình thường'),(65,'A00017','FA131',-1,-1,-1,'Cấm thi'),(66,'A00020','CS131',9,10,10,'Bình thường'),(67,'A00020','FA131',8.6,7.5,7.94,'Bình thường'),(68,'A00017','CS131',4,5,4.6,'Bình thường');
+INSERT INTO `sinhvien_diem` VALUES (45,'A00017','CS102',5.4,6.2,5.88,'Bình thường'),(65,'A00017','FA131',-1,-1,-1,'Cấm thi'),(66,'A00020','CS131',9,10,10,'Bình thường'),(67,'A00020','FA131',8.6,7.5,7.94,'Bình thường'),(68,'A00017','CS131',4,5,4.6,'Bình thường'),(69,'A00003','CS131',10,10,10,'Bình thường'),(70,'A00003','CS1410',0,0,0,'Bình thường'),(71,'A00003','FA131',9,7,7.8,'Bình thường');
 /*!40000 ALTER TABLE `sinhvien_diem` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -59,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-25 23:15:54
+-- Dump completed on 2022-05-28 21:49:23

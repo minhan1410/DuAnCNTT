@@ -39,7 +39,7 @@ CREATE TABLE `chuyennganh` (
 
 LOCK TABLES `chuyennganh` WRITE;
 /*!40000 ALTER TABLE `chuyennganh` DISABLE KEYS */;
-INSERT INTO `chuyennganh` VALUES ('111','Du lịch'),('222','Kinh tế'),('444','Ngôn ngữ'),('333','Toán tin');
+INSERT INTO `chuyennganh` VALUES ('AD','Admin'),('DT','Đào Tạo'),('111','Du lịch'),('222','Kinh tế'),('444','Ngôn ngữ'),('333','Toán tin');
 /*!40000 ALTER TABLE `chuyennganh` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-25 23:15:54
+-- Dump completed on 2022-05-28 21:49:23

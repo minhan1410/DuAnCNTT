@@ -136,10 +136,23 @@
                                         required
                                         minlength="1"
                                         maxlength="1"
-                                        type="text"
+                                        type="number"
                                         id="form3Example4c"
                                         class="form-control form__input"
                                         th:field="*{soTinChi}"
+                                />
+                            </div>
+
+                            <div>
+                                <label class="form-label" for="form3Example4c">Số lượng sinh viên được đăng ký: </label>
+                                <input
+                                        required
+                                        minlength="1"
+                                        maxlength="1"
+                                        type="number"
+                                        id="form3Example4c"
+                                        class="form-control form__input"
+                                        th:field="*{soLuongSv}"
                                 />
                             </div>
 
@@ -156,12 +169,16 @@
 
                             <div>
                                 <label class="form-label" for="form3Example4c">Chuyên ngành: </label>
-                                <select class="select" th:field="*{maChuyenNganh}">
-                                    <option
-                                            th:each="specializeds : ${listSpecialized}"
-                                            th:value="${specializeds.id}"
-                                            th:text="${specializeds.name}"
-                                    ></option>
+                                <select class="select" name="chuyenNganh">
+                                    <th:block th:each="specializeds : ${listSpecialized}">
+                                        <th:block
+                                                th:if="${specializeds.id != 'AD'&& specializeds.id != 'DT'}">
+                                            <option
+                                                    th:value="${specializeds.id}"
+                                                    th:text="${specializeds.name}"
+                                            ></option>
+                                        </th:block>
+                                    </th:block>
                                 </select>
                             </div>
 
@@ -290,6 +307,18 @@
                                                     type="text"
                                                     name="soTinChi"
                                                     th:value="${subject.soTinChi}"
+                                            />
+                                        </div>
+
+                                        <div>
+                                            <label class="form-label" for="form3Example4c">Số lượng sinh viên được đăng ký: </label>
+                                            <input
+                                                    required
+                                                    minlength="1"
+                                                    maxlength="1"
+                                                    type="text"
+                                                    name="soLuongSv"
+                                                    th:value="${subject.soLuongSv}"
                                             />
                                         </div>
 

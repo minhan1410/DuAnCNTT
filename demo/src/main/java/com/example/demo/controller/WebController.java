@@ -100,7 +100,7 @@ public class WebController {
 //            return "registration/registrationUser";
 //        }
 //        userRepository.save(newUser);
-//        return "home";
+//        return "redirect:/";
 //    }
 //
 //    @GetMapping("/registrationTeacher")

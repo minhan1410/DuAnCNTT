@@ -101,6 +101,16 @@
                         <li><a th:href="@{/phanconggiangday}">Phân công giảng dạy</a></li>
 
                     </div>
+
+                    <div th:if="${user.permissions == 'ROLE_Admin'}">
+                        <li><a th:href="@{/quanlisinhvien}">Quản lí sinh viên</a></li>
+                        <li><a th:href="@{/quanligiaovien}">Quản lí giáo viên</a></li>
+                        <li><a th:href="@{/quanlichuyennganh}">Quản lí chuyên ngành</a></li>
+                        <li><a th:href="@{/quanlimonhoc}">Quản lí môn học</a></li>
+                        <li><a th:href="@{/thongke}">Thống kê</a></li>
+                        <li><a th:href="@{/quanlyuser}">Quản lí người dùng</a></li>
+                    </div>
+
                 </ul>
             </li>
         </ul>

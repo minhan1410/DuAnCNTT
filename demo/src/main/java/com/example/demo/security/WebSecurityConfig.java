@@ -35,15 +35,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                còn những gì cấm hoặc yêu cầu xác thực sẽ dùng .authenticated()
         http
                 .authorizeRequests()
-                .antMatchers("/", "/home", "/registrationUser", "/registrationSpecialized", "/registrationTeacher").permitAll() // Cho phép tất cả mọi người truy cập vào 2 địa chỉ này
+                .antMatchers("/", "/registrationUser", "/registrationSpecialized", "/registrationTeacher").permitAll() // Cho phép tất cả mọi người truy cập vào 2 địa chỉ này
 
-                .antMatchers("/bangdiem", "/dangkimonhoc", "/dkh/{id}", "/huydkh/{id}", "/lichthichinhthuc").access("hasRole('ROLE_Student')")
+                .antMatchers("/bangdiem", "/dangkimonhoc", "/lichthichinhthuc").access("hasRole('ROLE_Student')")
 
-                .antMatchers("/quanlilophoc", "/quanlilophoc/{id}", "/danhgiasv").access("hasRole('ROLE_Teacher')")
+                .antMatchers("/quanlilophoc").access("hasRole('ROLE_Teacher')")
 
-                .antMatchers("/quanlisinhvien", "/dangKiSinhVien", "/capNhatTrangThai/{index}", "/quanligiaovien",
-                        "/dangKiGiaoVien", "capNhatTrangThaiGV/{index}", "/quanlichuyennganh", "/dangKiChuyenNganh",
-                        "xoaChuyenNganh/{idSpecialized}", "capNhatChuyenNganh/{index}").access("hasRole('ROLE_TrainingDepartment')")
+                .antMatchers("/quanlisinhvien", "/quanligiaovien", "/quanlichuyennganh", "/quanlimonhoc").access("hasAnyRole('ROLE_TrainingDepartment','ROLE_Admin')")
+
+                .antMatchers("/phanconggiangday", "/laplichthi").access("hasRole('ROLE_TrainingDepartment')")
+
+                .antMatchers("/thongke", "/quanlyuser").access("hasRole('ROLE_Admin')")
 
                 .anyRequest().authenticated() // Tất cả các request khác đều cần phải xác thực mới được truy cập
                 .and()

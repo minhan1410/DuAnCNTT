@@ -99,14 +99,19 @@ public class ControllerTrainingDepartment {
         model.addAttribute("newUser", new User());
         model.addAttribute("listSpecialized", specializedRepository.findAll());
 
-        List<Teacher> listTeacher = new ArrayList<Teacher>();
-        for (Teacher teacher : teacherRepository.findAll()) {
-            if (userRepository.findById(teacher.getUserId()).get().getPermissions().equals("ROLE_Teacher")) {
-                listTeacher.add(teacher);
+        if (user.getPermissions().equals("ROLE_Admin")) {
+            model.addAttribute("listTeacher", teacherRepository.findAll());
+        } else {
+            List<Teacher> listTeacher = new ArrayList<Teacher>();
+            for (Teacher teacher : teacherRepository.findAll()) {
+                if (userRepository.findById(teacher.getUserId()).get().getPermissions().equals("ROLE_Teacher")) {
+                    listTeacher.add(teacher);
+                }
             }
+
+            model.addAttribute("listTeacher", listTeacher);
         }
 
-        model.addAttribute("listTeacher", listTeacher);
         model.addAttribute("userRepository", userRepository);
 
         return "sidebar/quanligiaovien";
@@ -167,13 +172,13 @@ public class ControllerTrainingDepartment {
         return quanlichuyennganh(model, principal);
     }
 
-    @GetMapping("xoaChuyenNganh/{idSpecialized}")
+    @GetMapping("/xoaChuyenNganh/{idSpecialized}")
     public String xoaChuyenNganh(@PathVariable("idSpecialized") String idSpecialized) {
         specializedRepository.deleteById(idSpecialized);
         return "redirect:/quanlichuyennganh";
     }
 
-    @PostMapping("capNhatChuyenNganh/{index}")
+    @PostMapping("/capNhatChuyenNganh/{index}")
     public String capNhatChuyenNganh(@PathVariable("index") int index, @RequestParam("nameSpecialized") String nameSpecialized) {
         Specialized s = specializedRepository.findAll().get(index);
         s.setName(nameSpecialized);
@@ -190,7 +195,7 @@ public class ControllerTrainingDepartment {
 
         model.addAttribute("user", user);
         model.addAttribute("student", teacherRepository.findByUserId(user.getId()));
-    //
+        //
         model.addAttribute("newSubject", new Subject());
         model.addAttribute("listSubject", subjectRepository.findAll());
         model.addAttribute("listSpecialized", specializedRepository.findAll());
@@ -215,16 +220,17 @@ public class ControllerTrainingDepartment {
         return quanlimonhoc(model, principal);
     }
 
-    @GetMapping("xoaMonHoc/{idSubject}")
+    @GetMapping("/xoaMonHoc/{idSubject}")
     public String xoaMonHoc(@PathVariable("idSubject") String idSubject) {
         subjectRepository.deleteById(idSubject);
         return "redirect:/quanlimonhoc";
     }
 
-    @PostMapping("capNhatMonHoc/{index}")
+    @PostMapping("/capNhatMonHoc/{index}")
     public String capNhatMonHoc(@PathVariable("index") int index, @RequestParam("name") String name,
                                 @RequestParam("tenLop") String tenLop, @RequestParam("ca") String ca, @RequestParam("thu") String thu,
-                                @RequestParam("phongHoc") String phongHoc, @RequestParam("soTinChi") int soTinChi) {
+                                @RequestParam("phongHoc") String phongHoc, @RequestParam("soTinChi") int soTinChi,
+                                @RequestParam("soLuongSv") int soLuongSv) {
         Subject s = subjectRepository.findAll().get(index);
         s.setName(name);
         s.setTenLop(tenLop);
@@ -232,6 +238,7 @@ public class ControllerTrainingDepartment {
         s.setThu(thu);
         s.setPhongHoc(phongHoc);
         s.setSoTinChi(soTinChi);
+        s.setSoLuongSv(soLuongSv);
 
         subjectRepository.save(s);
         return "redirect:/quanlimonhoc";
@@ -255,7 +262,7 @@ public class ControllerTrainingDepartment {
         return "sidebar/laplichthi";
     }
 
-    @PostMapping("capNhatLichThi/{index}")
+    @PostMapping("/capNhatLichThi/{index}")
     public String capNhatLichThi(@PathVariable("index") int index, @RequestParam("ngayThi") String ngayThi,
                                  @RequestParam("caThi") String caThi) throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -285,7 +292,7 @@ public class ControllerTrainingDepartment {
         return "sidebar/phanconggiangday";
     }
 
-    @PostMapping("capnhapPCGD/{index}")
+    @PostMapping("/capnhapPCGD/{index}")
     public String capnhapPCGD(@PathVariable("index") int index, @RequestParam("gvID") String gvID) {
         Subject s = subjectRepository.findAll().get(index);
         s.setTeacherId(gvID);

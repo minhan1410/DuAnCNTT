@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ANNNN😁😁</title>
+</head>
+<body>
+
+<div id="donutchart"></div>
+<div id="columnchart_DTK"></div>
+<div id="columnchart_TC"></div>
+<div id="columnchart_SVGioi"></div>
+
+</body>
+
+<!--Load the AJAX API-->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" th:inline="javascript">
+    google.charts.load('current', {'packages': ['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        // Đếm số lượng User
+        bdTron('Quyền', 'Số lượng', [[${countingUser}]], 'Đếm số lượng User', 1000, 400, 'donutchart');
+
+        // Thống kê điểm trung bình tích lũy
+        bdCot('MSV', 'Điểm', [[${diemTongket}]], "Thống kê điểm trung bình tích lũy", 500, 400, "columnchart_DTK");
+
+        // Thống kê tổng số tín chỉ tích lũy
+        bdCot('MSV', 'Tín chỉ', [[${soTinChi}]], "Thống kê tổng số tín chỉ tích lũy", 500, 400, "columnchart_TC");
+
+        // Thống kê sv giỏi
+        bdCot('MSV', 'Điểm', [[${svGioi}]], "Thống kê sv giỏi", 500, 400, "columnchart_SVGioi");
+
+    }
+
+    function bdTron(tx, ty, arr, title, width, height, id) {
+        var data_donutchart = new google.visualization.DataTable();
+        data_donutchart.addColumn('string', tx);
+        data_donutchart.addColumn('number', ty);
+        data_donutchart.addRows(arr);
+
+        var options_donutchart = {
+            title: title,
+            'width': width,
+            'height': height,
+            pieHole: 0.5,
+        };
+
+        var donutchart = new google.visualization.PieChart(document.getElementById(id));
+        donutchart.draw(data_donutchart, options_donutchart);
+    }
+
+    function bdCot(tx, ty, arr, title, width, height, id) {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', tx);
+        data.addColumn('number', ty);
+        data.addColumn({type: 'string', role: 'style'});
+        data.addRows(arr);
+
+        var options = {
+            title: title,
+            width: width,
+            height: height,
+            bar: {groupWidth: "95%"},
+            legend: {position: "none"},
+        };
+
+        var chart_TC = new google.visualization.ColumnChart(document.getElementById(id));
+        chart_TC.draw(data, options);
+    }
+
+</script>
+
+</html>

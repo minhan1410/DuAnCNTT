@@ -196,11 +196,15 @@
                       Specialized :
                     </label>
                     <select class="select" name="chuyenNganh">
-                      <option
-                        th:each="specializeds : ${listSpecialized}"
-                        th:value="${specializeds.id}"
-                        th:text="${specializeds.name}"
-                      ></option>
+                      <th:block th:each="specializeds : ${listSpecialized}">
+                        <th:block
+                                th:if="${specializeds.id != 'AD'&& specializeds.id != 'DT'}">
+                          <option
+                                  th:value="${specializeds.id}"
+                                  th:text="${specializeds.name}"
+                          ></option>
+                        </th:block>
+                      </th:block>
                     </select>
                   </div>
                 </div>

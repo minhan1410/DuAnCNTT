@@ -41,11 +41,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .antMatchers("/quanlilophoc").access("hasRole('ROLE_Teacher')")
 
-                .antMatchers("/quanlisinhvien", "/quanligiaovien", "/quanlichuyennganh", "/quanlimonhoc").access("hasAnyRole('ROLE_TrainingDepartment','ROLE_Admin')")
+                .antMatchers("/quanlisinhvien", "/quanligiaovien", "/quanlichuyennganh", "/quanlimonhoc", "/thongke").access("hasAnyRole('ROLE_TrainingDepartment','ROLE_Admin')")
 
                 .antMatchers("/phanconggiangday", "/laplichthi").access("hasRole('ROLE_TrainingDepartment')")
 
-                .antMatchers("/thongke", "/quanlyuser").access("hasRole('ROLE_Admin')")
+                .antMatchers("/quanlyuser").access("hasRole('ROLE_Admin')")
 
                 .anyRequest().authenticated() // Tất cả các request khác đều cần phải xác thực mới được truy cập
                 .and()

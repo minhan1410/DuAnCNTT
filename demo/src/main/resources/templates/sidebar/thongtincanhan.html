@@ -1,127 +1,128 @@
 <!DOCTYPE html>
 <html lang="vi" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head th:replace="template/template.html :: head('Thông tin cá nhân')"></head>
 
 <head>
-    <link rel="stylesheet" th:href="@{/style/dangkihoc.css}" />
-    <link rel="stylesheet" th:href="@{/style/thongtincanhan.css}" />
+    <link rel="stylesheet" th:href="@{/style/dangkihoc.css}"/>
+    <link rel="stylesheet" th:href="@{/style/thongtincanhan.css}"/>
 </head>
 
 <body>
-    <div id="head">
+<div id="head">
 
-        <div th:replace="template/template.html :: header"></div>
+    <div th:replace="template/template.html :: header"></div>
 
-        <div id="page">
+    <div id="page">
 
-            <div th:replace="template/template.html :: sidebar"></div>
+        <div th:replace="template/template.html :: sidebar"></div>
 
-            <div id="right">
-                <div class="title">
-                    <a href="">Thông tin cá nhân </a>
+        <div id="right">
+            <div class="title">
+                <a href="">Thông tin cá nhân </a>
+            </div>
+            <div class="entry">
+                <table width="70%">
+                    <tr>
+                        <td width="30%">Mã :</td>
+                        <td th:text="${student.id}"></td>
+                    </tr>
+                    <tr>
+                        <td width>Họ tên :</td>
+                        <td th:text="${user.name}"></td>
+                    </tr>
+                    <tr>
+                        <td width>Giới tính :</td>
+                        <td th:text="${user.sex}"></td>
+                    </tr>
+                    <tr>
+                        <td width>Ngày sinh :</td>
+                        <td th:text="${user.birthdayStr}"></td>
+                    </tr>
+                    <tr>
+                        <td width>Điện thoại :</td>
+                        <td th:text="${user.phoneNumber}"></td>
+                    </tr>
+                    <tr>
+                        <td width>Email :</td>
+                        <td th:text="${user.email}"></td>
+                    </tr>
+                    <tr>
+                        <td width>Chỗ ở :</td>
+                        <td th:text="${user.address}"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button class="btn">Cập nhật thông tin</button>
+                        </td>
+                    </tr>
+
+                </table>
+                <div class="avatar">
+                    <tr>
+                        <td><img th:src="${user.avatar}"/></td>
+                    </tr>
                 </div>
-                <div class="entry">
-                    <table width="70%">
-                        <tr>
-                            <td width="30%">Mã :</td>
-                            <td th:text="${student.id}"></td>
-                        </tr>
-                        <tr>
-                            <td width>Họ tên :</td>
-                            <td th:text="${user.name}"></td>
-                        </tr>
-                        <tr>
-                            <td width>Giới tính :</td>
-                            <td th:text="${user.sex}"></td>
-                        </tr>
-                        <tr>
-                            <td width>Ngày sinh :</td>
-                            <td th:text="${user.birthdayStr}"></td>
-                        </tr>
-                        <tr>
-                            <td width>Điện thoại :</td>
-                            <td th:text="${user.phoneNumber}"></td>
-                        </tr>
-                        <tr>
-                            <td width>Email :</td>
-                            <td th:text="${user.email}"></td>
-                        </tr>
-                        <tr>
-                            <td width>Chỗ ở :</td>
-                            <td th:text="${user.address}"></td>
-                        </tr>
-                        <tr>
-                            <td><button class="btn">Cập nhật thông tin</button></td>
-                        </tr>
-
-                    </table>
-                    <div class="avatar">
-                        <tr>
-                            <td> <img th:src="${user.avatar}" /></td>
-                        </tr>
-                    </div>
-
-
-
-                </div>
-
 
 
             </div>
+
 
         </div>
 
     </div>
 
-    <div th:replace="template/template.html :: footer"></div>
+</div>
 
-    </div>
+<div th:replace="template/template.html :: footer"></div>
 
-    <div class="update">
-        <div class="table">
-            <h4 style="font-size:18px">Cập nhật Thông tin cá nhân <a href=""
-                    style="color:red ; margin-left:140px;font-size:25px">x</a></h4>
-            <hr>
-            <div id="div">
-                <form th:action="@{/updateUser}" th:object="${user}" method="post" class="form">
-                    <label>First Name</label>
-                    <input type="text" minlength="2" maxlength="50" th:field="*{name}">
+</div>
 
-                    <label>Address</label>
-                    <input type="text" th:field="*{address}">
+<div class="update">
+    <div class="table">
+        <h4 style="font-size:18px">Cập nhật Thông tin cá nhân <a href=""
+                                                                 style="color:red ; margin-left:140px;font-size:25px">x</a>
+        </h4>
+        <hr>
+        <div id="div">
+            <form th:action="@{/updateUser}" th:object="${user}" method="post" class="form">
+                <label>Họ và tên</label>
+                <input type="text" minlength="5" maxlength="50" th:field="*{name}">
 
-                    <label>Phone Number</label>
-                    <input type="tel" pattern="[0-9]{10}" th:field="*{phoneNumber}">
+                <label>Địa chỉ</label>
+                <input type="text" minlength="5" maxlength="50" th:field="*{address}">
 
-                    <label>Email</label>
-                    <input type="email" th:field="*{email}">
+                <label>Số điện thoại</label>
+                <input type="tel" pattern="[0-9]{11}" th:field="*{phoneNumber}">
 
-                    <label>Birthday</label>
-                    <input type="date" th:field="*{birthday}">
+                <label>Email</label>
+                <input type="email" th:field="*{email}">
 
-                    <label for="country">Giới tính</label>
-                    <select id="country" th:field="*{sex}">
-                        <option value="Nam">
-                            Nam
-                        </option>
-                        <option value="Nữ">
-                            Nữ
-                        </option>
-                    </select>
+                <label>Ngày sinh</label>
+                <input type="date" th:field="*{birthday}">
 
-                    <label>Avartar</label>
-                    <input type="url" th:field="*{avatar}">
+                <label for="country">Giới tính</label>
+                <select id="country" th:field="*{sex}">
+                    <option value="Nam">
+                        Nam
+                    </option>
+                    <option value="Nữ">
+                        Nữ
+                    </option>
+                </select>
 
-                    <input type="submit" value="Update" id="submit">
+                <label>Ảnh</label>
+                <input type="url" th:field="*{avatar}">
+
+                <input type="submit" value="Update" id="submit">
 
 
-                </form>
-            </div>
+            </form>
         </div>
     </div>
+</div>
 
 </body>
 <script>

@@ -1,209 +1,229 @@
 <!DOCTYPE html>
 <html lang="vi" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head th:replace="template/template.html :: head('TRƯỜNG ĐẠI HỌC THĂNG LONG')"></head>
 
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
 
-    <link rel="stylesheet" th:href="@{/style/dangkihoc.css}" />
-    <link rel="stylesheet" th:href="@{/style/quanlilophoc.css}" />
+    <link rel="stylesheet" th:href="@{/style/dangkihoc.css}"/>
+    <link rel="stylesheet" th:href="@{/style/quanlilophoc.css}"/>
 </head>
 
 <body>
-    <div id="head">
-        <div th:replace="template/template.html :: header"></div>
+<div id="head">
+    <div th:replace="template/template.html :: header"></div>
 
-        <div id="page">
-            <div th:replace="template/template.html :: sidebar"></div>
-            <div id="right">
-                <div class="title">Quản lí lớp học</div>
+    <div id="page">
+        <div th:replace="template/template.html :: sidebar"></div>
+        <div id="right">
+            <div class="title">Quản lí lớp học</div>
+            <div>
+
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Chọn môn
+                        học
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <!-- <li><a th:href="@{/quanlilophoc}"> Tất cả </a></li> -->
+                        <th:block th:each="subject : ${listSubject}">
+                            <li>
+                                <a th:text="${subject.name}"
+                                   th:href="@{/quanlilophoc/{id}(id = ${subject.id})}"></a>
+                                <input type="text" class="subject" style="display: none" th:value="${subject.id}">
+                                <input type="text" class="subjectName" style="display: none" th:value="${subject.name}">
+                            </li>
+                        </th:block>
+                    </ul>
+                </div>
+
+                <br/>
+
                 <div>
+                    <table class="grid" border="0" cellspacing="0"
+                           style="border-style: none; width: 100%; border-collapse: collapse">
+                        <thead>
+                        <tr>
+                            <th scope="col">STT</th>
+                            <th scope="col">Mã sinh viên</th>
+                            <th scope="col">Họ tên</th>
+                            <th scope="col">Tình trạng</th>
+                            <th scope="col">Thêm</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="student, iStat : ${listStudent}">
+                            <td th:text="${iStat.index+1}"></td>
+                            <td th:text="${student.id}"></td>
+                            <td th:text="${userRepository.findById(student.getUserId()).get().getName()}"></td>
+                            <td th:text="${listStudentPoints.get(iStat.index).getTinhTrang()}"></td>
+                            <td>
+                                <button class="btnDanhGia">
 
-                    <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Chọn môn
-                            học
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <!-- <li><a th:href="@{/quanlilophoc}"> Tất cả </a></li> -->
-                            <th:block th:each="subject : ${listSubject}">
-                                <li>
-                                    <a th:text="${subject.name}"
-                                        th:href="@{/quanlilophoc/{id}(id = ${subject.id})}"></a>
-                                    <input type="text" class="subject" style="display: none" th:value="${subject.id}">
-                                    <input type="text" class="subjectName" style="display: none" th:value="${subject.name}">
-                                </li>
-                            </th:block>
-                        </ul>
-                    </div>
+                                    Đánh giá
 
-                    <br />
+                                    <div class="danhGia">
+                                        <form th:action="@{/danhgiasv}" method="post">
+                                            <table class="table">
+                                                <tr>
+                                                    <td style="display: none">
+                                                        <input type="text" name="idstudentPoint" class="idstudentPoint"
+                                                               th:value="${listStudentPoints.get(iStat.index).id}">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Mã sinh viên :</td>
+                                                    <td th:text="${student.id}"></td>
 
-                    <div>
-                        <table class="grid" border="0" cellspacing="0"
-                            style="border-style: none; width: 100%; border-collapse: collapse">
-                            <thead>
-                                <tr>
-                                    <th scope="col">STT</th>
-                                    <th scope="col">Mã sinh viên</th>
-                                    <th scope="col">Họ tên</th>
-                                    <th scope="col">Tình trạng</th>
-                                    <th scope="col">Thêm</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr th:each="student, iStat : ${listStudent}">
-                                    <td th:text="${iStat.index+1}"></td>
-                                    <td th:text="${student.id}"></td>
-                                    <td th:text="${userRepository.findById(student.getUserId()).get().getName()}"></td>
-                                    <td th:text="${listStudentPoints.get(iStat.index).getTinhTrang()}"></td>
-                                    <td>
-                                        <button class="btnDanhGia">
-                                            
-                                            Đánh giá
-                                            
-                                            <div class="danhGia">
-                                                <form th:action="@{/danhgiasv}" method="post">
-                                                    <table class="table">
-                                                        <tr>
-                                                            <td><input type="text" name="idstudentPoint" class="idstudentPoint" style="display: none" th:value="${listStudentPoints.get(iStat.index).id}"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Mã sinh viên :</td>
-                                                            <td th:text="${student.id}"></td>
-
-                                                        </tr>
-                                                        <tr>
-                                                            <td width>Họ tên :</td>
-                                                            <td
-                                                                th:text="${userRepository.findById(student.getUserId()).get().name}">
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Tình Trạng :</td>
-                                                            <td>
-                                                                <select name="tinhTrang" class = "tinhTrang">
-                                                                    <option selected value="Bình thường">
-                                                                        Bình thường
-                                                                    </option>
-                                                                    <option value="Cấm thi">
-                                                                        Cấm thi
-                                                                    </option>
-                                                                </select>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Nhập điểm quá trình : </td>
-                                                            <td><input type="number" min="-1" max="10" name="quaTrinh" class="quaTrinh" step=".01" th:value = "${listStudentPoints.get(iStat.index).getDiemQuaTrinh()}"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Nhập điểm cuối kì : </td>
-                                                            <td><input type="number" min="-1" max="10" name="cuoiKi" class="cuoiKi" step=".01" th:value = "${listStudentPoints.get(iStat.index).getDiemCuoiKy()}"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Nhập điểm tổng kết : </td>
-                                                            <td><input type="number" min="-1" max="10" name="tongKet" class="tongKet" step=".01" th:value = "${listStudentPoints.get(iStat.index).getDiemTongket()}"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><input type="submit" value="Update" id="submit"></td>
-                                                            <td><a href="">Đóng</a></td>
-                                                        </tr>
-                                                    </table>
-                                                </form>
-
-
-                                            </div>
-                                        </button>
-
-                                        <button class="btnChiTiet">
-                                            Chi tiết
-
-                                            <div class="chiTiet">
-                                                <table class="table">
-
-                                                    <tr>
-                                                        <td>Mã sinh viên :</td>
-                                                        <td th:text="${student.id}"></td>
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td width>Họ tên :</td>
-                                                        <td
+                                                </tr>
+                                                <tr>
+                                                    <td width>Họ tên :</td>
+                                                    <td
                                                             th:text="${userRepository.findById(student.getUserId()).get().name}">
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td width>Giới tính :</td>
-                                                        <td
-                                                            th:text="${userRepository.findById(student.getUserId()).get().sex}">
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td width>Ngày sinh :</td>
-                                                        <td
-                                                            th:text="${userRepository.findById(student.getUserId()).get().birthdayStr}">
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td width>Điện thoại :</td>
-                                                        <td
-                                                            th:text="${userRepository.findById(student.getUserId()).get().phoneNumber}">
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td width>Email :</td>
-                                                        <td
-                                                            th:text="${userRepository.findById(student.getUserId()).get().email}">
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td width>Chỗ ở :</td>
-                                                        <td
-                                                            th:text="${userRepository.findById(student.getUserId()).get().address}">
-                                                        </td>
-                                                    </tr>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tình Trạng :</td>
+                                                    <td>
+                                                        <select name="tinhTrang" class="tinhTrang">
+                                                            <option th:selected="${listStudentPoints.get(iStat.index).tinhTrang=='Bình thường'}"
+                                                                    value="Bình thường">
+                                                                Bình thường
+                                                            </option>
+                                                            <option th:selected="${listStudentPoints.get(iStat.index).tinhTrang=='Cấm thi'}"
+                                                                    value="Cấm thi">
+                                                                Cấm thi
+                                                            </option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Nhập điểm quá trình :</td>
+                                                    <td><input type="number" min="-1" max="10" name="quaTrinh"
+                                                               class="quaTrinh" step=".01"
+                                                               th:value="${listStudentPoints.get(iStat.index).getDiemQuaTrinh()}">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Nhập điểm cuối kì :</td>
+                                                    <td><input type="number" min="-1" max="10" name="cuoiKi"
+                                                               class="cuoiKi" step=".01"
+                                                               th:value="${listStudentPoints.get(iStat.index).getDiemCuoiKy()}">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Nhập điểm tổng kết :</td>
+                                                    <td><input type="number" min="-1" max="10" name="tongKet"
+                                                               class="tongKet" step=".01"
+                                                               th:value="${listStudentPoints.get(iStat.index).getDiemTongket()}">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <button class="customeButton" type="submit" id="submit">
+                                                            Cập nhật
+                                                        </button>
+                                                    </td>
+                                                    <td>
+                                                        <a th:href="@{/quanlilophoc/{id}(id = ${listStudentPoints.get(iStat.index).subjectId})}">Đóng</a>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </form>
 
-                                                    <tr>
-                                                        <td><a href="">Đóng</a></td>
-                                                    </tr>
-                                                </table>
-                                                <!-- <div>
-                                            <img th:src="${userRepository.findById(student.getUserId()).get().avatar}"/>
-                                        </div>        -->
-                                            </div>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+
+                                    </div>
+                                </button>
+
+                                <button class="btnChiTiet">
+                                    Chi tiết
+
+                                    <div class="chiTiet">
+                                        <table class="table">
+
+                                            <tr>
+                                                <td>Mã sinh viên :</td>
+                                                <td th:text="${student.id}"></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td width>Họ tên :</td>
+                                                <td
+                                                        th:text="${userRepository.findById(student.getUserId()).get().name}">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width>Giới tính :</td>
+                                                <td
+                                                        th:text="${userRepository.findById(student.getUserId()).get().sex}">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width>Ngày sinh :</td>
+                                                <td
+                                                        th:text="${userRepository.findById(student.getUserId()).get().birthdayStr}">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width>Điện thoại :</td>
+                                                <td
+                                                        th:text="${userRepository.findById(student.getUserId()).get().phoneNumber}">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width>Email :</td>
+                                                <td
+                                                        th:text="${userRepository.findById(student.getUserId()).get().email}">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width>Chỗ ở :</td>
+                                                <td
+                                                        th:text="${userRepository.findById(student.getUserId()).get().address}">
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td><a href="">Đóng</a></td>
+                                            </tr>
+                                        </table>
+                                        <!-- <div>
+                                    <img th:src="${userRepository.findById(student.getUserId()).get().avatar}"/>
+                                </div>        -->
+                                    </div>
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-
-            <div th:replace="template/template.html :: footer"></div>
         </div>
+
+        <div th:replace="template/template.html :: footer"></div>
+    </div>
 
 </body>
 
 <script>
-    $(".dropdown-menu li a").click(function(){
-        $(".btn:first-child").html($(this).text()+' <span class="caret"></span>');
+    $(".dropdown-menu li a").click(function () {
+        $(".btn:first-child").html($(this).text() + ' <span class="caret"></span>');
     });
 
-    
+
     // click chi tiet vs danh gia
     const buttonUpdate = document.querySelectorAll(".btnChiTiet");
     const chiTiet = document.querySelectorAll(".chiTiet");
@@ -231,36 +251,36 @@
     const tongKet = document.querySelectorAll(".tongKet");
 
     for (let i = 0; i < buttonDanhGia.length; i++) {
-        tinhTrang[i].addEventListener('change', function() {
-            if(this.value == "Cấm thi"){
+        tinhTrang[i].addEventListener('change', function () {
+            if (this.value == "Cấm thi") {
                 quaTrinh[i].value = -1
-                quaTrinh[i].readOnly= true
-                
+                quaTrinh[i].readOnly = true
+
                 cuoiKi[i].value = -1
-                cuoiKi[i].readOnly= true
-                
+                cuoiKi[i].readOnly = true
+
                 tongKet[i].value = -1
-                tongKet[i].readOnly= true
-            }else{
+                tongKet[i].readOnly = true
+            } else {
                 quaTrinh[i].value = quaTrinh[i].defaultValue;
-                quaTrinh[i].readOnly= false
+                quaTrinh[i].readOnly = false
 
                 cuoiKi[i].value = cuoiKi[i].defaultValue
-                cuoiKi[i].readOnly= false
+                cuoiKi[i].readOnly = false
 
                 tongKet[i].value = tongKet[i].defaultValue
-                tongKet[i].readOnly= false
+                tongKet[i].readOnly = false
             }
         });
-        
-        cuoiKi[i].addEventListener('change', (e) => {  
-            if(quaTrinh[i].value != 0 && quaTrinh[i].value != -1){
+
+        cuoiKi[i].addEventListener('change', (e) => {
+            if (quaTrinh[i].value != 0 && quaTrinh[i].value != -1) {
                 tongKet[i].value = (quaTrinh[i].value * 0.4 + cuoiKi[i].value * 0.6).toFixed(2)
             }
         });
-        
-        quaTrinh[i].addEventListener('change', (e) => {  
-            if(cuoiKi[i].value != 0 && cuoiKi[i].value != -1){
+
+        quaTrinh[i].addEventListener('change', (e) => {
+            if (cuoiKi[i].value != 0 && cuoiKi[i].value != -1) {
                 tongKet[i].value = (quaTrinh[i].value * 0.4 + cuoiKi[i].value * 0.6).toFixed(2)
             }
         });

@@ -74,6 +74,7 @@ img {
     font-size: 18px;
     padding-left: 25px;
 }
+
 .table tr td {
     padding-top: 25px;
 }
@@ -91,4 +92,25 @@ label {
     border-radius: 5px;
     background-color: #f2f2f2;
     padding: 20px;
+}
+
+/*a {*/
+/*    text-decoration: none !important;*/
+/*    color: #000000 !important;*/
+/*}*/
+
+/*a:hover {*/
+/*    color: #000000 !important;*/
+/*}*/
+
+.customeButton {
+    outline: none;
+    padding: 5px 10px;
+
+    border: 1px solid transparent !important;
+}
+
+.customeButton:hover {
+    color: white !important;
+    background-color: #6296c5 !important;
 }

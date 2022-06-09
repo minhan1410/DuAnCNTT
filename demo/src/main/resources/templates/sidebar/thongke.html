@@ -27,11 +27,11 @@
     <link rel="stylesheet" th:href="@{/style/dangkihoc.css}"/>
     <link rel="stylesheet" th:href="@{/style/thoikhoabieutoantruong.css}"/>
 
-    <style>
-        .ggChart {
-            /*display: none;*/
-        }
-    </style>
+<!--    <style>-->
+<!--        .ggChart {-->
+<!--            display: none;-->
+<!--        }-->
+<!--    </style>-->
 </head>
 
 <body>
@@ -45,7 +45,7 @@
             <div class="dropdown">
                 <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown button
+                    Chọn biểu đồ
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <th:block th:if="${user.permissions == 'ROLE_Admin'}">

@@ -92,20 +92,21 @@ public class ControllerTrainingDepartment {
     @GetMapping("/quanligiaovien")
     public String quanligiaovien(Model model, Principal principal) {
         User user = (User) ((Authentication) principal).getPrincipal();
-
+        Teacher teacher = teacherRepository.findByUserId(user.getId());
         model.addAttribute("user", user);
-        model.addAttribute("student", teacherRepository.findByUserId(user.getId()));
+        model.addAttribute("student", teacher);
 //
         model.addAttribute("newUser", new User());
         model.addAttribute("listSpecialized", specializedRepository.findAll());
 
         if (user.getPermissions().equals("ROLE_Admin")) {
-            model.addAttribute("listTeacher", teacherRepository.findAll());
+            model.addAttribute("listTeacher", teacherRepository.findAll()
+                    .stream().filter(t -> !t.getId().equals(teacher.getId())).collect(Collectors.toList()));
         } else {
             List<Teacher> listTeacher = new ArrayList<Teacher>();
-            for (Teacher teacher : teacherRepository.findAll()) {
-                if (userRepository.findById(teacher.getUserId()).get().getPermissions().equals("ROLE_Teacher")) {
-                    listTeacher.add(teacher);
+            for (Teacher t : teacherRepository.findAll()) {
+                if (userRepository.findById(t.getUserId()).get().getPermissions().equals("ROLE_Teacher")) {
+                    listTeacher.add(t);
                 }
             }
 
@@ -154,7 +155,8 @@ public class ControllerTrainingDepartment {
         model.addAttribute("student", teacherRepository.findByUserId(user.getId()));
 //
         model.addAttribute("newSpecialized", new Specialized());
-        model.addAttribute("listSpecialized", specializedRepository.findAll());
+        model.addAttribute("listSpecialized", specializedRepository.findAll()
+                .stream().filter(specialized -> !specialized.getId().equals("AD") && !specialized.getId().equals("DT")).collect(Collectors.toList()));
         return "sidebar/quanlichuyennganh";
     }
 
@@ -178,9 +180,9 @@ public class ControllerTrainingDepartment {
         return "redirect:/quanlichuyennganh";
     }
 
-    @PostMapping("/capNhatChuyenNganh/{index}")
-    public String capNhatChuyenNganh(@PathVariable("index") int index, @RequestParam("nameSpecialized") String nameSpecialized) {
-        Specialized s = specializedRepository.findAll().get(index);
+    @PostMapping("/capNhatChuyenNganh/{id}")
+    public String capNhatChuyenNganh(@PathVariable("id") String id, @RequestParam("nameSpecialized") String nameSpecialized) {
+        Specialized s = specializedRepository.findById(id).get();
         s.setName(nameSpecialized);
 
         specializedRepository.save(s);
@@ -215,6 +217,8 @@ public class ControllerTrainingDepartment {
             mess = "Tên môn đã tồn tại";
         } else {
             subjectRepository.save(newSubject);
+            TeacherSubject ts =  TeacherSubject.builder().id((long)teacherSubjectRepository.findAll().size()).subjectId(newSubject.getId()).teacherId(newSubject.getTeacherId()).build();
+            teacherSubjectRepository.save(ts);
         }
         model.addAttribute("mess", mess);
         return quanlimonhoc(model, principal);

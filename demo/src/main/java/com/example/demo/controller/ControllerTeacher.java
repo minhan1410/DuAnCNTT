@@ -16,6 +16,8 @@ public class ControllerTeacher {
     @Autowired
     private UserRepository userRepository;
     @Autowired
+    private StudentRepository studentRepository;
+    @Autowired
     private TeacherRepository teacherRepository;
     @Autowired
     private TeacherSubjectRepository teacherSubjectRepository;
@@ -100,6 +102,25 @@ public class ControllerTeacher {
 
         System.out.println("\n\n"+sp+"\n\n");
         studentPointRepository.save(sp);
-        return chonMonQuanlilophoc(model, principal,sp.getSubjectId());
+        // return chonMonQuanlilophoc(model, principal,sp.getSubjectId());
+        return "redirect:/quanlilophoc/"+sp.getSubjectId();
+    }
+
+//  =========================================== quanliSV ================================================
+
+    @GetMapping("/quanliSV")
+    public String quanliSV(Model model, Principal principal) {
+        User user = (User) ((Authentication) principal).getPrincipal();
+        Teacher teacher = teacherRepository.findByUserId(user.getId());
+
+        model.addAttribute("user", user);
+        model.addAttribute("student", teacher);
+
+        model.addAttribute("listStudent", studentRepository.findStudentByGiaoVienId(teacher.getId()));
+//        model.addAttribute("listStudent", teacherSubjectRepository.findStudentsByTeacherId(teacher.getId()));
+        model.addAttribute("userRepository", userRepository);
+
+
+        return "sidebar/dssv";
     }
 }

@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `testdb` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `testdb`;
--- MySQL dump 10.13  Distrib 8.0.29, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
 --
 -- Host: localhost    Database: testdb
 -- ------------------------------------------------------
--- Server version	8.0.29
+-- Server version	8.0.28
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -53,7 +53,7 @@ CREATE TABLE `monhoc` (
 
 LOCK TABLES `monhoc` WRITE;
 /*!40000 ALTER TABLE `monhoc` DISABLE KEYS */;
-INSERT INTO `monhoc` VALUES ('CS102','1','333','Công dân số','CONGDANSO.11',3,'MSteam','1-2','3','2022-05-03 00:00:00','2',3500000,'2022-03-27',1,1),('CS131','2','333','Cấu trúc dữ liệu','CTDL.1',3,'A704','6-9','3','2022-07-01 00:00:00','4',1200000,'2022-03-27',50,3),('CS1410','B00004','333','Java','Java.1',3,'A708','6-9','2','2022-02-01 00:00:00',NULL,NULL,NULL,70,1),('FA131','1','333','Bố cục màu','BOCUCMAU.1',2,'BOMON','8-9','1','2022-02-01 00:00:00','3',3400000,'2022-03-27',30,3);
+INSERT INTO `monhoc` VALUES ('ctdl','B00004','TT','Cấu trúc dữ liệu','ctdl.1',3,'A704','1-2','3','2022-06-28 00:00:00','4',NULL,'2022-06-16',80,1),('gt1','B00006','TI','Giải tích 1','Giải tích sáng',2,'BoMon','1-5','Cn','2022-06-16 23:19:33.127',NULL,NULL,'2022-06-16',700,0),('iot','B00004','TT','IOT','IOT.1',3,'A704','3-5','5','2022-06-16 22:38:07.367',NULL,NULL,'2022-06-16',100,1),('java','B00003','TT','Java core','JavaCore.1',3,'A703','1-2','2','2022-06-20 00:00:00','2',NULL,'2022-06-16',70,2),('java2','B00003','TT','JavaFX','JavaFX.2',3,'A703','3-5','3','2022-06-16 22:35:35.239',NULL,NULL,'2022-06-16',70,0),('java3','B00003','TT','Spring boot','SpringBoot.3',3,'A703','6-10','4','2022-06-16 22:36:34.863',NULL,NULL,'2022-06-16',50,1),('oop','B00005','TT','Lập trình hướng đối tượng','OOP1',3,'A708','3-5','7','2022-07-02 00:00:00','1',NULL,'2022-06-16',60,1);
 /*!40000 ALTER TABLE `monhoc` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -66,4 +66,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-28 21:49:23
+-- Dump completed on 2022-06-16 23:23:32

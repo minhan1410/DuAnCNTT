@@ -70,7 +70,6 @@
                         Cập nhật
                         <div style="display: none" class="capNhat">
                           <form
-                            class="mx-1 mx-md-4"
                             th:action="@{/capNhatLichThi/{index}(index=${iStat.index})}"
                             method="post"
                           >
@@ -83,6 +82,7 @@
                               name="ngayThi"
                               th:value="${dateFormat.format(subject.ngayThi)}"
                             />
+                            <br>
 
                             <label>Ca thi:</label>
                             <input
@@ -94,7 +94,7 @@
                               th:value="${subject.caThi}"
                             />
 
-                            <input type="submit" />
+                            <input style="margin-top: 5px" type="submit" />
                           </form>
                         </div>
                       </button>

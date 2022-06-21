@@ -48,128 +48,120 @@
                             method="post"
                     >
                         <div class="div">
-                            <div>
-                                <label class="form-label" for="form3Example4c">Mã môn: </label>
+                            <div style="margin-top:5px;">
+                                <label class="form-label" >Mã môn: </label>
                                 <a
                                         href=""
-                                        style="color: red; font-size: 19px; margin-left: 390px"
+                                        style="color: red; font-size: 19px; margin-left: 340px"
                                 >X</a>
                                 <input
                                         required
                                         minlength="2"
                                         maxlength="6"
                                         type="text"
-                                        id="form3Example4c"
                                         class="form-control form__input"
                                         th:field="*{id}"
                                 />
                             </div>
 
-                            <div>
-                                <label class="form-label" for="form3Example4c">Tên môn: </label>
+                            <div style="margin-top:5px;">
+                                <label class="form-label" >Tên môn: </label>
                                 <input
                                         required
                                         minlength="2"
-                                        maxlength="6"
+                                        maxlength="50"
                                         type="text"
-                                        id="form3Example4c"
                                         class="form-control form__input"
                                         th:field="*{name}"
                                 />
                             </div>
 
-                            <div>
-                                <label class="form-label" for="form3Example4c">Tên lớp: </label>
+                            <div style="margin-top:5px;">
+                                <label class="form-label" >Tên lớp: </label>
                                 <input
                                         required
                                         minlength="2"
-                                        maxlength="6"
+                                        maxlength="50"
                                         type="text"
-                                        id="form3Example4c"
                                         class="form-control form__input"
                                         th:field="*{tenLop}"
                                 />
                             </div>
 
-                            <div>
-                                <label class="form-label" for="form3Example4c">Ca: </label>
+                            <div style="margin-top:5px;">
+                                <label class="form-label" >Ca: </label>
                                 <input
                                         required
                                         minlength="3"
-                                        maxlength="3"
+                                        maxlength="5"
                                         type="text"
-                                        id="form3Example4c"
                                         class="form-control form__input"
                                         th:field="*{ca}"
                                 />
                             </div>
 
-                            <div>
-                                <label class="form-label" for="form3Example4c">Thứ: </label>
+                            <div style="margin-top:5px;">
+                                <label class="form-label" >Thứ: </label>
                                 <input
                                         required
                                         minlength="1"
-                                        maxlength="1"
+                                        maxlength="2"
                                         type="text"
-                                        id="form3Example4c"
                                         class="form-control form__input"
                                         th:field="*{thu}"
                                 />
                             </div>
 
-                            <div>
-                                <label class="form-label" for="form3Example4c">Phòng học: </label>
+                            <div style="margin-top:5px;">
+                                <label class="form-label" >Phòng học: </label>
                                 <input
                                         required
                                         minlength="2"
                                         maxlength="6"
                                         type="text"
-                                        id="form3Example4c"
                                         class="form-control form__input"
                                         th:field="*{phongHoc}"
                                 />
                             </div>
 
-                            <div>
-                                <label class="form-label" for="form3Example4c">Số tín chỉ: </label>
+                            <div style="margin-top:5px;">
+                                <label class="form-label" >Số tín chỉ: </label>
                                 <input
                                         required
                                         minlength="1"
                                         maxlength="1"
                                         type="number"
-                                        id="form3Example4c"
                                         class="form-control form__input"
                                         th:field="*{soTinChi}"
                                 />
                             </div>
 
-                            <div>
-                                <label class="form-label" for="form3Example4c">Số lượng sinh viên được đăng ký: </label>
+                            <div style="margin-top:5px;">
+                                <label class="form-label" >Số lượng sinh viên được đăng ký: </label>
                                 <input
                                         required
                                         minlength="1"
-                                        maxlength="1"
+                                        maxlength="5"
                                         type="number"
-                                        id="form3Example4c"
                                         class="form-control form__input"
                                         th:field="*{soLuongSv}"
                                 />
                             </div>
 
-                            <div>
-                                <label class="form-label" for="form3Example4c">Giáo viên: </label>
+                            <div style="margin-top:5px;">
+                                <label class="form-label" >Giáo viên: </label>
                                 <select class="select" th:field="*{teacherId}">
                                     <option
-                                            th:each="teacher : ${listTeacher}"
+                                            th:each="teacher : ${teacherRepository.findByGv()}"
                                             th:value="${teacher.id}"
                                             th:text="${userRepository.findById(teacher.userId).get().getName()}"
                                     ></option>
                                 </select>
                             </div>
 
-                            <div>
-                                <label class="form-label" for="form3Example4c">Chuyên ngành: </label>
-                                <select class="select" name="chuyenNganh">
+                            <div style="margin-top:5px;">
+                                <label class="form-label" >Chuyên ngành: </label>
+                                <select class="select" th:field="*{maChuyenNganh}">
                                     <th:block th:each="specializeds : ${listSpecialized}">
                                         <th:block
                                                 th:if="${specializeds.id != 'AD'&& specializeds.id != 'DT'}">
@@ -209,14 +201,14 @@
                     <tr>
                         <th scope="col">STT</th>
                         <th scope="col">Mã môn học</th>
-                        <th scope="col">Mã chuyên ngành</th>
+                        <!-- <th scope="col">Mã chuyên ngành</th> -->
                         <th scope="col">Tên môn học</th>
                         <th scope="col">Tên lớp học</th>
                         <th scope="col">Ca</th>
                         <th scope="col">Thứ</th>
                         <th scope="col">Phòng học</th>
                         <th scope="col">Số tín chỉ</th>
-                        <th scope="col">Giáo viên</th>
+                        <!-- <th scope="col">Giáo viên</th> -->
                         <th scope="col">Hành động</th>
                     </tr>
                     </thead>
@@ -224,50 +216,49 @@
                     <tr th:each="subject, iStat : ${listSubject}">
                         <td th:text="${iStat.index+1}"></td>
                         <td th:text="${subject.id}"></td>
-                        <td th:text="${subject.maChuyenNganh}"></td>
+                        <!-- <td th:text="${subject.maChuyenNganh}"></td> -->
                         <td th:text="${subject.name}"></td>
                         <td th:text="${subject.tenLop}"></td>
                         <td th:text="${subject.ca}"></td>
                         <td th:text="${subject.thu}"></td>
                         <td th:text="${subject.phongHoc}"></td>
                         <td th:text="${subject.soTinChi}"></td>
-                        <td th:text="${userRepository.findById(teacherRepository.findById(subject.teacherId).get().getUserId()).get().getName()}"></td>
+                        <!-- <td th:text="${userRepository.findById(teacherRepository.findById(subject.teacherId).get().getUserId()).get().getName()}"></td> -->
 
                         <td>
                             <button class="btnCapNhat">
                                 Cập nhật
                                 <div style="display: none" class="capNhat">
-                                    <form
-                                            class="mx-1 mx-md-4"
+                                    <form   
+                                            class="capNhat1"
                                             th:action="@{/capNhatMonHoc/{index}(index = ${iStat.index})}"
                                             method="post"
                                     >
-                                            <label class="form-label" for="form3Example4c">Tên môn: </label>
+                                            <label class="form-label" style="margin-top:10px;">Tên môn: </label>
                                             <input
                                                     required
                                                     minlength="2"
-                                                    maxlength="6"
+                                                    maxlength="50"
                                                     type="text"
                                                     name="name"
                                                     th:value="${subject.name}"
                                             />
-
-                                            <label class="form-label" for="form3Example4c">Tên lớp: </label>
+                                            <label class="form-label"  style="margin-top:10px;">Tên lớp: </label>
                                             <input
                                                     required
                                                     minlength="2"
-                                                    maxlength="100"
+                                                    maxlength="50"
                                                     type="text"
                                                     name="tenLop"
                                                     th:value="${subject.tenLop}"
                                             />
 
                                         <div>
-                                            <label class="form-label" for="form3Example4c">Ca: </label>
+                                            <label class="form-label" style="margin-top:10px;">Ca: </label>
                                             <input
                                                     required
                                                     minlength="3"
-                                                    maxlength="3"
+                                                    maxlength="5"
                                                     type="text"
                                                     name="ca"
                                                     th:value="${subject.ca}"
@@ -275,11 +266,11 @@
                                         </div>
 
                                         <div>
-                                            <label class="form-label" for="form3Example4c">Thứ: </label>
+                                            <label class="form-label" style="margin-top:10px;">Thứ: </label>
                                             <input
                                                     required
                                                     minlength="1"
-                                                    maxlength="1"
+                                                    maxlength="2"
                                                     type="text"
                                                     name="thu"
                                                     th:value="${subject.thu}"
@@ -287,7 +278,7 @@
                                         </div>
 
                                         <div>
-                                            <label class="form-label" for="form3Example4c">Phòng học: </label>
+                                            <label class="form-label" style="margin-top:10px;">Phòng học: </label>
                                             <input
                                                     required
                                                     minlength="2"
@@ -299,7 +290,7 @@
                                         </div>
 
                                         <div>
-                                            <label class="form-label" for="form3Example4c">Số tín chỉ: </label>
+                                            <label class="form-label" style="margin-top:10px;">Số tín chỉ: </label>
                                             <input
                                                     required
                                                     minlength="1"
@@ -311,23 +302,25 @@
                                         </div>
 
                                         <div>
-                                            <label class="form-label" for="form3Example4c">Số lượng sinh viên được đăng ký: </label>
+                                            <label class="form-label" style="margin-top:10px;">Số lượng sinh viên được đăng ký: </label>
                                             <input
                                                     required
                                                     minlength="1"
-                                                    maxlength="1"
+                                                    maxlength="3"
                                                     type="text"
                                                     name="soLuongSv"
                                                     th:value="${subject.soLuongSv}"
                                             />
                                         </div>
 
-                                        <input type="submit"></input>
+                                        <input type="submit" style="margin-top:10px;"></input>
+                                        <input type="submit" value="Đóng">
+                                        
                                     </form>
                                 </div>
                             </button>
 
-                            <a
+                            <a style="display: none"
                                     th:href="@{xoaMonHoc/{idSubject}(idSubject = ${subject.id})}"
                             ><button class="btnXoa">Xóa</button></a
                             >

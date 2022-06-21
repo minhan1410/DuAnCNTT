@@ -68,23 +68,22 @@
                                 Cập nhật
                                 <div style="display: none" class="capNhat">
                                     <form
-                                            class="mx-1 mx-md-4"
                                             th:action="@{/capnhapPCGD/{index}(index=${iStat.index})}"
                                             method="post"
                                     >
-                                        <label class="form-label">
-                                            GVCN:
-                                        </label>
-                                        <select class="select" name="gvID">
-                                            <option
-                                                    th:each="teacher : ${listTeacher}"
+                                        <label >
+                                            Giáo viên:
+                                        </label> 
+                                        <select class="select" name="gvID" >
+                                            <option 
+                                                    th:each="teacher : ${teacherRepository.findByChuyenNganhId(subject.maChuyenNganh)}"
                                                     th:value="${teacher.id}"
                                                     th:text="${userRepository.findById(teacher.userId).get().getName()}"
                                                     th:selected="${userRepository.findById(teacher.userId).get().getName() == userRepository.findById(teacherRepository.findById(subject.teacherId).get().getUserId()).get().getName()}"
                                             ></option>
                                         </select>
 
-                                        <input type="submit"/>
+                                        <input style="margin-top: 5px;" type="submit"/>
                                     </form>
                                 </div>
                             </button>

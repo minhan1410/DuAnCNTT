@@ -52,7 +52,7 @@
                     <label class="form-label" for="form3Example4c">id: </label>
                     <a
                       href=""
-                      style="color: red; font-size: 19px; margin-left: 390px"
+                      style="color: red; font-size: 19px; margin-left: 380px"
                       >X</a>
                     <input
                       required
@@ -124,8 +124,7 @@
                       Cập nhật
                       <div style="display: none" class="capNhat">
                         <form
-                          class="mx-1 mx-md-4"
-                          th:action="@{/capNhatChuyenNganh/{index}(index = ${iStat.index})}"
+                          th:action="@{/capNhatChuyenNganh/{id}(id = ${specialized.id})}"
                           method="post"
                         >
                           <label>Tên chuyên ngành</label>
@@ -135,13 +134,13 @@
                             th:value="${specialized.name}"
                           />
 
-                          <input type="submit"></input>
+                          <input style="margin-top: 5px;" type="submit"></input>
                         </form>
                       </div>
                     </button>
                     <a
                       th:href="@{xoaChuyenNganh/{idSpecialized}(idSpecialized = ${specialized.id})}"
-                      ><button class="btnXoa">Xóa</button></a
+                       style="display:none"><button class="btnXoa">Xóa</button></a
                     >
                   </td>
                 </tr>

@@ -14,9 +14,24 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
     <link rel="stylesheet" th:href="@{/style/dangkihoc.css}"/>
     <link rel="stylesheet" th:href="@{/style/thoikhoabieutoantruong.css}"/>
 
+<!--    <style>-->
+<!--        .ggChart {-->
+<!--            display: none;-->
+<!--        }-->
+<!--    </style>-->
 </head>
 
 <body>
@@ -27,12 +42,27 @@
         <div th:replace="template/template.html :: sidebar"></div>
         <div id="right">
 
+            <div class="dropdown">
+                <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Chọn biểu đồ
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <th:block th:if="${user.permissions == 'ROLE_Admin'}">
+                        <a class="dropdown-item" href="#donutchart">Đếm số lượng User</a>
+                    </th:block>
+                    <a class="dropdown-item" href="#columnchart_DTK">Thống kê điểm trung bình tích lũy</a>
+                    <a class="dropdown-item" href="#columnchart_TC">Thống kê tổng số tín chỉ tích lũy</a>
+                    <a class="dropdown-item" href="#columnchart_SVGioi">Thống kê sv giỏi</a>
+                </div>
+            </div>
+
             <th:block th:if="${user.permissions == 'ROLE_Admin'}">
-                <div id="donutchart"></div>
+                <div id="donutchart" class="ggChart"></div>
             </th:block>
-            <div id="columnchart_DTK"></div>
-            <div id="columnchart_TC"></div>
-            <div id="columnchart_SVGioi"></div>
+            <div id="columnchart_DTK" class="ggChart"></div>
+            <div id="columnchart_TC" class="ggChart"></div>
+            <div id="columnchart_SVGioi" class="ggChart"></div>
 
         </div>
     </div>
@@ -40,6 +70,18 @@
     <div th:replace="template/template.html :: footer"></div>
 </div>
 </body>
+
+<script>
+    document.querySelectorAll(".dropdown-item").forEach((i, index) => i.addEventListener("click", () => {
+        document.querySelectorAll(".ggChart").forEach((j, j_index) => {
+            if (index != j_index) {
+                j.style.display = "none";
+            } else {
+                j.style.display = "block";
+            }
+        })
+    }))
+</script>
 
 <!--Load the AJAX API-->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -49,13 +91,13 @@
 
     function drawChart() {
         [#th:block th:if="${user.permissions == 'ROLE_Admin'}"]
-            // Đếm số lượng User
-            bdTron('Quyền', 'Số lượng', [[${countingUser}]], 'Đếm số lượng User', 750, 400, 'donutchart');
+        // Đếm số lượng User
+        bdTron('Quyền', 'Số lượng', [[${countingUser}]], 'Đếm số lượng User', 750, 400, 'donutchart');
         [/th:block]
 
 
-        // Thống kê điểm trung bình tích lũy
-        bdCot('MSV', 'Điểm', [[${diemTongket}]], "Thống kê điểm trung bình tích lũy", 750, 400, "columnchart_DTK");
+            // Thống kê điểm trung bình tích lũy
+            bdCot('MSV', 'Điểm', [[${diemTongket}]], "Thống kê điểm trung bình tích lũy", 750, 400, "columnchart_DTK");
 
         // Thống kê tổng số tín chỉ tích lũy
         bdCot('MSV', 'Tín chỉ', [[${soTinChi}]], "Thống kê tổng số tín chỉ tích lũy", 750, 400, "columnchart_TC");
@@ -102,5 +144,4 @@
     }
 
 </script>
-
 </html>

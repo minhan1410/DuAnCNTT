@@ -25,3 +25,4 @@ public class Teacher {
     @Column(name = "user_id")   
     private Long userId;
 }
+

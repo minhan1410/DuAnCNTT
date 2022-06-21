@@ -40,7 +40,7 @@
                         <ul class="dropdown-menu">
                             <!-- <li><a th:href="@{/quanlilophoc}"> Tất cả </a></li> -->
                             <th:block th:each="subject : ${listSubject}">
-                                <li>
+                                <li style="margin-left: 15px;">
                                     <a th:text="${subject.name}"
                                         th:href="@{/quanlilophoc/{id}(id = ${subject.id})}"></a>
                                     <input type="text" class="subject" style="display: none" th:value="${subject.id}">
@@ -119,7 +119,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td><input type="submit" value="Update" id="submit"></td>
-                                                            <td><a href="">Đóng</a></td>
+                                                            <td><a href=""><button>Đóng</button></a></td>
                                                         </tr>
                                                     </table>
                                                 </form>
@@ -177,7 +177,7 @@
                                                     </tr>
 
                                                     <tr>
-                                                        <td><a href="">Đóng</a></td>
+                                                        <td><a href=""><button>Đóng</button></a></td>
                                                     </tr>
                                                 </table>
                                                 <!-- <div>
@@ -193,9 +193,9 @@
                 </div>
             </div>
 
-            <div th:replace="template/template.html :: footer"></div>
+            
         </div>
-
+        <div th:replace="template/template.html :: footer"></div>
 </body>
 
 <script>

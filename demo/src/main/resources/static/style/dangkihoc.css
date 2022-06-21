@@ -13,8 +13,9 @@ h3 {
 }
 
 a {
-    text-decoration: none;
+    text-decoration: none !important;
     color: #003745;
+    
 }
 
 ul {
@@ -27,6 +28,7 @@ ul {
     background: url("https://dangkyhoc.thanglong.edu.vn/App_Themes/abrasive/images/topbg.jpg")
         repeat-x top;
     margin: auto;
+    position: relative;
 }
 
 #head .center {
@@ -119,7 +121,8 @@ ul {
     left: 50%;
     margin-left: -500px;
     margin-top: 10px;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
+    margin-bottom: 90px;
     clear: both;
 }
 
